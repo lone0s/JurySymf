@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,9 +66,9 @@ class Mentions
     private $commentaire = 'NULL';
 
     /**
-     * @var \Diplomes
+     * @var Diplomes
      *
-     * @ORM\ManyToOne(targetEntity="Diplomes")
+     * @ORM\ManyToOne(targetEntity="Diplomes",inversedBy="idMention")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_diplome", referencedColumnName="id")
      * })
@@ -74,7 +76,7 @@ class Mentions
     private $idDiplome;
 
     /**
-     * @var \Ufrs
+     * @var Ufrs
      *
      * @ORM\ManyToOne(targetEntity="Ufrs")
      * @ORM\JoinColumns({
@@ -83,5 +85,10 @@ class Mentions
      */
     private $idUfr;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="idMention")
+     */
+    private $idMentionParcours;
 
 }

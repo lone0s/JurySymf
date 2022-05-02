@@ -29,9 +29,9 @@ class MentionsParcours
     private $rang;
 
     /**
-     * @var \Mentions
+     * @var Mentions
      *
-     * @ORM\ManyToOne(targetEntity="Mentions")
+     * @ORM\ManyToOne(targetEntity="Mentions", inversedBy="idMentionParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_mention", referencedColumnName="id")
      * })
@@ -39,14 +39,12 @@ class MentionsParcours
     private $idMention;
 
     /**
-     * @var \Parcours
+     * @var Parcours
      *
-     * @ORM\ManyToOne(targetEntity="Parcours")
+     * @ORM\ManyToOne(targetEntity="Parcours", inversedBy="idMentionParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
      * })
      */
     private $idParcours;
-
-
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,14 +38,34 @@ class Periodes
     private $codeApogee = 'NULL';
 
     /**
-     * @var \Parcours
+     * @var Parcours
      *
-     * @ORM\ManyToOne(targetEntity="Parcours")
+     * @ORM\ManyToOne(targetEntity="Parcours", inversedBy="idPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
      * })
      */
     private $idParcours;
 
+
+    /**
+     * @var PeriodesUes
+     *
+     * @ORM\ManyToOne(targetEntity="PeriodesUes", inversedBy="idPeriode")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
+     * })
+     */
+    private $idPeriodeUe;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ParcoursUes::class, mappedBy="idPeriode")
+     */
+    private $idParcoursUe;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsPeriodes::class, mappedBy="idPeriode")
+     */
+    private $idInscriptionPeriode;
 
 }

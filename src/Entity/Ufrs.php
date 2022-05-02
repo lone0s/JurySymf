@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,12 +47,16 @@ class Ufrs
     /**
      * @var Universites
      *
-     * @ORM\ManyToOne(targetEntity="Universites")
+     * @ORM\ManyToOne(targetEntity="Universites", inversedBy = "idUfr")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_universite", referencedColumnName="id")
      * })
      */
     private $idUniversite;
 
+    /**
+     * @ORM\OneToMany(targetEntity=mentions::class, mappedBy="idUfr")
+     */
+    private $idMention ;
 
 }

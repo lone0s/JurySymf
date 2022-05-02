@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,5 +58,9 @@ class Diplomes
      */
     private $commentaire = 'NULL';
 
+    /**
+     * @ORM\OneToMany(targetEntity=Mentions::class, mappedBy="idDiplome", orphanRemoval=true)
+     */
+    private $idMention;
 
 }

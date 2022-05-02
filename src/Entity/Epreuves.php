@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,22 +68,25 @@ class Epreuves
     /**
      * @var NaturesEpreuve
      *
-     * @ORM\ManyToOne(targetEntity="NaturesEpreuve")
+     * @ORM\ManyToOne(targetEntity="NaturesEpreuve", inversedBy = "idEpreuve")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_nature", referencedColumnName="id")
      * })
      */
-    private $idNature;
+    private $idNatureEpreuve;
 
     /**
      * @var Ues
      *
-     * @ORM\ManyToOne(targetEntity="Ues")
+     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "idEpreuve")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id")
      * })
      */
     private $idUe;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="idEpreuve")
+     */
+    private $idInscriptionEpreuve;
 }

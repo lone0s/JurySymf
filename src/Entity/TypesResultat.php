@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,5 +37,19 @@ class TypesResultat
      */
     private $commentaire = 'NULL';
 
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsParcours::class, mappedBy="idTypeResultat")
+     */
+    private $idInscriptionParcours;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsPeriodes::class, mappedBy="idTypeResultat")
+     */
+    private $idInscriptionPeriode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsUes::class, mappedBy="idTypeResultat")
+     */
+    private $idInscriptionUe;
 
 }

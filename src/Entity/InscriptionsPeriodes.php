@@ -50,9 +50,9 @@ class InscriptionsPeriodes
     private $inscriptionPartielle = '0';
 
     /**
-     * @var \Etudiants
+     * @var Etudiants
      *
-     * @ORM\ManyToOne(targetEntity="Etudiants")
+     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "idInscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
@@ -60,9 +60,9 @@ class InscriptionsPeriodes
     private $idEtudiant;
 
     /**
-     * @var \TypesNote
+     * @var TypesNote
      *
-     * @ORM\ManyToOne(targetEntity="TypesNote")
+     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "idInscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
      * })
@@ -70,9 +70,9 @@ class InscriptionsPeriodes
     private $idTypeNote;
 
     /**
-     * @var \Periodes
+     * @var Periodes
      *
-     * @ORM\ManyToOne(targetEntity="Periodes")
+     * @ORM\ManyToOne(targetEntity="Periodes", inversedBy = "idInscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periode", referencedColumnName="id")
      * })
@@ -80,14 +80,12 @@ class InscriptionsPeriodes
     private $idPeriode;
 
     /**
-     * @var \TypesResultat
+     * @var TypesResultat
      *
-     * @ORM\ManyToOne(targetEntity="TypesResultat")
+     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "idInscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
      * })
      */
     private $idTypeResultat;
-
-
 }

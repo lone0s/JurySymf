@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -71,9 +73,9 @@ class Parcours
     private $commentaire = 'NULL';
 
     /**
-     * @var \Periodicites
+     * @var Periodicites
      *
-     * @ORM\ManyToOne(targetEntity="Periodicites")
+     * @ORM\ManyToOne(targetEntity="Periodicites", inversedBy = "idParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periodicite", referencedColumnName="id")
      * })
@@ -81,4 +83,18 @@ class Parcours
     private $idPeriodicite;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="idParcours")
+     */
+    private $idMentionParcours;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsParcours::class, mappedBy="idParcours")
+     */
+    private $idInscriptionParcours;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Periodes::class, mappedBy="idParcours")
+     */
+    private $idPeriode;
 }

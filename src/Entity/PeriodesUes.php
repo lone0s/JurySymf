@@ -36,24 +36,36 @@ class PeriodesUes
     private $rang;
 
     /**
-     * @var \Periodes
+     * @var Periodes
      *
-     * @ORM\ManyToOne(targetEntity="Periodes")
+     * @ORM\ManyToOne(targetEntity="Periodes", inversedBy = "idPeriodeUe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periode", referencedColumnName="id")
      * })
      */
     private $idPeriode;
 
+
     /**
-     * @var \Ues
+     * @var Ues
      *
-     * @ORM\ManyToOne(targetEntity="Ues")
+     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "idPeriodeUe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id")
      * })
      */
     private $idUe;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="idPeriodeUe")
+     */
+    private $idInscriptionEpreuve;
+
+    /**
+     * @ORM\OneToMany(targetEntity=InscriptionsUes::class, mappedBy="idPeriodeUe")
+     */
+    private $idInscriptionUe;
+
 
 
 }
