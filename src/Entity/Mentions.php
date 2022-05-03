@@ -9,8 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Mentions
  *
- * @ORM\Table(name="mentions", indexes={@ORM\Index(name="fk_mentions_ufrs_1_idx", columns={"id_ufr"}), @ORM\Index(name="fk_mentions_diplomes_1_idx", columns={"id_diplome"})})
- * @ORM\Entity
+ * @ORM\Table(name="mentions", indexes=
+ *     {@ORM\Index(name="fk_mentions_ufrs_1_idx", columns={"id_ufr"}),
+ *     @ORM\Index(name="fk_mentions_diplomes_1_idx", columns={"id_diplome"})})
+ * @ORM\Entity(repositoryClass="App\Repository\MentionsRepository")
  */
 class Mentions
 {
@@ -68,27 +70,163 @@ class Mentions
     /**
      * @var Diplomes
      *
-     * @ORM\ManyToOne(targetEntity="Diplomes",inversedBy="idMention")
+     * @ORM\ManyToOne(targetEntity="Diplomes",inversedBy="mention")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_diplome", referencedColumnName="id")
      * })
      */
-    private $idDiplome;
+    private $diplome;
 
     /**
      * @var Ufrs
      *
-     * @ORM\ManyToOne(targetEntity="Ufrs")
+     * @ORM\ManyToOne(targetEntity="Ufrs",inversedBy="mention")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ufr", referencedColumnName="id")
      * })
      */
-    private $idUfr;
+    private $ufr;
 
 
     /**
-     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="idMention")
+     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="mention")
      */
-    private $idMentionParcours;
+    private $mentionParcours;
+
+    public function __construct()
+    {
+        $this->mentionParcours = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getNomCourt(): ?string
+    {
+        return $this->nomCourt;
+    }
+
+    public function setNomCourt(?string $nomCourt): self
+    {
+        $this->nomCourt = $nomCourt;
+
+        return $this;
+    }
+
+    public function getAnneeDebut(): ?int
+    {
+        return $this->anneeDebut;
+    }
+
+    public function setAnneeDebut(int $anneeDebut): self
+    {
+        $this->anneeDebut = $anneeDebut;
+
+        return $this;
+    }
+
+    public function getAnneeFin(): ?int
+    {
+        return $this->anneeFin;
+    }
+
+    public function setAnneeFin(int $anneeFin): self
+    {
+        $this->anneeFin = $anneeFin;
+
+        return $this;
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?string $commentaire): self
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getDiplome(): ?Diplomes
+    {
+        return $this->diplome;
+    }
+
+    public function setDiplome(?Diplomes $diplome): self
+    {
+        $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    public function getUfr(): ?Ufrs
+    {
+        return $this->ufr;
+    }
+
+    public function setUfr(?Ufrs $ufr): self
+    {
+        $this->ufr = $ufr;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MentionsParcours>
+     */
+    public function getMentionParcours(): Collection
+    {
+        return $this->mentionParcours;
+    }
+
+    public function addIdMentionParcour(MentionsParcours $idMentionParcour): self
+    {
+        if (!$this->mentionParcours->contains($idMentionParcour)) {
+            $this->mentionParcours[] = $idMentionParcour;
+            $idMentionParcour->setMention($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdMentionParcour(MentionsParcours $idMentionParcour): self
+    {
+        if ($this->mentionParcours->removeElement($idMentionParcour)) {
+            // set the owning side to null (unless already changed)
+            if ($idMentionParcour->getMention() === $this) {
+                $idMentionParcour->setMention(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

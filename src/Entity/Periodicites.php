@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Periodicites
  *
  * @ORM\Table(name="periodicites")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PeriodicitesRepository")
  */
 class Periodicites
 {
@@ -45,8 +45,84 @@ class Periodicites
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Parcours::class, mappedBy="idPeriodicite")
+     * @ORM\OneToMany(targetEntity=Parcours::class, mappedBy="periodicite")
      */
-    private $idParcours;
+    private $parcours;
+
+    public function __construct()
+    {
+        $this->parcours = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getNomCourt(): ?string
+    {
+        return $this->nomCourt;
+    }
+
+    public function setNomCourt(string $nomCourt): self
+    {
+        $this->nomCourt = $nomCourt;
+
+        return $this;
+    }
+
+    public function getNombre(): ?int
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre(int $nombre): self
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Parcours>
+     */
+    public function getParcours(): Collection
+    {
+        return $this->parcours;
+    }
+
+    public function addIdParcour(Parcours $idParcour): self
+    {
+        if (!$this->parcours->contains($idParcour)) {
+            $this->parcours[] = $idParcour;
+            $idParcour->setPeriodicite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdParcour(Parcours $idParcour): self
+    {
+        if ($this->parcours->removeElement($idParcour)) {
+            // set the owning side to null (unless already changed)
+            if ($idParcour->getPeriodicite() === $this) {
+                $idParcour->setPeriodicite(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

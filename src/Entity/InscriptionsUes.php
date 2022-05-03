@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * InscriptionsUes
  *
- * @ORM\Table(name="inscriptions_ues", uniqueConstraints={@ORM\UniqueConstraint(name="index6", columns={"id_etudiant", "id_parcours_ue"})}, indexes={@ORM\Index(name="fk_inscriptions_ues_types_resultat_idx", columns={"id_type_resultat"}), @ORM\Index(name="fk_inscriptions_ues_etudiants_idx", columns={"id_etudiant"}), @ORM\Index(name="fk_inscriptions_ues_parcours_ues_idx", columns={"id_parcours_ue"}), @ORM\Index(name="fk_inscriptions_ues_types_note_idx", columns={"id_type_note"})})
- * @ORM\Entity
+ * @ORM\Table(name="inscriptions_ues")
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionsUesRepository")
  */
 class InscriptionsUes
 {
@@ -22,16 +22,16 @@ class InscriptionsUes
     private $id;
 
     /**
-     * @var float|null
+     * @var float
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
      */
     private $note = NULL;
 
     /**
-     * @var float|null
+     * @var float
      *
-     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true)
      */
     private $pointsJury = NULL;
 
@@ -45,51 +45,134 @@ class InscriptionsUes
     /**
      * @var Etudiants
      *
-     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "idInscriptionUe")
+     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "inscriptionUe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
      */
-    private $idEtudiant;
+    private $etudiant;
 
     /**
      * @var TypesNote
      *
-     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "idInscriptionUe")
+     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "inscriptionUe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
      * })
      */
-    private $idTypeNote;
+    private $typeNote;
 
     /**
      * @var PeriodesUes
      *
-     * @ORM\ManyToOne(targetEntity="PeriodesUes", inversedBy = "idInscriptionUe")
+     * @ORM\ManyToOne(targetEntity="PeriodesUes", inversedBy = "inscriptionUe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id")
      * })
      */
-    private $idPeriodeUe;
+    private $periodeUe;
 
     /**
      * @var TypesResultat
      *
-     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "idInscriptionUe")
+     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "inscriptionUe")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id", nullable = true)
      * })
      */
-    private $idTypeResultat;
+    private $typeResultat;
 
-    /**
-     * @var ParcoursUes
-     *
-     * @ORM\ManyToOne(targetEntity="ParcoursUes", inversedBy = "idInscriptionUe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_parcours_ue", referencedColumnName="id")
-     * })
-     */
-    private $idParcoursUe;
+
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    public function getPointsJury(): ?float
+    {
+        return $this->pointsJury;
+    }
+
+    public function setPointsJury(?float $pointsJury): self
+    {
+        $this->pointsJury = $pointsJury;
+
+        return $this;
+    }
+
+    public function getSaisie(): ?bool
+    {
+        return $this->saisie;
+    }
+
+    public function setSaisie(bool $saisie): self
+    {
+        $this->saisie = $saisie;
+
+        return $this;
+    }
+
+    public function getEtudiant(): ?Etudiants
+    {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(?Etudiants $etudiant): self
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    public function getTypeNote(): ?TypesNote
+    {
+        return $this->typeNote;
+    }
+
+    public function setTypeNote(?TypesNote $typeNote): self
+    {
+        $this->typeNote = $typeNote;
+
+        return $this;
+    }
+
+    public function getPeriodeUe(): ?PeriodesUes
+    {
+        return $this->periodeUe;
+    }
+
+    public function setPeriodeUe(?PeriodesUes $periodeUe): self
+    {
+        $this->periodeUe = $periodeUe;
+
+        return $this;
+    }
+
+    public function getTypeResultat(): ?TypesResultat
+    {
+        return $this->typeResultat;
+    }
+
+    public function setTypeResultat(?TypesResultat $typeResultat): self
+    {
+        $this->typeResultat = $typeResultat;
+
+        return $this;
+    }
+
+
 
 }

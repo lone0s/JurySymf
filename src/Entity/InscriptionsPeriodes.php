@@ -7,8 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * InscriptionsPeriodes
  *
- * @ORM\Table(name="inscriptions_periodes", uniqueConstraints={@ORM\UniqueConstraint(name="index6", columns={"id_etudiant", "id_periode"})}, indexes={@ORM\Index(name="fk_inscriptions_periodes_periodes_idx", columns={"id_periode"}), @ORM\Index(name="fk_inscriptions_periodes_etudiants_idx", columns={"id_etudiant"}), @ORM\Index(name="fk_inscriptions_periodes_types_note_idx", columns={"id_type_note"}), @ORM\Index(name="fk_inscriptions_periodes_types_resultat_idx", columns={"id_type_resultat"})})
- * @ORM\Entity
+ * @ORM\Table(name="inscriptions_periodes", uniqueConstraints=
+ *     {@ORM\UniqueConstraint(name="index6", columns={"id_etudiant", "id_periode"})},
+ *     indexes={@ORM\Index(name="fk_inscriptions_periodes_periodes_idx", columns={"id_periode"}),
+ *     @ORM\Index(name="fk_inscriptions_periodes_etudiants_idx", columns={"id_etudiant"}),
+ *     @ORM\Index(name="fk_inscriptions_periodes_types_note_idx", columns={"id_type_note"}),
+ *     @ORM\Index(name="fk_inscriptions_periodes_types_resultat_idx", columns={"id_type_resultat"})})
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionsPeriodesRepository")
  */
 class InscriptionsPeriodes
 {
@@ -22,16 +27,16 @@ class InscriptionsPeriodes
     private $id;
 
     /**
-     * @var float|null
+     * @var float
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
      */
     private $note = NULL;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true)
      */
     private $pointsJury = NULL;
 
@@ -52,40 +57,141 @@ class InscriptionsPeriodes
     /**
      * @var Etudiants
      *
-     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "idInscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "inscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
      */
-    private $idEtudiant;
+    private $etudiant;
 
     /**
      * @var TypesNote
      *
-     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "idInscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "inscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
      * })
      */
-    private $idTypeNote;
+    private $typeNote;
 
     /**
      * @var Periodes
      *
-     * @ORM\ManyToOne(targetEntity="Periodes", inversedBy = "idInscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="Periodes", inversedBy = "inscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periode", referencedColumnName="id")
      * })
      */
-    private $idPeriode;
+    private $periode;
 
     /**
      * @var TypesResultat
      *
-     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "idInscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "inscriptionPeriode")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
      * })
      */
-    private $idTypeResultat;
+    private $typeResultat;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    public function getPointsJury(): ?float
+    {
+        return $this->pointsJury;
+    }
+
+    public function setPointsJury(?float $pointsJury): self
+    {
+        $this->pointsJury = $pointsJury;
+
+        return $this;
+    }
+
+    public function getSaisie(): ?bool
+    {
+        return $this->saisie;
+    }
+
+    public function setSaisie(bool $saisie): self
+    {
+        $this->saisie = $saisie;
+
+        return $this;
+    }
+
+    public function getInscriptionPartielle(): ?bool
+    {
+        return $this->inscriptionPartielle;
+    }
+
+    public function setInscriptionPartielle(bool $inscriptionPartielle): self
+    {
+        $this->inscriptionPartielle = $inscriptionPartielle;
+
+        return $this;
+    }
+
+    public function getEtudiant(): ?Etudiants
+    {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(?Etudiants $etudiant): self
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    public function getTypeNote(): ?TypesNote
+    {
+        return $this->typeNote;
+    }
+
+    public function setTypeNote(?TypesNote $typeNote): self
+    {
+        $this->typeNote = $typeNote;
+
+        return $this;
+    }
+
+    public function getPeriode(): ?Periodes
+    {
+        return $this->periode;
+    }
+
+    public function setPeriode(?Periodes $periode): self
+    {
+        $this->periode = $periode;
+
+        return $this;
+    }
+
+    public function getTypeResultat(): ?TypesResultat
+    {
+        return $this->typeResultat;
+    }
+
+    public function setTypeResultat(?TypesResultat $typeResultat): self
+    {
+        $this->typeResultat = $typeResultat;
+
+        return $this;
+    }
 }

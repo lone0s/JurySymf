@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Epreuves
  *
  * @ORM\Table(name="epreuves", indexes={@ORM\Index(name="fk_epreuves_natures_epreuve_idx", columns={"id_nature"}), @ORM\Index(name="fk_epreuves_ues_idx", columns={"id_ue"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EpreuvesRepository")
  */
 class Epreuves
 {
@@ -68,25 +68,161 @@ class Epreuves
     /**
      * @var NaturesEpreuve
      *
-     * @ORM\ManyToOne(targetEntity="NaturesEpreuve", inversedBy = "idEpreuve")
+     * @ORM\ManyToOne(targetEntity="NaturesEpreuve", inversedBy = "epreuve")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_nature", referencedColumnName="id")
      * })
      */
-    private $idNatureEpreuve;
+    private $natureEpreuve;
 
     /**
      * @var Ues
      *
-     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "idEpreuve")
+     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "epreuve")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id",nullable = false)
      * })
      */
-    private $idUe;
+    private $ue;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="idEpreuve")
+     * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="epreuve")
      */
-    private $idInscriptionEpreuve;
+    private $inscriptionEpreuve;
+
+    public function __construct()
+    {
+        $this->inscriptionEpreuve = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getCoefficient(): ?float
+    {
+        return $this->coefficient;
+    }
+
+    public function setCoefficient(float $coefficient): self
+    {
+        $this->coefficient = $coefficient;
+
+        return $this;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(int $rang): self
+    {
+        $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getSession1(): ?bool
+    {
+        return $this->session1;
+    }
+
+    public function setSession1(bool $session1): self
+    {
+        $this->session1 = $session1;
+
+        return $this;
+    }
+
+    public function getSession2(): ?bool
+    {
+        return $this->session2;
+    }
+
+    public function setSession2(bool $session2): self
+    {
+        $this->session2 = $session2;
+
+        return $this;
+    }
+
+    public function getDuree(): ?string
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(?string $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getNatureEpreuve(): ?NaturesEpreuve
+    {
+        return $this->natureEpreuve;
+    }
+
+    public function setNatureEpreuve(?NaturesEpreuve $natureEpreuve): self
+    {
+        $this->natureEpreuve = $natureEpreuve;
+
+        return $this;
+    }
+
+    public function getUe(): ?Ues
+    {
+        return $this->ue;
+    }
+
+    public function setUe(?Ues $ue): self
+    {
+        $this->ue = $ue;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, InscriptionsEpreuves>
+     */
+    public function getInscriptionEpreuve(): Collection
+    {
+        return $this->inscriptionEpreuve;
+    }
+
+    public function addIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    {
+        if (!$this->inscriptionEpreuve->contains($idInscriptionEpreuve)) {
+            $this->inscriptionEpreuve[] = $idInscriptionEpreuve;
+            $idInscriptionEpreuve->setEpreuve($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    {
+        if ($this->inscriptionEpreuve->removeElement($idInscriptionEpreuve)) {
+            // set the owning side to null (unless already changed)
+            if ($idInscriptionEpreuve->getEpreuve() === $this) {
+                $idInscriptionEpreuve->setEpreuve(null);
+            }
+        }
+
+        return $this;
+    }
 }
