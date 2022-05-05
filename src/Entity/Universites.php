@@ -38,13 +38,13 @@ class Universites
     private $commentaire = 'NULL';
 
     /**
-     * @ORM\OneToMany(targetEntity=Ufrs::class, mappedBy="idUniversite")
+     * @ORM\OneToMany(targetEntity=Ufrs::class, mappedBy="universite")
      */
-    private $idUfr;
+    private $ufr;
 
     public function __construct()
     {
-        $this->idUfr = new ArrayCollection();
+        $this->ufr = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,16 +79,16 @@ class Universites
     /**
      * @return Collection<int, Ufrs>
      */
-    public function getIdUfr(): Collection
+    public function getUfr(): Collection
     {
-        return $this->idUfr;
+        return $this->ufr;
     }
 
     public function addIdUfr(Ufrs $idUfr): self
     {
-        if (!$this->idUfr->contains($idUfr)) {
-            $this->idUfr[] = $idUfr;
-            $idUfr->setIdUniversite($this);
+        if (!$this->ufr->contains($idUfr)) {
+            $this->ufr[] = $idUfr;
+            $idUfr->setUniversite($this);
         }
 
         return $this;
@@ -96,10 +96,10 @@ class Universites
 
     public function removeIdUfr(Ufrs $idUfr): self
     {
-        if ($this->idUfr->removeElement($idUfr)) {
+        if ($this->ufr->removeElement($idUfr)) {
             // set the owning side to null (unless already changed)
-            if ($idUfr->getIdUniversite() === $this) {
-                $idUfr->setIdUniversite(null);
+            if ($idUfr->getUniversite() === $this) {
+                $idUfr->setUniversite(null);
             }
         }
 

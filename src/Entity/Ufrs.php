@@ -47,21 +47,21 @@ class Ufrs
     /**
      * @var Universites
      *
-     * @ORM\ManyToOne(targetEntity="Universites", inversedBy = "idUfr")
+     * @ORM\ManyToOne(targetEntity="Universites", inversedBy = "ufr")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_universite", referencedColumnName="id")
      * })
      */
-    private $idUniversite;
+    private $universite;
 
     /**
-     * @ORM\OneToMany(targetEntity=mentions::class, mappedBy="idUfr")
+     * @ORM\OneToMany(targetEntity=mentions::class, mappedBy="ufr")
      */
-    private $idMention ;
+    private $mention ;
 
     public function __construct()
     {
-        $this->idMention = new ArrayCollection();
+        $this->mention = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,14 +105,14 @@ class Ufrs
         return $this;
     }
 
-    public function getIdUniversite(): ?Universites
+    public function getUniversite(): ?Universites
     {
-        return $this->idUniversite;
+        return $this->universite;
     }
 
-    public function setIdUniversite(?Universites $idUniversite): self
+    public function setUniversite(?Universites $universite): self
     {
-        $this->idUniversite = $idUniversite;
+        $this->universite = $universite;
 
         return $this;
     }
@@ -120,15 +120,15 @@ class Ufrs
     /**
      * @return Collection<int, mentions>
      */
-    public function getIdMention(): Collection
+    public function getMention(): Collection
     {
-        return $this->idMention;
+        return $this->mention;
     }
 
     public function addIdMention(mentions $idMention): self
     {
-        if (!$this->idMention->contains($idMention)) {
-            $this->idMention[] = $idMention;
+        if (!$this->mention->contains($idMention)) {
+            $this->mention[] = $idMention;
             $idMention->setUfr($this);
         }
 
@@ -137,7 +137,7 @@ class Ufrs
 
     public function removeIdMention(mentions $idMention): self
     {
-        if ($this->idMention->removeElement($idMention)) {
+        if ($this->mention->removeElement($idMention)) {
             // set the owning side to null (unless already changed)
             if ($idMention->getUfr() === $this) {
                 $idMention->setUfr(null);
