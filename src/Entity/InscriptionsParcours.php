@@ -78,9 +78,9 @@ class InscriptionsParcours
     private $parcour;
 
     /**
-     * @var TypesResultat
+     * @var TypeResultat
      *
-     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "inscriptionParcours")
+     * @ORM\ManyToOne(targetEntity="TypeResultat", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
      * })
@@ -164,12 +164,12 @@ class InscriptionsParcours
         return $this;
     }
 
-    public function getTypeResultat(): ?TypesResultat
+    public function getTypeResultat(): ?TypeResultat
     {
         return $this->typeResultat;
     }
 
-    public function setTypeResultat(?TypesResultat $typeResultat): self
+    public function setTypeResultat(?TypeResultat $typeResultat): self
     {
         $this->typeResultat = $typeResultat;
 

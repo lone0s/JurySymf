@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\TypesResultat;
+use App\Entity\TypeResultat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TypesResultat>
+ * @extends ServiceEntityRepository<TypeResultat>
  *
- * @method TypesResultat|null find($id, $lockMode = null, $lockVersion = null)
- * @method TypesResultat|null findOneBy(array $criteria, array $orderBy = null)
- * @method TypesResultat[]    findAll()
- * @method TypesResultat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TypeResultat|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TypeResultat|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TypeResultat[]    findAll()
+ * @method TypeResultat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TypesResultatRepository extends ServiceEntityRepository
+class TypeResultatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TypesResultat::class);
+        parent::__construct($registry, TypeResultat::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(TypesResultat $entity, bool $flush = true): void
+    public function add(TypeResultat $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class TypesResultatRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(TypesResultat $entity, bool $flush = true): void
+    public function remove(TypeResultat $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class TypesResultatRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return TypesResultat[] Returns an array of TypesResultat objects
+    //  * @return TypeResultat[] Returns an array of TypeResultat objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class TypesResultatRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TypesResultat
+    public function findOneBySomeField($value): ?TypeResultat
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

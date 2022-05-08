@@ -85,9 +85,9 @@ class InscriptionsPeriodes
     private $periode;
 
     /**
-     * @var TypesResultat
+     * @var TypeResultat
      *
-     * @ORM\ManyToOne(targetEntity="TypesResultat", inversedBy = "inscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="TypeResultat", inversedBy = "inscriptionsPeriodes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
      * })
@@ -183,12 +183,12 @@ class InscriptionsPeriodes
         return $this;
     }
 
-    public function getTypeResultat(): ?TypesResultat
+    public function getTypeResultat(): ?TypeResultat
     {
         return $this->typeResultat;
     }
 
-    public function setTypeResultat(?TypesResultat $typeResultat): self
+    public function setTypeResultat(?TypeResultat $typeResultat): self
     {
         $this->typeResultat = $typeResultat;
 
