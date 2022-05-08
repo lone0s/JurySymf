@@ -101,7 +101,7 @@ class Parcour
     private $inscriptionsParcours;
 
     /**
-     * @ORM\OneToMany(targetEntity=Periodes::class, mappedBy="parcour")
+     * @ORM\OneToMany(targetEntity=Periode::class, mappedBy="parcour")
      */
     private $periodes;
 
@@ -281,14 +281,14 @@ class Parcour
     }
 
     /**
-     * @return Collection<int, Periodes>
+     * @return Collection<int, Periode>
      */
     public function getPeriodes(): Collection
     {
         return $this->periodes;
     }
 
-    public function addPeriode(Periodes $periode): self
+    public function addPeriode(Periode $periode): self
     {
         if (!$this->periodes->contains($periode)) {
             $this->periodes[] = $periode;
@@ -298,7 +298,7 @@ class Parcour
         return $this;
     }
 
-    public function removePeriode(Periodes $periode): self
+    public function removePeriode(Periode $periode): self
     {
         if ($this->periodes->removeElement($periode)) {
             // set the owning side to null (unless already changed)

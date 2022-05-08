@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Periodes;
+use App\Entity\Periode;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Periodes>
+ * @extends ServiceEntityRepository<Periode>
  *
- * @method Periodes|null find($id, $lockMode = null, $lockVersion = null)
- * @method Periodes|null findOneBy(array $criteria, array $orderBy = null)
- * @method Periodes[]    findAll()
- * @method Periodes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Periode|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Periode|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Periode[]    findAll()
+ * @method Periode[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PeriodesRepository extends ServiceEntityRepository
+class PeriodeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Periodes::class);
+        parent::__construct($registry, Periode::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Periodes $entity, bool $flush = true): void
+    public function add(Periode $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class PeriodesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Periodes $entity, bool $flush = true): void
+    public function remove(Periode $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class PeriodesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Periodes[] Returns an array of Periodes objects
+    //  * @return Periode[] Returns an array of Periode objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class PeriodesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Periodes
+    public function findOneBySomeField($value): ?Periode
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
