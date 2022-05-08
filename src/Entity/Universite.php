@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Universites
+ * Universite
  *
  * @ORM\Table(name="universites")
- * @ORM\Entity(repositoryClass="App\Repository\UniversitesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UniversiteRepository")
  */
-class Universites
+class Universite
 {
     /**
      * @var int
@@ -33,19 +33,23 @@ class Universites
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
      * @ORM\OneToMany(targetEntity=Ufrs::class, mappedBy="universite")
      */
-    private $ufr;
+    private $ufrs;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->ufr = new ArrayCollection();
+        $this->commentaire = null;
+        $this->ufrs = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -79,27 +83,27 @@ class Universites
     /**
      * @return Collection<int, Ufrs>
      */
-    public function getUfr(): Collection
+    public function getUfrs(): Collection
     {
-        return $this->ufr;
+        return $this->ufrs;
     }
 
-    public function addIdUfr(Ufrs $idUfr): self
+    public function addUfr(Ufrs $ufr): self
     {
-        if (!$this->ufr->contains($idUfr)) {
-            $this->ufr[] = $idUfr;
-            $idUfr->setUniversite($this);
+        if (!$this->ufrs->contains($ufr)) {
+            $this->ufrs[] = $ufr;
+            $ufr->setUniversite($this);
         }
 
         return $this;
     }
 
-    public function removeIdUfr(Ufrs $idUfr): self
+    public function removeUfr(Ufrs $ufr): self
     {
-        if ($this->ufr->removeElement($idUfr)) {
+        if ($this->ufrs->removeElement($ufr)) {
             // set the owning side to null (unless already changed)
-            if ($idUfr->getUniversite() === $this) {
-                $idUfr->setUniversite(null);
+            if ($ufr->getUniversite() === $this) {
+                $ufr->setUniversite(null);
             }
         }
 

@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Universites;
+use App\Entity\Universite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Universites>
+ * @extends ServiceEntityRepository<Universite>
  *
- * @method Universites|null find($id, $lockMode = null, $lockVersion = null)
- * @method Universites|null findOneBy(array $criteria, array $orderBy = null)
- * @method Universites[]    findAll()
- * @method Universites[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Universite|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Universite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Universite[]    findAll()
+ * @method Universite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UniversitesRepository extends ServiceEntityRepository
+class UniversiteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Universites::class);
+        parent::__construct($registry, Universite::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Universites $entity, bool $flush = true): void
+    public function add(Universite $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class UniversitesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Universites $entity, bool $flush = true): void
+    public function remove(Universite $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class UniversitesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Universites[] Returns an array of Universites objects
+    //  * @return Universite[] Returns an array of Universite objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class UniversitesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Universites
+    public function findOneBySomeField($value): ?Universite
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')

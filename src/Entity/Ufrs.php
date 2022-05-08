@@ -45,9 +45,9 @@ class Ufrs
     private $commentaire = 'NULL';
 
     /**
-     * @var Universites
+     * @var Universite
      *
-     * @ORM\ManyToOne(targetEntity="Universites", inversedBy = "ufr")
+     * @ORM\ManyToOne(targetEntity="Universite", inversedBy = "ufrs")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_universite", referencedColumnName="id")
      * })
@@ -105,12 +105,12 @@ class Ufrs
         return $this;
     }
 
-    public function getUniversite(): ?Universites
+    public function getUniversite(): ?Universite
     {
         return $this->universite;
     }
 
-    public function setUniversite(?Universites $universite): self
+    public function setUniversite(?Universite $universite): self
     {
         $this->universite = $universite;
 
