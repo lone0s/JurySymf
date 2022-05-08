@@ -7,14 +7,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mentions
+ * Mention
  *
- * @ORM\Table(name="mentions", indexes=
- *     {@ORM\Index(name="fk_mentions_ufrs_1_idx", columns={"id_ufr"}),
- *     @ORM\Index(name="fk_mentions_diplomes_1_idx", columns={"id_diplome"})})
- * @ORM\Entity(repositoryClass="App\Repository\MentionsRepository")
+ * @ORM\Table(
+ *     name="mentions",
+ *     indexes={
+ *         @ORM\Index(name="fk_mentions_ufrs_1_idx", columns={"id_ufr"}),
+ *         @ORM\Index(name="fk_mentions_diplomes_1_idx", columns={"id_diplome"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\MentionRepository")
  */
-class Mentions
+class Mention
 {
     /**
      * @var int
@@ -35,9 +39,9 @@ class Mentions
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"=null})
      */
-    private $nomCourt = 'NULL';
+    private $nomCourt;
 
     /**
      * @var int
@@ -56,23 +60,23 @@ class Mentions
     /**
      * @var bool
      *
-     * @ORM\Column(name="actif", type="boolean", nullable=false, options={"default"="1","comment"="booléen"})
+     * @ORM\Column(name="actif", type="boolean", nullable=false, options={"default"=true, "comment"="booléen"})
      */
-    private $actif = true;
+    private $actif;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
      * @var Diplome
      *
      * @ORM\ManyToOne(targetEntity="Diplome",inversedBy="mentions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_diplome", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_diplome", referencedColumnName="id", nullable=false)
      * })
      */
     private $diplome;
@@ -82,7 +86,7 @@ class Mentions
      *
      * @ORM\ManyToOne(targetEntity="Ufr",inversedBy="mentions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_ufr", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_ufr", referencedColumnName="id", nullable=false)
      * })
      */
     private $ufr;
@@ -91,12 +95,18 @@ class Mentions
     /**
      * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="mention")
      */
-    private $mentionParcours;
+    private $mentionsParcours;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->mentionParcours = new ArrayCollection();
+        $this->nomCourt = null;
+        $this->actif = true;
+        $this->commentaire = null;
+        $this->mentionsParcours = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -202,27 +212,27 @@ class Mentions
     /**
      * @return Collection<int, MentionsParcours>
      */
-    public function getMentionParcours(): Collection
+    public function getMentionsParcours(): Collection
     {
-        return $this->mentionParcours;
+        return $this->mentionsParcours;
     }
 
-    public function addIdMentionParcour(MentionsParcours $idMentionParcour): self
+    public function addMentionParcour(MentionsParcours $mentionParcour): self
     {
-        if (!$this->mentionParcours->contains($idMentionParcour)) {
-            $this->mentionParcours[] = $idMentionParcour;
-            $idMentionParcour->setMention($this);
+        if (!$this->mentionsParcours->contains($mentionParcour)) {
+            $this->mentionsParcours[] = $mentionParcour;
+            $mentionParcour->setMention($this);
         }
 
         return $this;
     }
 
-    public function removeIdMentionParcour(MentionsParcours $idMentionParcour): self
+    public function removeMentionParcour(MentionsParcours $mentionParcour): self
     {
-        if ($this->mentionParcours->removeElement($idMentionParcour)) {
+        if ($this->mentionsParcours->removeElement($mentionParcour)) {
             // set the owning side to null (unless already changed)
-            if ($idMentionParcour->getMention() === $this) {
-                $idMentionParcour->setMention(null);
+            if ($mentionParcour->getMention() === $this) {
+                $mentionParcour->setMention(null);
             }
         }
 

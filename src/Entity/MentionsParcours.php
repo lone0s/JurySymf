@@ -32,9 +32,9 @@ class MentionsParcours
     private $rang;
 
     /**
-     * @var Mentions
+     * @var Mention
      *
-     * @ORM\ManyToOne(targetEntity="Mentions", inversedBy="mentionParcours")
+     * @ORM\ManyToOne(targetEntity="Mention", inversedBy="mentionsParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_mention", referencedColumnName="id")
      * })
@@ -68,12 +68,12 @@ class MentionsParcours
         return $this;
     }
 
-    public function getMention(): ?Mentions
+    public function getMention(): ?Mention
     {
         return $this->mention;
     }
 
-    public function setMention(?Mentions $mention): self
+    public function setMention(?Mention $mention): self
     {
         $this->mention = $mention;
 

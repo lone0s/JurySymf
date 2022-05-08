@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Mentions;
+use App\Entity\Mention;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Mentions>
+ * @extends ServiceEntityRepository<Mention>
  *
- * @method Mentions|null find($id, $lockMode = null, $lockVersion = null)
- * @method Mentions|null findOneBy(array $criteria, array $orderBy = null)
- * @method Mentions[]    findAll()
- * @method Mentions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Mention|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Mention|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Mention[]    findAll()
+ * @method Mention[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MentionsRepository extends ServiceEntityRepository
+class MentionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Mentions::class);
+        parent::__construct($registry, Mention::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Mentions $entity, bool $flush = true): void
+    public function add(Mention $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class MentionsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Mentions $entity, bool $flush = true): void
+    public function remove(Mention $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class MentionsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Mentions[] Returns an array of Mentions objects
+    //  * @return Mention[] Returns an array of Mention objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class MentionsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Mentions
+    public function findOneBySomeField($value): ?Mention
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.exampleField = :val')

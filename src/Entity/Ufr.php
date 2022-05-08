@@ -60,7 +60,7 @@ class Ufr
     private $universite;
 
     /**
-     * @ORM\OneToMany(targetEntity=mentions::class, mappedBy="ufr")
+     * @ORM\OneToMany(targetEntity=Mention::class, mappedBy="ufr")
      */
     private $mentions;
 
@@ -128,14 +128,14 @@ class Ufr
     }
 
     /**
-     * @return Collection<int, Mentions>
+     * @return Collection<int, Mention>
      */
     public function getMentions(): Collection
     {
         return $this->mentions;
     }
 
-    public function addMention(Mentions $mention): self
+    public function addMention(Mention $mention): self
     {
         if (!$this->mentions->contains($mention)) {
             $this->mentions[] = $mention;
@@ -145,7 +145,7 @@ class Ufr
         return $this;
     }
 
-    public function removeMention(Mentions $mention): self
+    public function removeMention(Mention $mention): self
     {
         if ($this->mentions->removeElement($mention)) {
             // set the owning side to null (unless already changed)
