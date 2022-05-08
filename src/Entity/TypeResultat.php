@@ -53,7 +53,7 @@ class TypeResultat
     private $inscriptionsPeriodes;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsUes::class, mappedBy="typeResultat")
+     * @ORM\OneToMany(targetEntity=InscriptionUe::class, mappedBy="typeResultat")
      */
     private $inscriptionsUes;
 
@@ -158,14 +158,14 @@ class TypeResultat
     }
 
     /**
-     * @return Collection<int, InscriptionsUes>
+     * @return Collection<int, InscriptionUe>
      */
     public function getInscriptionsUes(): Collection
     {
         return $this->inscriptionsUes;
     }
 
-    public function addInscriptionUe(InscriptionsUes $inscriptionUe): self
+    public function addInscriptionUe(InscriptionUe $inscriptionUe): self
     {
         if (!$this->inscriptionsUes->contains($inscriptionUe)) {
             $this->inscriptionsUes[] = $inscriptionUe;
@@ -175,7 +175,7 @@ class TypeResultat
         return $this;
     }
 
-    public function removeInscriptionUe(InscriptionsUes $inscriptionUe): self
+    public function removeInscriptionUe(InscriptionUe $inscriptionUe): self
     {
         if ($this->inscriptionsUes->removeElement($inscriptionUe)) {
             // set the owning side to null (unless already changed)

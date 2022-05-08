@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * InscriptionsUes
  *
  * @ORM\Table(name="inscriptions_ues")
- * @ORM\Entity(repositoryClass="App\Repository\InscriptionsUesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionUeRepository")
  */
-class InscriptionsUes
+class InscriptionUe
 {
     /**
      * @var int
@@ -24,30 +24,30 @@ class InscriptionsUes
     /**
      * @var float
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
-    private $note = NULL;
+    private $note;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
-    private $pointsJury = NULL;
+    private $pointsJury;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="saisie", type="boolean", nullable=false, options={"comment"="booléen"})
+     * @ORM\Column(name="saisie", type="boolean", nullable=false, options={"comment"="booléen", "default"=false})
      */
-    private $saisie = '0';
+    private $saisie;
 
     /**
      * @var Etudiant
      *
      * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy = "inscriptionsUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id", nullable=false)
      * })
      */
     private $etudiant;
@@ -57,7 +57,7 @@ class InscriptionsUes
      *
      * @ORM\ManyToOne(targetEntity="TypeNote", inversedBy = "inscriptionsUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id", nullable=true)
      * })
      */
     private $typeNote;
@@ -67,7 +67,7 @@ class InscriptionsUes
      *
      * @ORM\ManyToOne(targetEntity="PeriodeUe", inversedBy = "inscriptionsUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id", nullable=false)
      * })
      */
     private $periodeUe;
@@ -77,11 +77,21 @@ class InscriptionsUes
      *
      * @ORM\ManyToOne(targetEntity="TypeResultat", inversedBy = "inscriptionsUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id", nullable = true)
+     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id", nullable=true)
      * })
      */
     private $typeResultat;
 
+
+    // *******************************************************************
+    public function __construct()
+    {
+        $this->note = null;
+        $this->pointsJury = null;
+        $this->saisie = false;
+        $this->typeNote =null;
+        $this->typeResultat = null;
+    }
 
 
     public function getId(): ?int
