@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Diplomes
+ * Diplome
  *
  * @ORM\Table(name="diplomes")
- * @ORM\Entity(repositoryClass="App\Repository\DiplomesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DiplomeRepository")
  */
-class Diplomes
+class Diplome
 {
     /**
      * @var int
@@ -54,19 +54,23 @@ class Diplomes
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
-     * @ORM\OneToMany(targetEntity=Mentions::class, mappedBy="diplome", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Mentions::class, mappedBy="diplome", orphanRemoval=false)
      */
-    private $mention;
+    private $mentions;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->mention = new ArrayCollection();
+        $this->commentaire = null;
+        $this->mentions = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -136,27 +140,27 @@ class Diplomes
     /**
      * @return Collection<int, Mentions>
      */
-    public function getMention(): Collection
+    public function getMentions(): Collection
     {
-        return $this->mention;
+        return $this->mentions;
     }
 
-    public function addIdMention(Mentions $idMention): self
+    public function addMention(Mentions $mention): self
     {
-        if (!$this->mention->contains($idMention)) {
-            $this->mention[] = $idMention;
-            $idMention->setDiplome($this);
+        if (!$this->mentions->contains($mention)) {
+            $this->mentions[] = $mention;
+            $mention->setDiplome($this);
         }
 
         return $this;
     }
 
-    public function removeIdMention(Mentions $idMention): self
+    public function removeMention(Mentions $mention): self
     {
-        if ($this->mention->removeElement($idMention)) {
+        if ($this->mentions->removeElement($mention)) {
             // set the owning side to null (unless already changed)
-            if ($idMention->getDiplome() === $this) {
-                $idMention->setDiplome(null);
+            if ($mention->getDiplome() === $this) {
+                $mention->setDiplome(null);
             }
         }
 

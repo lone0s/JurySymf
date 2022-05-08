@@ -68,9 +68,9 @@ class Mentions
     private $commentaire = 'NULL';
 
     /**
-     * @var Diplomes
+     * @var Diplome
      *
-     * @ORM\ManyToOne(targetEntity="Diplomes",inversedBy="mention")
+     * @ORM\ManyToOne(targetEntity="Diplome",inversedBy="mentions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_diplome", referencedColumnName="id")
      * })
@@ -175,12 +175,12 @@ class Mentions
         return $this;
     }
 
-    public function getDiplome(): ?Diplomes
+    public function getDiplome(): ?Diplome
     {
         return $this->diplome;
     }
 
-    public function setDiplome(?Diplomes $diplome): self
+    public function setDiplome(?Diplome $diplome): self
     {
         $this->diplome = $diplome;
 
