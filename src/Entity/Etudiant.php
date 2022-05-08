@@ -69,7 +69,7 @@ class Etudiant
     private $inscriptionsParcours;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsPeriodes::class, mappedBy="etudiant")
+     * @ORM\OneToMany(targetEntity=InscriptionPeriode::class, mappedBy="etudiant")
      */
     private $inscriptionsPeriodes;
 
@@ -192,14 +192,14 @@ class Etudiant
     }
 
     /**
-     * @return Collection<int, InscriptionsPeriodes>
+     * @return Collection<int, InscriptionPeriode>
      */
     public function getInscriptionsPeriodes(): Collection
     {
         return $this->inscriptionsPeriodes;
     }
 
-    public function addInscriptionPeriode(InscriptionsPeriodes $inscriptionPeriode): self
+    public function addInscriptionPeriode(InscriptionPeriode $inscriptionPeriode): self
     {
         if (!$this->inscriptionsPeriodes->contains($inscriptionPeriode)) {
             $this->inscriptionsPeriodes[] = $inscriptionPeriode;
@@ -209,7 +209,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeInscriptionPeriode(InscriptionsPeriodes $inscriptionPeriode): self
+    public function removeInscriptionPeriode(InscriptionPeriode $inscriptionPeriode): self
     {
         if ($this->inscriptionsPeriodes->removeElement($inscriptionPeriode)) {
             // set the owning side to null (unless already changed)
