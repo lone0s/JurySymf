@@ -9,10 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ufrs
  *
- * @ORM\Table(name="ufrs", indexes={@ORM\Index(name="fk_ufrs_universites_1_idx", columns={"id_universite"})})
- * @ORM\Entity(repositoryClass="App\Repository\UfrsRepository")
+ * @ORM\Table(
+ *     name="ufrs",
+ *     indexes={
+ *         @ORM\Index(name="fk_ufrs_universites_1_idx", columns={"id_universite"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\UfrRepository")
  */
-class Ufrs
+class Ufr
 {
     /**
      * @var int
@@ -33,23 +38,23 @@ class Ufrs
     /**
      * @var string|null
      *
-     * @ORM\Column(name="denomination_courte", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="denomination_courte", type="string", length=20, nullable=true, options={"default"=null})
      */
-    private $denominationCourte = 'NULL';
+    private $denominationCourte;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
      * @var Universite
      *
      * @ORM\ManyToOne(targetEntity="Universite", inversedBy = "ufrs")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_universite", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_universite", referencedColumnName="id", nullable=false)
      * })
      */
     private $universite;
@@ -57,12 +62,17 @@ class Ufrs
     /**
      * @ORM\OneToMany(targetEntity=mentions::class, mappedBy="ufr")
      */
-    private $mention ;
+    private $mentions;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->mention = new ArrayCollection();
+        $this->denominationCourte = null;
+        $this->commentaire = null;
+        $this->mentions = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -118,29 +128,29 @@ class Ufrs
     }
 
     /**
-     * @return Collection<int, mentions>
+     * @return Collection<int, Mentions>
      */
-    public function getMention(): Collection
+    public function getMentions(): Collection
     {
-        return $this->mention;
+        return $this->mentions;
     }
 
-    public function addIdMention(mentions $idMention): self
+    public function addMention(Mentions $mention): self
     {
-        if (!$this->mention->contains($idMention)) {
-            $this->mention[] = $idMention;
-            $idMention->setUfr($this);
+        if (!$this->mentions->contains($mention)) {
+            $this->mentions[] = $mention;
+            $mention->setUfr($this);
         }
 
         return $this;
     }
 
-    public function removeIdMention(mentions $idMention): self
+    public function removeMention(Mentions $mention): self
     {
-        if ($this->mention->removeElement($idMention)) {
+        if ($this->mentions->removeElement($mention)) {
             // set the owning side to null (unless already changed)
-            if ($idMention->getUfr() === $this) {
-                $idMention->setUfr(null);
+            if ($mention->getUfr() === $this) {
+                $mention->setUfr(null);
             }
         }
 

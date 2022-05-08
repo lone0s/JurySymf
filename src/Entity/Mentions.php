@@ -78,9 +78,9 @@ class Mentions
     private $diplome;
 
     /**
-     * @var Ufrs
+     * @var Ufr
      *
-     * @ORM\ManyToOne(targetEntity="Ufrs",inversedBy="mention")
+     * @ORM\ManyToOne(targetEntity="Ufr",inversedBy="mentions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ufr", referencedColumnName="id")
      * })
@@ -187,12 +187,12 @@ class Mentions
         return $this;
     }
 
-    public function getUfr(): ?Ufrs
+    public function getUfr(): ?Ufr
     {
         return $this->ufr;
     }
 
-    public function setUfr(?Ufrs $ufr): self
+    public function setUfr(?Ufr $ufr): self
     {
         $this->ufr = $ufr;
 

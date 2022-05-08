@@ -38,7 +38,7 @@ class Universite
     private $commentaire;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ufrs::class, mappedBy="universite")
+     * @ORM\OneToMany(targetEntity=Ufr::class, mappedBy="universite")
      */
     private $ufrs;
 
@@ -81,14 +81,14 @@ class Universite
     }
 
     /**
-     * @return Collection<int, Ufrs>
+     * @return Collection<int, Ufr>
      */
     public function getUfrs(): Collection
     {
         return $this->ufrs;
     }
 
-    public function addUfr(Ufrs $ufr): self
+    public function addUfr(Ufr $ufr): self
     {
         if (!$this->ufrs->contains($ufr)) {
             $this->ufrs[] = $ufr;
@@ -98,7 +98,7 @@ class Universite
         return $this;
     }
 
-    public function removeUfr(Ufrs $ufr): self
+    public function removeUfr(Ufr $ufr): self
     {
         if ($this->ufrs->removeElement($ufr)) {
             // set the owning side to null (unless already changed)

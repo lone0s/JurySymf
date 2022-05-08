@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Ufrs;
+use App\Entity\Ufr;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Ufrs>
+ * @extends ServiceEntityRepository<Ufr>
  *
- * @method Ufrs|null find($id, $lockMode = null, $lockVersion = null)
- * @method Ufrs|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ufrs[]    findAll()
- * @method Ufrs[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Ufr|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Ufr|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Ufr[]    findAll()
+ * @method Ufr[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UfrsRepository extends ServiceEntityRepository
+class UfrRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Ufrs::class);
+        parent::__construct($registry, Ufr::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Ufrs $entity, bool $flush = true): void
+    public function add(Ufr $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class UfrsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Ufrs $entity, bool $flush = true): void
+    public function remove(Ufr $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class UfrsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Ufrs[] Returns an array of Ufrs objects
+    //  * @return Ufr[] Returns an array of Ufr objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class UfrsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Ufrs
+    public function findOneBySomeField($value): ?Ufr
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
