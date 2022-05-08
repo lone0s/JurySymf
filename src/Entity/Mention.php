@@ -93,7 +93,7 @@ class Mention
 
 
     /**
-     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="mention")
+     * @ORM\OneToMany(targetEntity=MentionParcour::class, mappedBy="mention")
      */
     private $mentionsParcours;
 
@@ -210,14 +210,14 @@ class Mention
     }
 
     /**
-     * @return Collection<int, MentionsParcours>
+     * @return Collection<int, MentionParcour>
      */
     public function getMentionsParcours(): Collection
     {
         return $this->mentionsParcours;
     }
 
-    public function addMentionParcour(MentionsParcours $mentionParcour): self
+    public function addMentionParcour(MentionParcour $mentionParcour): self
     {
         if (!$this->mentionsParcours->contains($mentionParcour)) {
             $this->mentionsParcours[] = $mentionParcour;
@@ -227,7 +227,7 @@ class Mention
         return $this;
     }
 
-    public function removeMentionParcour(MentionsParcours $mentionParcour): self
+    public function removeMentionParcour(MentionParcour $mentionParcour): self
     {
         if ($this->mentionsParcours->removeElement($mentionParcour)) {
             // set the owning side to null (unless already changed)

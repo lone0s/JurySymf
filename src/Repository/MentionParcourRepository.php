@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\MentionsParcours;
+use App\Entity\MentionParcour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<MentionsParcours>
+ * @extends ServiceEntityRepository<MentionParcour>
  *
- * @method MentionsParcours|null find($id, $lockMode = null, $lockVersion = null)
- * @method MentionsParcours|null findOneBy(array $criteria, array $orderBy = null)
- * @method MentionsParcours[]    findAll()
- * @method MentionsParcours[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MentionParcour|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MentionParcour|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MentionParcour[]    findAll()
+ * @method MentionParcour[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MentionsParcoursRepository extends ServiceEntityRepository
+class MentionParcourRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MentionsParcours::class);
+        parent::__construct($registry, MentionParcour::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(MentionsParcours $entity, bool $flush = true): void
+    public function add(MentionParcour $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class MentionsParcoursRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(MentionsParcours $entity, bool $flush = true): void
+    public function remove(MentionParcour $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {

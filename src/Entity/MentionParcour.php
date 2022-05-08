@@ -7,13 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MentionsParcours
  *
- * @ORM\Table(name="mentions_parcours", uniqueConstraints=
- *     {@ORM\UniqueConstraint(name="index4", columns={"id_mention", "id_parcours"})},
- *     indexes={@ORM\Index(name="fk_mp_mentions_idx", columns={"id_mention"}),
- *     @ORM\Index(name="fk_mp_parcours_idx", columns={"id_parcours"})})
- * @ORM\Entity(repositoryClass="App\Repository\MentionsParcoursRepository")
+ * @ORM\Table(
+ *     name="mentions_parcours",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="index4", columns={"id_mention", "id_parcours"})
+ *     },
+ *     indexes={
+ *         @ORM\Index(name="fk_mp_mentions_idx", columns={"id_mention"}),
+ *         @ORM\Index(name="fk_mp_parcours_idx", columns={"id_parcours"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\MentionParcourRepository")
  */
-class MentionsParcours
+class MentionParcour
 {
     /**
      * @var int
@@ -36,7 +42,7 @@ class MentionsParcours
      *
      * @ORM\ManyToOne(targetEntity="Mention", inversedBy="mentionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_mention", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_mention", referencedColumnName="id", nullable=false)
      * })
      */
     private $mention;
@@ -46,10 +52,17 @@ class MentionsParcours
      *
      * @ORM\ManyToOne(targetEntity="Parcour", inversedBy="mentionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id", nullable=false)
      * })
      */
     private $parcour;
+
+
+    // *******************************************************************
+    public function __construct()
+    {
+    }
+
 
     public function getId(): ?int
     {
