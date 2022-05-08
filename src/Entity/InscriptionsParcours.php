@@ -48,9 +48,9 @@ class InscriptionsParcours
     private $saisie = '0';
 
     /**
-     * @var Etudiants
+     * @var Etudiant
      *
-     * @ORM\ManyToOne(targetEntity="Etudiants", inversedBy = "inscriptionParcours")
+     * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
@@ -128,12 +128,12 @@ class InscriptionsParcours
         return $this;
     }
 
-    public function getEtudiant(): ?Etudiants
+    public function getEtudiant(): ?Etudiant
     {
         return $this->etudiant;
     }
 
-    public function setEtudiant(?Etudiants $etudiant): self
+    public function setEtudiant(?Etudiant $etudiant): self
     {
         $this->etudiant = $etudiant;
 

@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Etudiants;
+use App\Entity\Etudiant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Etudiants>
+ * @extends ServiceEntityRepository<Etudiant>
  *
- * @method Etudiants|null find($id, $lockMode = null, $lockVersion = null)
- * @method Etudiants|null findOneBy(array $criteria, array $orderBy = null)
- * @method Etudiants[]    findAll()
- * @method Etudiants[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Etudiant|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Etudiant|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Etudiant[]    findAll()
+ * @method Etudiant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EtudiantsRepository extends ServiceEntityRepository
+class EtudiantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Etudiants::class);
+        parent::__construct($registry, Etudiant::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Etudiants $entity, bool $flush = true): void
+    public function add(Etudiant $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class EtudiantsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Etudiants $entity, bool $flush = true): void
+    public function remove(Etudiant $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class EtudiantsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Etudiants[] Returns an array of Etudiants objects
+    //  * @return Etudiant[] Returns an array of Etudiant objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class EtudiantsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Etudiants
+    public function findOneBySomeField($value): ?Etudiant
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')
