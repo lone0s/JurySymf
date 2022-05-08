@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Periodicites
+ * Periodicite
  *
  * @ORM\Table(name="periodicites")
- * @ORM\Entity(repositoryClass="App\Repository\PeriodicitesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PeriodiciteRepository")
  */
-class Periodicites
+class Periodicite
 {
     /**
      * @var int
@@ -49,10 +49,13 @@ class Periodicites
      */
     private $parcours;
 
+
+    // *******************************************************************
     public function __construct()
     {
         $this->parcours = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -103,22 +106,22 @@ class Periodicites
         return $this->parcours;
     }
 
-    public function addIdParcour(Parcours $idParcour): self
+    public function addParcour(Parcours $parcour): self
     {
-        if (!$this->parcours->contains($idParcour)) {
-            $this->parcours[] = $idParcour;
-            $idParcour->setPeriodicite($this);
+        if (!$this->parcours->contains($parcour)) {
+            $this->parcours[] = $parcour;
+            $parcour->setPeriodicite($this);
         }
 
         return $this;
     }
 
-    public function removeIdParcour(Parcours $idParcour): self
+    public function removeParcour(Parcours $parcour): self
     {
-        if ($this->parcours->removeElement($idParcour)) {
+        if ($this->parcours->removeElement($parcour)) {
             // set the owning side to null (unless already changed)
-            if ($idParcour->getPeriodicite() === $this) {
-                $idParcour->setPeriodicite(null);
+            if ($parcour->getPeriodicite() === $this) {
+                $parcour->setPeriodicite(null);
             }
         }
 

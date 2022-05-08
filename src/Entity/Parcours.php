@@ -75,9 +75,9 @@ class Parcours
     private $commentaire = 'NULL';
 
     /**
-     * @var Periodicites
+     * @var Periodicite
      *
-     * @ORM\ManyToOne(targetEntity="Periodicites", inversedBy = "parcours")
+     * @ORM\ManyToOne(targetEntity="Periodicite", inversedBy = "parcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periodicite", referencedColumnName="id")
      * })
@@ -196,12 +196,12 @@ class Parcours
         return $this;
     }
 
-    public function getPeriodicite(): ?Periodicites
+    public function getPeriodicite(): ?Periodicite
     {
         return $this->periodicite;
     }
 
-    public function setPeriodicite(?Periodicites $periodicite): self
+    public function setPeriodicite(?Periodicite $periodicite): self
     {
         $this->periodicite = $periodicite;
 

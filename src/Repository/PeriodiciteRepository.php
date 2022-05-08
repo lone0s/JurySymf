@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Periodicites;
+use App\Entity\Periodicite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Periodicites>
+ * @extends ServiceEntityRepository<Periodicite>
  *
- * @method Periodicites|null find($id, $lockMode = null, $lockVersion = null)
- * @method Periodicites|null findOneBy(array $criteria, array $orderBy = null)
- * @method Periodicites[]    findAll()
- * @method Periodicites[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Periodicite|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Periodicite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Periodicite[]    findAll()
+ * @method Periodicite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PeriodicitesRepository extends ServiceEntityRepository
+class PeriodiciteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Periodicites::class);
+        parent::__construct($registry, Periodicite::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Periodicites $entity, bool $flush = true): void
+    public function add(Periodicite $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class PeriodicitesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Periodicites $entity, bool $flush = true): void
+    public function remove(Periodicite $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class PeriodicitesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Periodicites[] Returns an array of Periodicites objects
+    //  * @return Periodicite[] Returns an array of Periodicite objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class PeriodicitesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Periodicites
+    public function findOneBySomeField($value): ?Periodicite
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
