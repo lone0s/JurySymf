@@ -65,9 +65,9 @@ class InscriptionsPeriodes
     private $etudiant;
 
     /**
-     * @var TypesNote
+     * @var TypeNote
      *
-     * @ORM\ManyToOne(targetEntity="TypesNote", inversedBy = "inscriptionPeriode")
+     * @ORM\ManyToOne(targetEntity="TypeNote", inversedBy = "inscriptionsPeriodes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
      * })
@@ -159,12 +159,12 @@ class InscriptionsPeriodes
         return $this;
     }
 
-    public function getTypeNote(): ?TypesNote
+    public function getTypeNote(): ?TypeNote
     {
         return $this->typeNote;
     }
 
-    public function setTypeNote(?TypesNote $typeNote): self
+    public function setTypeNote(?TypeNote $typeNote): self
     {
         $this->typeNote = $typeNote;
 

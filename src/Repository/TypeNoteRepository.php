@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\TypesNote;
+use App\Entity\TypeNote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TypesNote>
+ * @extends ServiceEntityRepository<TypeNote>
  *
- * @method TypesNote|null find($id, $lockMode = null, $lockVersion = null)
- * @method TypesNote|null findOneBy(array $criteria, array $orderBy = null)
- * @method TypesNote[]    findAll()
- * @method TypesNote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TypeNote|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TypeNote|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TypeNote[]    findAll()
+ * @method TypeNote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TypesNoteRepository extends ServiceEntityRepository
+class TypeNoteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TypesNote::class);
+        parent::__construct($registry, TypeNote::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(TypesNote $entity, bool $flush = true): void
+    public function add(TypeNote $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class TypesNoteRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(TypesNote $entity, bool $flush = true): void
+    public function remove(TypeNote $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class TypesNoteRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return TypesNote[] Returns an array of TypesNote objects
+    //  * @return TypeNote[] Returns an array of TypeNote objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class TypesNoteRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TypesNote
+    public function findOneBySomeField($value): ?TypeNote
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')
