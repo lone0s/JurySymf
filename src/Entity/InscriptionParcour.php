@@ -5,17 +5,23 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * InscriptionsParcours
+ * InscriptionParcour
  *
- * @ORM\Table(name="inscriptions_parcours", uniqueConstraints={
- *     @ORM\UniqueConstraint(name="index4", columns={"id_etudiant", "id_parcours"})},
- *     indexes={@ORM\Index(name="fk_inscriptions_parcours_types_resultat_idx", columns={"id_type_resultat"}),
- *     @ORM\Index(name="fk_inscriptions_parcours_etudiants_idx", columns={"id_etudiant"}),
- *     @ORM\Index(name="fk_inscriptions_parcours_parcours_idx", columns={"id_parcours"}),
- *     @ORM\Index(name="fk_inscriptions_parcours_types_note_idx", columns={"id_type_note"})})
- * @ORM\Entity(repositoryClass="App\Repository\InscriptionsParcoursRepository")
+ * @ORM\Table(
+ *     name="inscriptions_parcours",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="index4", columns={"id_etudiant", "id_parcours"})
+ *     },
+ *     indexes={
+ *         @ORM\Index(name="fk_inscriptions_parcours_types_resultat_idx", columns={"id_type_resultat"}),
+ *         @ORM\Index(name="fk_inscriptions_parcours_etudiants_idx", columns={"id_etudiant"}),
+ *         @ORM\Index(name="fk_inscriptions_parcours_parcours_idx", columns={"id_parcours"}),
+ *         @ORM\Index(name="fk_inscriptions_parcours_types_note_idx", columns={"id_type_note"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionParcourRepository")
  */
-class InscriptionsParcours
+class InscriptionParcour
 {
     /**
      * @var int
@@ -29,30 +35,30 @@ class InscriptionsParcours
     /**
      * @var float
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
-    private $note = NULL;
+    private $note;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="points_jury", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
-    private $pointsJury = NULL;
+    private $pointsJury;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="saisie", type="boolean", nullable=false, options={"comment"="booléen"})
+     * @ORM\Column(name="saisie", type="boolean", nullable=false, options={"comment"="booléen", "default"=false})
      */
-    private $saisie = '0';
+    private $saisie;
 
     /**
      * @var Etudiant
      *
      * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id", nullable=false)
      * })
      */
     private $etudiant;
@@ -62,7 +68,7 @@ class InscriptionsParcours
      *
      * @ORM\ManyToOne(targetEntity="TypeNote", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_type_note", referencedColumnName="id", nullable=true)
      * })
      */
     private $typeNote;
@@ -72,7 +78,7 @@ class InscriptionsParcours
      *
      * @ORM\ManyToOne(targetEntity="Parcour", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id", nullable=false)
      * })
      */
     private $parcour;
@@ -82,10 +88,22 @@ class InscriptionsParcours
      *
      * @ORM\ManyToOne(targetEntity="TypeResultat", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_type_resultat", referencedColumnName="id", nullable=true)
      * })
      */
     private $typeResultat;
+
+
+    // *******************************************************************
+    public function __construct()
+    {
+        $this->note = null;
+        $this->pointsJury = null;
+        $this->saisie = false;
+        $this->typeNote = null;
+        $this->typeResultat = null;
+    }
+
 
     public function getId(): ?int
     {

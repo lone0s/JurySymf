@@ -64,7 +64,7 @@ class Etudiant
     private $commentaire;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsParcours::class, mappedBy="etudiant")
+     * @ORM\OneToMany(targetEntity=InscriptionParcour::class, mappedBy="etudiant")
      */
     private $inscriptionsParcours;
 
@@ -162,14 +162,14 @@ class Etudiant
     }
 
     /**
-     * @return Collection<int, InscriptionsParcours>
+     * @return Collection<int, InscriptionParcour>
      */
     public function getInscriptionsParcours(): Collection
     {
         return $this->inscriptionsParcours;
     }
 
-    public function addInscriptionParcour(InscriptionsParcours $inscriptionParcour): self
+    public function addInscriptionParcour(InscriptionParcour $inscriptionParcour): self
     {
         if (!$this->inscriptionsParcours->contains($inscriptionParcour)) {
             $this->inscriptionsParcours[] = $inscriptionParcour;
@@ -179,7 +179,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeInscriptionParcour(InscriptionsParcours $inscriptionParcour): self
+    public function removeInscriptionParcour(InscriptionParcour $inscriptionParcour): self
     {
         if ($this->inscriptionsParcours->removeElement($inscriptionParcour)) {
             // set the owning side to null (unless already changed)

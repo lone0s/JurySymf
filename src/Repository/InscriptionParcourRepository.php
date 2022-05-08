@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\InscriptionsParcours;
+use App\Entity\InscriptionParcour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<InscriptionsParcours>
+ * @extends ServiceEntityRepository<InscriptionParcour>
  *
- * @method InscriptionsParcours|null find($id, $lockMode = null, $lockVersion = null)
- * @method InscriptionsParcours|null findOneBy(array $criteria, array $orderBy = null)
- * @method InscriptionsParcours[]    findAll()
- * @method InscriptionsParcours[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method InscriptionParcour|null find($id, $lockMode = null, $lockVersion = null)
+ * @method InscriptionParcour|null findOneBy(array $criteria, array $orderBy = null)
+ * @method InscriptionParcour[]    findAll()
+ * @method InscriptionParcour[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InscriptionsParcoursRepository extends ServiceEntityRepository
+class InscriptionParcourRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, InscriptionsParcours::class);
+        parent::__construct($registry, InscriptionParcour::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(InscriptionsParcours $entity, bool $flush = true): void
+    public function add(InscriptionParcour $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class InscriptionsParcoursRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(InscriptionsParcours $entity, bool $flush = true): void
+    public function remove(InscriptionParcour $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class InscriptionsParcoursRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return InscriptionsParcours[] Returns an array of InscriptionsParcours objects
+    //  * @return InscriptionParcour[] Returns an array of InscriptionParcour objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class InscriptionsParcoursRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?InscriptionsParcours
+    public function findOneBySomeField($value): ?InscriptionParcour
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')
