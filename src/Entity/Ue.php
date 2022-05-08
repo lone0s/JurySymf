@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ues
+ * Ue
  *
  * @ORM\Table(name="ues")
- * @ORM\Entity(repositoryClass="App\Repository\UesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UeRepository")
  */
-class Ues
+class Ue
 {
     /**
      * @var int
@@ -33,9 +33,9 @@ class Ues
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"=null})
      */
-    private $nomCourt = 'NULL';
+    private $nomCourt;
 
     /**
      * @var float
@@ -47,34 +47,38 @@ class Ues
     /**
      * @var string|null
      *
-     * @ORM\Column(name="code_apogee", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="code_apogee", type="string", length=30, nullable=true, options={"default"=null})
      */
-    private $codeApogee = 'NULL';
+    private $codeApogee;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
      * @ORM\OneToMany(targetEntity=PeriodesUes::class, mappedBy="ue")
      */
-    private $periodeUe;
-
+    private $periodesUes;
 
     /**
      * @ORM\OneToMany(targetEntity=Epreuves::class, mappedBy="ue")
      */
-    private $epreuve;
+    private $epreuves;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->periodeUe = new ArrayCollection();
-        $this->periodeUe = new ArrayCollection();
-        $this->epreuve = new ArrayCollection();
+        $this->nomCourt = null;
+        $this->codeApogee = null;
+        $this->commentaire = null;
+        $this->periodesUes = new ArrayCollection();
+        $this->epreuves = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -144,57 +148,27 @@ class Ues
     /**
      * @return Collection<int, PeriodesUes>
      */
-    public function getPeriodeUe(): Collection
+    public function getPeriodesUes(): Collection
     {
-        return $this->periodeUe;
+        return $this->periodesUes;
     }
 
-    public function addIdPeriodeUe(PeriodesUes $idPeriodeUe): self
+    public function addPeriodeUe(PeriodesUes $periodeUe): self
     {
-        if (!$this->periodeUe->contains($idPeriodeUe)) {
-            $this->periodeUe[] = $idPeriodeUe;
-            $idPeriodeUe->setUe($this);
+        if (!$this->periodesUes->contains($periodeUe)) {
+            $this->periodesUes[] = $periodeUe;
+            $periodeUe->setUe($this);
         }
 
         return $this;
     }
 
-    public function removeIdPeriodeUe(PeriodesUes $idPeriodeUe): self
+    public function removePeriodeUe(PeriodesUes $periodeUe): self
     {
-        if ($this->periodeUe->removeElement($idPeriodeUe)) {
+        if ($this->periodesUes->removeElement($periodeUe)) {
             // set the owning side to null (unless already changed)
-            if ($idPeriodeUe->getUe() === $this) {
-                $idPeriodeUe->setUe(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ParcoursUes>
-     */
-    public function getIdParcoursUe(): Collection
-    {
-        return $this->idParcoursUe;
-    }
-
-    public function addIdParcoursUe(ParcoursUes $idParcoursUe): self
-    {
-        if (!$this->idParcoursUe->contains($idParcoursUe)) {
-            $this->idParcoursUe[] = $idParcoursUe;
-            $idParcoursUe->setIdUe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdParcoursUe(ParcoursUes $idParcoursUe): self
-    {
-        if ($this->idParcoursUe->removeElement($idParcoursUe)) {
-            // set the owning side to null (unless already changed)
-            if ($idParcoursUe->getIdUe() === $this) {
-                $idParcoursUe->setIdUe(null);
+            if ($periodeUe->getUe() === $this) {
+                $periodeUe->setUe(null);
             }
         }
 
@@ -204,32 +178,31 @@ class Ues
     /**
      * @return Collection<int, Epreuves>
      */
-    public function getEpreuve(): Collection
+    public function getEpreuves(): Collection
     {
-        return $this->epreuve;
+        return $this->epreuves;
     }
 
-    public function addIdEpreuve(Epreuves $idEpreuve): self
+    public function addEpreuve(Epreuves $epreuve): self
     {
-        if (!$this->epreuve->contains($idEpreuve)) {
-            $this->epreuve[] = $idEpreuve;
-            $idEpreuve->setUe($this);
+        if (!$this->epreuves->contains($epreuve)) {
+            $this->epreuves[] = $epreuve;
+            $epreuve->setUe($this);
         }
 
         return $this;
     }
 
-    public function removeIdEpreuve(Epreuves $idEpreuve): self
+    public function removeEpreuve(Epreuves $epreuve): self
     {
-        if ($this->epreuve->removeElement($idEpreuve)) {
+        if ($this->epreuves->removeElement($epreuve)) {
             // set the owning side to null (unless already changed)
-            if ($idEpreuve->getUe() === $this) {
-                $idEpreuve->setUe(null);
+            if ($epreuve->getUe() === $this) {
+                $epreuve->setUe(null);
             }
         }
 
         return $this;
     }
-
 
 }

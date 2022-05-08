@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Ues;
+use App\Entity\Ue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Ues>
+ * @extends ServiceEntityRepository<Ue>
  *
- * @method Ues|null find($id, $lockMode = null, $lockVersion = null)
- * @method Ues|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ues[]    findAll()
- * @method Ues[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Ue|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Ue|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Ue[]    findAll()
+ * @method Ue[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UesRepository extends ServiceEntityRepository
+class UeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Ues::class);
+        parent::__construct($registry, Ue::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Ues $entity, bool $flush = true): void
+    public function add(Ue $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class UesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Ues $entity, bool $flush = true): void
+    public function remove(Ue $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class UesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Ues[] Returns an array of Ues objects
+    //  * @return Ue[] Returns an array of Ue objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class UesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Ues
+    public function findOneBySomeField($value): ?Ue
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')

@@ -52,9 +52,9 @@ class PeriodesUes
 
 
     /**
-     * @var Ues
+     * @var Ue
      *
-     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "periodeUe")
+     * @ORM\ManyToOne(targetEntity="Ue", inversedBy = "periodesUes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id")
      * })
@@ -118,12 +118,12 @@ class PeriodesUes
         return $this;
     }
 
-    public function getUe(): ?Ues
+    public function getUe(): ?Ue
     {
         return $this->ue;
     }
 
-    public function setUe(?Ues $ue): self
+    public function setUe(?Ue $ue): self
     {
         $this->ue = $ue;
 

@@ -76,9 +76,9 @@ class Epreuves
     private $natureEpreuve;
 
     /**
-     * @var Ues
+     * @var Ue
      *
-     * @ORM\ManyToOne(targetEntity="Ues", inversedBy = "epreuve")
+     * @ORM\ManyToOne(targetEntity="Ue", inversedBy = "epreuves")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id",nullable = false)
      * })
@@ -184,12 +184,12 @@ class Epreuves
         return $this;
     }
 
-    public function getUe(): ?Ues
+    public function getUe(): ?Ue
     {
         return $this->ue;
     }
 
-    public function setUe(?Ues $ue): self
+    public function setUe(?Ue $ue): self
     {
         $this->ue = $ue;
 
