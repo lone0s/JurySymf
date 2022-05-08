@@ -9,13 +9,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PeriodesUes
  *
- * @ORM\Table(name="periodes_ues", uniqueConstraints=
- *     {@ORM\UniqueConstraint(name="index4", columns={"id_ue", "id_periode"})},
- *     indexes={@ORM\Index(name="fk_pu_ues_idx", columns={"id_ue"}),
- *     @ORM\Index(name="fk_pu_periodes_idx", columns={"id_periode"})})
- * @ORM\Entity(repositoryClass="App\Repository\PeriodesUesRepository")
+ * @ORM\Table(
+ *     name="periodes_ues",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="index4", columns={"id_ue", "id_periode"})
+ *     },
+ *     indexes={
+ *         @ORM\Index(name="fk_pu_ues_idx", columns={"id_ue"}),
+ *         @ORM\Index(name="fk_pu_periodes_idx", columns={"id_periode"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\PeriodeUeRepository")
  */
-class PeriodesUes
+class PeriodeUe
 {
     /**
      * @var int
@@ -29,7 +35,7 @@ class PeriodesUes
     /**
      * @var float
      *
-     * @ORM\Column(name="note_eliminatoire", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="note_eliminatoire", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
     private $noteEliminatoire;
 
@@ -45,18 +51,17 @@ class PeriodesUes
      *
      * @ORM\ManyToOne(targetEntity="Periode", inversedBy = "periodesUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_periode", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_periode", referencedColumnName="id", nullable=false)
      * })
      */
     private $periode;
-
 
     /**
      * @var Ue
      *
      * @ORM\ManyToOne(targetEntity="Ue", inversedBy = "periodesUes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id", nullable=false)
      * })
      */
     private $ue;
@@ -64,18 +69,22 @@ class PeriodesUes
     /**
      * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="periodeUe")
      */
-    private $inscriptionEpreuve;
+    private $inscriptionsEpreuves;
 
     /**
      * @ORM\OneToMany(targetEntity=InscriptionsUes::class, mappedBy="periodeUe")
      */
-    private $inscriptionUe;
+    private $inscriptionsUes;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->inscriptionEpreuve = new ArrayCollection();
-        $this->inscriptionUe = new ArrayCollection();
+        $this->noteEliminatoire = null;
+        $this->inscriptionsEpreuves = new ArrayCollection();
+        $this->inscriptionsUes = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -133,27 +142,27 @@ class PeriodesUes
     /**
      * @return Collection<int, InscriptionsEpreuves>
      */
-    public function getInscriptionEpreuve(): Collection
+    public function getInscriptionsEpreuves(): Collection
     {
-        return $this->inscriptionEpreuve;
+        return $this->inscriptionsEpreuves;
     }
 
-    public function addIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    public function addInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
     {
-        if (!$this->inscriptionEpreuve->contains($idInscriptionEpreuve)) {
-            $this->inscriptionEpreuve[] = $idInscriptionEpreuve;
-            $idInscriptionEpreuve->setPeriodeUe($this);
+        if (!$this->inscriptionsEpreuves->contains($inscriptionEpreuve)) {
+            $this->inscriptionsEpreuves[] = $inscriptionEpreuve;
+            $inscriptionEpreuve->setPeriodeUe($this);
         }
 
         return $this;
     }
 
-    public function removeIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    public function removeInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
     {
-        if ($this->inscriptionEpreuve->removeElement($idInscriptionEpreuve)) {
+        if ($this->inscriptionsEpreuves->removeElement($inscriptionEpreuve)) {
             // set the owning side to null (unless already changed)
-            if ($idInscriptionEpreuve->getPeriodeUe() === $this) {
-                $idInscriptionEpreuve->setPeriodeUe(null);
+            if ($inscriptionEpreuve->getPeriodeUe() === $this) {
+                $inscriptionEpreuve->setPeriodeUe(null);
             }
         }
 
@@ -163,33 +172,31 @@ class PeriodesUes
     /**
      * @return Collection<int, InscriptionsUes>
      */
-    public function getInscriptionUe(): Collection
+    public function getInscriptionsUes(): Collection
     {
-        return $this->inscriptionUe;
+        return $this->inscriptionsUes;
     }
 
-    public function addIdInscriptionUe(InscriptionsUes $idInscriptionUe): self
+    public function addInscriptionUe(InscriptionsUes $inscriptionUe): self
     {
-        if (!$this->inscriptionUe->contains($idInscriptionUe)) {
-            $this->inscriptionUe[] = $idInscriptionUe;
-            $idInscriptionUe->setPeriodeUe($this);
+        if (!$this->inscriptionsUes->contains($inscriptionUe)) {
+            $this->inscriptionsUes[] = $inscriptionUe;
+            $inscriptionUe->setPeriodeUe($this);
         }
 
         return $this;
     }
 
-    public function removeIdInscriptionUe(InscriptionsUes $idInscriptionUe): self
+    public function removeInscriptionUe(InscriptionsUes $inscriptionUe): self
     {
-        if ($this->inscriptionUe->removeElement($idInscriptionUe)) {
+        if ($this->inscriptionsUes->removeElement($inscriptionUe)) {
             // set the owning side to null (unless already changed)
-            if ($idInscriptionUe->getPeriodeUe() === $this) {
-                $idInscriptionUe->setPeriodeUe(null);
+            if ($inscriptionUe->getPeriodeUe() === $this) {
+                $inscriptionUe->setPeriodeUe(null);
             }
         }
 
         return $this;
     }
-
-
 
 }

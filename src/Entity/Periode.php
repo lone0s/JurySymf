@@ -52,7 +52,7 @@ class Periode
     private $parcour;
 
     /**
-     * @ORM\OneToMany(targetEntity=PeriodesUes::class, mappedBy="periode")
+     * @ORM\OneToMany(targetEntity=PeriodeUe::class, mappedBy="periode")
      */
     private $periodesUes;
 
@@ -113,14 +113,14 @@ class Periode
     }
 
     /**
-     * @return Collection<int, PeriodesUes>
+     * @return Collection<int, PeriodeUe>
      */
     public function getPeriodesUes(): Collection
     {
         return $this->periodesUes;
     }
 
-    public function addPeriodeUe(PeriodesUes $periodeUe): self
+    public function addPeriodeUe(PeriodeUe $periodeUe): self
     {
         if (!$this->periodesUes->contains($periodeUe)) {
             $this->periodesUes[] = $periodeUe;
@@ -130,7 +130,7 @@ class Periode
         return $this;
     }
 
-    public function removePeriodeUe(PeriodesUes $periodeUe): self
+    public function removePeriodeUe(PeriodeUe $periodeUe): self
     {
         if ($this->periodesUes->removeElement($periodeUe)) {
             // set the owning side to null (unless already changed)

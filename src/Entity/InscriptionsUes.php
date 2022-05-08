@@ -63,9 +63,9 @@ class InscriptionsUes
     private $typeNote;
 
     /**
-     * @var PeriodesUes
+     * @var PeriodeUe
      *
-     * @ORM\ManyToOne(targetEntity="PeriodesUes", inversedBy = "inscriptionUe")
+     * @ORM\ManyToOne(targetEntity="PeriodeUe", inversedBy = "inscriptionsUes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id")
      * })
@@ -149,12 +149,12 @@ class InscriptionsUes
         return $this;
     }
 
-    public function getPeriodeUe(): ?PeriodesUes
+    public function getPeriodeUe(): ?PeriodeUe
     {
         return $this->periodeUe;
     }
 
-    public function setPeriodeUe(?PeriodesUes $periodeUe): self
+    public function setPeriodeUe(?PeriodeUe $periodeUe): self
     {
         $this->periodeUe = $periodeUe;
 
