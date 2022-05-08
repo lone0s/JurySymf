@@ -66,9 +66,9 @@ class Epreuves
     private $duree = 'NULL';
 
     /**
-     * @var NaturesEpreuve
+     * @var NatureEpreuve
      *
-     * @ORM\ManyToOne(targetEntity="NaturesEpreuve", inversedBy = "epreuve")
+     * @ORM\ManyToOne(targetEntity="NatureEpreuve", inversedBy = "epreuves")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_nature", referencedColumnName="id")
      * })
@@ -172,12 +172,12 @@ class Epreuves
         return $this;
     }
 
-    public function getNatureEpreuve(): ?NaturesEpreuve
+    public function getNatureEpreuve(): ?NatureEpreuve
     {
         return $this->natureEpreuve;
     }
 
-    public function setNatureEpreuve(?NaturesEpreuve $natureEpreuve): self
+    public function setNatureEpreuve(?NatureEpreuve $natureEpreuve): self
     {
         $this->natureEpreuve = $natureEpreuve;
 

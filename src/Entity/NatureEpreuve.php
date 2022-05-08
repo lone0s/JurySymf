@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * NaturesEpreuve
+ * NatureEpreuve
  *
  * @ORM\Table(name="natures_epreuve")
- * @ORM\Entity(repositoryClass="App\Repository\NaturesEpreuvesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\NatureEpreuveRepository")
  */
-class NaturesEpreuve
+class NatureEpreuve
 {
     /**
      * @var int
@@ -33,12 +33,15 @@ class NaturesEpreuve
     /**
      * @ORM\OneToMany(targetEntity=Epreuves::class, mappedBy="natureEpreuve")
      */
-    private $epreuve;
+    private $epreuves;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->epreuve = new ArrayCollection();
+        $this->epreuves = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -60,27 +63,27 @@ class NaturesEpreuve
     /**
      * @return Collection<int, Epreuves>
      */
-    public function getEpreuve(): Collection
+    public function getEpreuves(): Collection
     {
-        return $this->epreuve;
+        return $this->epreuves;
     }
 
-    public function addIdEpreuve(Epreuves $idEpreuve): self
+    public function addEpreuve(Epreuves $epreuve): self
     {
-        if (!$this->epreuve->contains($idEpreuve)) {
-            $this->epreuve[] = $idEpreuve;
-            $idEpreuve->setNatureEpreuve($this);
+        if (!$this->epreuves->contains($epreuve)) {
+            $this->epreuves[] = $epreuve;
+            $epreuve->setNatureEpreuve($this);
         }
 
         return $this;
     }
 
-    public function removeIdEpreuve(Epreuves $idEpreuve): self
+    public function removeEpreuve(Epreuves $epreuve): self
     {
-        if ($this->epreuve->removeElement($idEpreuve)) {
+        if ($this->epreuves->removeElement($epreuve)) {
             // set the owning side to null (unless already changed)
-            if ($idEpreuve->getNatureEpreuve() === $this) {
-                $idEpreuve->setNatureEpreuve(null);
+            if ($epreuve->getNatureEpreuve() === $this) {
+                $epreuve->setNatureEpreuve(null);
             }
         }
 

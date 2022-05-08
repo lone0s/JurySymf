@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\NaturesEpreuve;
+use App\Entity\NatureEpreuve;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<NaturesEpreuve>
+ * @extends ServiceEntityRepository<NatureEpreuve>
  *
- * @method NaturesEpreuve|null find($id, $lockMode = null, $lockVersion = null)
- * @method NaturesEpreuve|null findOneBy(array $criteria, array $orderBy = null)
- * @method NaturesEpreuve[]    findAll()
- * @method NaturesEpreuve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method NatureEpreuve|null find($id, $lockMode = null, $lockVersion = null)
+ * @method NatureEpreuve|null findOneBy(array $criteria, array $orderBy = null)
+ * @method NatureEpreuve[]    findAll()
+ * @method NatureEpreuve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class NaturesEpreuvesRepository extends ServiceEntityRepository
+class NatureEpreuveRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, NaturesEpreuve::class);
+        parent::__construct($registry, NatureEpreuve::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(NaturesEpreuve $entity, bool $flush = true): void
+    public function add(NatureEpreuve $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class NaturesEpreuvesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(NaturesEpreuve $entity, bool $flush = true): void
+    public function remove(NatureEpreuve $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class NaturesEpreuvesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return NaturesEpreuve[] Returns an array of NaturesEpreuve objects
+    //  * @return NatureEpreuve[] Returns an array of NatureEpreuve objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class NaturesEpreuvesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?NaturesEpreuve
+    public function findOneBySomeField($value): ?NatureEpreuve
     {
         return $this->createQueryBuilder('n')
             ->andWhere('n.exampleField = :val')
