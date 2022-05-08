@@ -58,7 +58,7 @@ class TypeNote
     private $inscriptionsUes;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="typeNote")
+     * @ORM\OneToMany(targetEntity=InscriptionEpreuve::class, mappedBy="typeNote")
      */
     private $inscriptionsEpreuves;
 
@@ -194,14 +194,14 @@ class TypeNote
     }
 
     /**
-     * @return Collection<int, InscriptionsEpreuves>
+     * @return Collection<int, InscriptionEpreuve>
      */
     public function getInscriptionsEpreuves(): Collection
     {
         return $this->inscriptionsEpreuves;
     }
 
-    public function addInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
+    public function addInscriptionEpreuve(InscriptionEpreuve $inscriptionEpreuve): self
     {
         if (!$this->inscriptionsEpreuves->contains($inscriptionEpreuve)) {
             $this->inscriptionsEpreuves[] = $inscriptionEpreuve;
@@ -211,7 +211,7 @@ class TypeNote
         return $this;
     }
 
-    public function removeInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
+    public function removeInscriptionEpreuve(InscriptionEpreuve $inscriptionEpreuve): self
     {
         if ($this->inscriptionsEpreuves->removeElement($inscriptionEpreuve)) {
             // set the owning side to null (unless already changed)

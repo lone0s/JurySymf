@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\InscriptionsEpreuves;
+use App\Entity\InscriptionEpreuve;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<InscriptionsEpreuves>
+ * @extends ServiceEntityRepository<InscriptionEpreuve>
  *
- * @method InscriptionsEpreuves|null find($id, $lockMode = null, $lockVersion = null)
- * @method InscriptionsEpreuves|null findOneBy(array $criteria, array $orderBy = null)
- * @method InscriptionsEpreuves[]    findAll()
- * @method InscriptionsEpreuves[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method InscriptionEpreuve|null find($id, $lockMode = null, $lockVersion = null)
+ * @method InscriptionEpreuve|null findOneBy(array $criteria, array $orderBy = null)
+ * @method InscriptionEpreuve[]    findAll()
+ * @method InscriptionEpreuve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InscriptionsEpreuvesRepository extends ServiceEntityRepository
+class InscriptionEpreuveRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, InscriptionsEpreuves::class);
+        parent::__construct($registry, InscriptionEpreuve::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(InscriptionsEpreuves $entity, bool $flush = true): void
+    public function add(InscriptionEpreuve $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class InscriptionsEpreuvesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(InscriptionsEpreuves $entity, bool $flush = true): void
+    public function remove(InscriptionEpreuve $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class InscriptionsEpreuvesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return InscriptionsEpreuves[] Returns an array of InscriptionsEpreuves objects
+    //  * @return InscriptionEpreuve[] Returns an array of InscriptionEpreuve objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class InscriptionsEpreuvesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?InscriptionsEpreuves
+    public function findOneBySomeField($value): ?InscriptionEpreuve
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

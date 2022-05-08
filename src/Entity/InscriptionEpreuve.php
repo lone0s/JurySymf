@@ -5,21 +5,21 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * InscriptionsEpreuves
+ * InscriptionEpreuve
  *
  * @ORM\Table
  * (
  *     name="inscriptions_epreuves",
  *     indexes={
- *      @ORM\Index(name="fk_inscriptions_epreuves_periodes_ues_idx", columns={"id_periode_ue"}),
- *      @ORM\Index(name="fk_inscriptions_epreuves_epreuves_idx", columns={"id_epreuve"}),
- *      @ORM\Index(name="fk_inscriptions_epreuves_types_note_idx", columns={"id_type_note"}),
- *      @ORM\Index(name="fk_inscriptions_epreuves_etudiants_idx", columns={"id_etudiant"})
+ *         @ORM\Index(name="fk_inscriptions_epreuves_periodes_ues_idx", columns={"id_periode_ue"}),
+ *         @ORM\Index(name="fk_inscriptions_epreuves_epreuves_idx", columns={"id_epreuve"}),
+ *         @ORM\Index(name="fk_inscriptions_epreuves_types_note_idx", columns={"id_type_note"}),
+ *         @ORM\Index(name="fk_inscriptions_epreuves_etudiants_idx", columns={"id_etudiant"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="App\Repository\InscriptionsEpreuvesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionEpreuveRepository")
  */
-class InscriptionsEpreuves
+class InscriptionEpreuve
 {
     /**
      * @var int
@@ -33,16 +33,16 @@ class InscriptionsEpreuves
     /**
      * @var float|null
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"=null})
      */
-    private $note = NULL;
+    private $note;
 
     /**
      * @var Epreuve
      *
      * @ORM\ManyToOne(targetEntity="Epreuve", inversedBy = "inscriptionsEpreuves")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_epreuve", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_epreuve", referencedColumnName="id", nullable=false)
      * })
      */
     private $epreuve;
@@ -52,7 +52,7 @@ class InscriptionsEpreuves
      *
      * @ORM\ManyToOne(targetEntity="PeriodeUe", inversedBy = "inscriptionsEpreuves")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id",nullable = true)
+     *   @ORM\JoinColumn(name="id_periode_ue", referencedColumnName="id", nullable=false)
      * })
      */
     private $periodeUe;
@@ -62,7 +62,7 @@ class InscriptionsEpreuves
      *
      * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy = "inscriptionsEpreuves")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id",nullable = true)
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id",nullable=false)
      * })
      */
     private $etudiant;
@@ -77,6 +77,15 @@ class InscriptionsEpreuves
      * })
      */
     private $typeNote;
+
+
+    // *******************************************************************
+    public function __construct()
+    {
+        $this->note = null;
+        $this->typeNote = null;
+    }
+
 
     public function getId(): ?int
     {
