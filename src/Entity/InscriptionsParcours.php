@@ -68,14 +68,14 @@ class InscriptionsParcours
     private $typeNote;
 
     /**
-     * @var Parcours
+     * @var Parcour
      *
-     * @ORM\ManyToOne(targetEntity="Parcours", inversedBy = "inscriptionParcours")
+     * @ORM\ManyToOne(targetEntity="Parcour", inversedBy = "inscriptionsParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
      * })
      */
-    private $parcours;
+    private $parcour;
 
     /**
      * @var TypesResultat
@@ -152,14 +152,14 @@ class InscriptionsParcours
         return $this;
     }
 
-    public function getParcours(): ?Parcours
+    public function getParcour(): ?Parcour
     {
-        return $this->parcours;
+        return $this->parcour;
     }
 
-    public function setParcours(?Parcours $parcours): self
+    public function setParcour(?Parcour $parcour): self
     {
-        $this->parcours = $parcours;
+        $this->parcour = $parcour;
 
         return $this;
     }

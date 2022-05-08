@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Parcours;
+use App\Entity\Parcour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Parcours>
+ * @extends ServiceEntityRepository<Parcour>
  *
- * @method Parcours|null find($id, $lockMode = null, $lockVersion = null)
- * @method Parcours|null findOneBy(array $criteria, array $orderBy = null)
- * @method Parcours[]    findAll()
- * @method Parcours[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Parcour|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Parcour|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Parcour[]    findAll()
+ * @method Parcour[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParcoursRepository extends ServiceEntityRepository
+class ParcourRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Parcours::class);
+        parent::__construct($registry, Parcour::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Parcours $entity, bool $flush = true): void
+    public function add(Parcour $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class ParcoursRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Parcours $entity, bool $flush = true): void
+    public function remove(Parcour $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class ParcoursRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Parcours[] Returns an array of Parcours objects
+    //  * @return Parcour[] Returns an array of Parcour objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class ParcoursRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Parcours
+    public function findOneBySomeField($value): ?Parcour
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

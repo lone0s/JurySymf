@@ -7,13 +7,19 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Parcours
+ * Parcour
  *
- * @ORM\Table(name="parcours", indexes=
- *     {@ORM\Index(name="fk_parcours_periodicites_idx", columns={"id_periodicite"})})
- * @ORM\Entity(repositoryClass="App\Repository\ParcoursRepository")
+ * @ORM\Table(
+ *     name="parcours",
+ *     indexes={
+ *         @ORM\Index(name="fk_parcours_periodicites_idx", columns={"id_periodicite"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\ParcourRepository")
+ *
+ * Singulier avec faute d'orthographe voulu
  */
-class Parcours
+class Parcour
 {
 
     /**
@@ -35,9 +41,9 @@ class Parcours
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="nom_court", type="string", length=20, nullable=true, options={"default"=null})
      */
-    private $nomCourt = 'NULL';
+    private $nomCourt;
 
     /**
      * @var int
@@ -56,56 +62,62 @@ class Parcours
     /**
      * @var string|null
      *
-     * @ORM\Column(name="code_apogee", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="code_apogee", type="string", length=30, nullable=true, options={"default"=null})
      */
-    private $codeApogee = 'NULL';
+    private $codeApogee;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="actif", type="boolean", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="actif", type="boolean", nullable=false, options={"default"=true})
      */
-    private $actif = true;
+    private $actif;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="commentaire", type="text", length=0, nullable=true, options={"default"=null})
      */
-    private $commentaire = 'NULL';
+    private $commentaire;
 
     /**
      * @var Periodicite
      *
      * @ORM\ManyToOne(targetEntity="Periodicite", inversedBy = "parcours")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_periodicite", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_periodicite", referencedColumnName="id", nullable=false)
      * })
      */
     private $periodicite;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="parcour")
+     */
+    private $mentionsParcours;
 
     /**
-     * @ORM\OneToMany(targetEntity=MentionsParcours::class, mappedBy="parcours")
+     * @ORM\OneToMany(targetEntity=InscriptionsParcours::class, mappedBy="parcour")
      */
-    private $mentionParcours;
+    private $inscriptionsParcours;
 
     /**
-     * @ORM\OneToMany(targetEntity=InscriptionsParcours::class, mappedBy="parcours")
+     * @ORM\OneToMany(targetEntity=Periodes::class, mappedBy="parcour")
      */
-    private $inscriptionParcours;
+    private $periodes;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Periodes::class, mappedBy="parcours")
-     */
-    private $periode;
 
+    // *******************************************************************
     public function __construct()
     {
-        $this->mentionParcours = new ArrayCollection();
-        $this->inscriptionParcours = new ArrayCollection();
-        $this->periode = new ArrayCollection();
+        $this->nomCourt = null;
+        $this->codeApogee = null;
+        $this->actif = true;
+        $this->commentaire = null;
+        $this->mentionsParcours = new ArrayCollection();
+        $this->inscriptionsParcours = new ArrayCollection();
+        $this->periodes = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -211,27 +223,27 @@ class Parcours
     /**
      * @return Collection<int, MentionsParcours>
      */
-    public function getMentionParcours(): Collection
+    public function getMentionsParcours(): Collection
     {
-        return $this->mentionParcours;
+        return $this->mentionsParcours;
     }
 
-    public function addIdMentionParcour(MentionsParcours $idMentionParcour): self
+    public function addMentionParcour(MentionsParcours $mentionParcour): self
     {
-        if (!$this->mentionParcours->contains($idMentionParcour)) {
-            $this->mentionParcours[] = $idMentionParcour;
-            $idMentionParcour->setParcours($this);
+        if (!$this->mentionsParcours->contains($mentionParcour)) {
+            $this->mentionsParcours[] = $mentionParcour;
+            $mentionParcour->setParcour($this);
         }
 
         return $this;
     }
 
-    public function removeIdMentionParcour(MentionsParcours $idMentionParcour): self
+    public function removeMentionParcour(MentionsParcours $mentionParcour): self
     {
-        if ($this->mentionParcours->removeElement($idMentionParcour)) {
+        if ($this->mentionsParcours->removeElement($mentionParcour)) {
             // set the owning side to null (unless already changed)
-            if ($idMentionParcour->getParcours() === $this) {
-                $idMentionParcour->setParcours(null);
+            if ($mentionParcour->getParcour() === $this) {
+                $mentionParcour->setParcour(null);
             }
         }
 
@@ -241,27 +253,27 @@ class Parcours
     /**
      * @return Collection<int, InscriptionsParcours>
      */
-    public function getInscriptionParcours(): Collection
+    public function getInscriptionsParcours(): Collection
     {
-        return $this->inscriptionParcours;
+        return $this->inscriptionsParcours;
     }
 
-    public function addIdInscriptionParcour(InscriptionsParcours $idInscriptionParcour): self
+    public function addInscriptionParcour(InscriptionsParcours $inscriptionParcour): self
     {
-        if (!$this->inscriptionParcours->contains($idInscriptionParcour)) {
-            $this->inscriptionParcours[] = $idInscriptionParcour;
-            $idInscriptionParcour->setParcours($this);
+        if (!$this->inscriptionsParcours->contains($inscriptionParcour)) {
+            $this->inscriptionsParcours[] = $inscriptionParcour;
+            $inscriptionParcour->setParcour($this);
         }
 
         return $this;
     }
 
-    public function removeIdInscriptionParcour(InscriptionsParcours $idInscriptionParcour): self
+    public function removeInscriptionParcour(InscriptionsParcours $inscriptionParcour): self
     {
-        if ($this->inscriptionParcours->removeElement($idInscriptionParcour)) {
+        if ($this->inscriptionsParcours->removeElement($inscriptionParcour)) {
             // set the owning side to null (unless already changed)
-            if ($idInscriptionParcour->getParcours() === $this) {
-                $idInscriptionParcour->setParcours(null);
+            if ($inscriptionParcour->getParcour() === $this) {
+                $inscriptionParcour->setParcour(null);
             }
         }
 
@@ -271,27 +283,27 @@ class Parcours
     /**
      * @return Collection<int, Periodes>
      */
-    public function getPeriode(): Collection
+    public function getPeriodes(): Collection
     {
-        return $this->periode;
+        return $this->periodes;
     }
 
-    public function addIdPeriode(Periodes $idPeriode): self
+    public function addPeriode(Periodes $periode): self
     {
-        if (!$this->periode->contains($idPeriode)) {
-            $this->periode[] = $idPeriode;
-            $idPeriode->setParcours($this);
+        if (!$this->periodes->contains($periode)) {
+            $this->periodes[] = $periode;
+            $periode->setParcour($this);
         }
 
         return $this;
     }
 
-    public function removeIdPeriode(Periodes $idPeriode): self
+    public function removePeriode(Periodes $periode): self
     {
-        if ($this->periode->removeElement($idPeriode)) {
+        if ($this->periodes->removeElement($periode)) {
             // set the owning side to null (unless already changed)
-            if ($idPeriode->getParcours() === $this) {
-                $idPeriode->setParcours(null);
+            if ($periode->getParcour() === $this) {
+                $periode->setParcour(null);
             }
         }
 

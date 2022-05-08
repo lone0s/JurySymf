@@ -42,14 +42,14 @@ class MentionsParcours
     private $mention;
 
     /**
-     * @var Parcours
+     * @var Parcour
      *
-     * @ORM\ManyToOne(targetEntity="Parcours", inversedBy="mentionParcours")
+     * @ORM\ManyToOne(targetEntity="Parcour", inversedBy="mentionsParcours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
      * })
      */
-    private $parcours;
+    private $parcour;
 
     public function getId(): ?int
     {
@@ -80,14 +80,14 @@ class MentionsParcours
         return $this;
     }
 
-    public function getParcours(): ?Parcours
+    public function getParcour(): ?Parcour
     {
-        return $this->parcours;
+        return $this->parcour;
     }
 
-    public function setParcours(?Parcours $parcours): self
+    public function setParcour(?Parcour $parcour): self
     {
-        $this->parcours = $parcours;
+        $this->parcour = $parcour;
 
         return $this;
     }

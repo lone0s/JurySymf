@@ -39,14 +39,14 @@ class Periodes
     private $codeApogee = 'NULL';
 
     /**
-     * @var Parcours
+     * @var Parcour
      *
-     * @ORM\ManyToOne(targetEntity="Parcours", inversedBy="periode")
+     * @ORM\ManyToOne(targetEntity="Parcour", inversedBy="periodes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_parcours", referencedColumnName="id")
      * })
      */
-    private $parcours;
+    private $parcour;
 
 
     /**
@@ -96,14 +96,14 @@ class Periodes
         return $this;
     }
 
-    public function getParcours(): ?Parcours
+    public function getParcour(): ?Parcour
     {
-        return $this->parcours;
+        return $this->parcour;
     }
 
-    public function setParcours(?Parcours $parcours): self
+    public function setParcour(?Parcour $parcour): self
     {
-        $this->parcours = $parcours;
+        $this->parcour = $parcour;
 
         return $this;
     }

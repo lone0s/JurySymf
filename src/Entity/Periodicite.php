@@ -45,7 +45,7 @@ class Periodicite
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Parcours::class, mappedBy="periodicite")
+     * @ORM\OneToMany(targetEntity=Parcour::class, mappedBy="periodicite")
      */
     private $parcours;
 
@@ -99,14 +99,14 @@ class Periodicite
     }
 
     /**
-     * @return Collection<int, Parcours>
+     * @return Collection<int, Parcour>
      */
     public function getParcours(): Collection
     {
         return $this->parcours;
     }
 
-    public function addParcour(Parcours $parcour): self
+    public function addParcour(Parcour $parcour): self
     {
         if (!$this->parcours->contains($parcour)) {
             $this->parcours[] = $parcour;
@@ -116,7 +116,7 @@ class Periodicite
         return $this;
     }
 
-    public function removeParcour(Parcours $parcour): self
+    public function removeParcour(Parcour $parcour): self
     {
         if ($this->parcours->removeElement($parcour)) {
             // set the owning side to null (unless already changed)
