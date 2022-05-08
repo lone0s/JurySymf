@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Epreuves;
+use App\Entity\Epreuve;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Epreuves>
+ * @extends ServiceEntityRepository<Epreuve>
  *
- * @method Epreuves|null find($id, $lockMode = null, $lockVersion = null)
- * @method Epreuves|null findOneBy(array $criteria, array $orderBy = null)
- * @method Epreuves[]    findAll()
- * @method Epreuves[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Epreuve|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Epreuve|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Epreuve[]    findAll()
+ * @method Epreuve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EpreuvesRepository extends ServiceEntityRepository
+class EpreuveRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Epreuves::class);
+        parent::__construct($registry, Epreuve::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Epreuves $entity, bool $flush = true): void
+    public function add(Epreuve $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class EpreuvesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Epreuves $entity, bool $flush = true): void
+    public function remove(Epreuve $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class EpreuvesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Epreuves[] Returns an array of Epreuves objects
+    //  * @return Epreuve[] Returns an array of Epreuve objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class EpreuvesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Epreuves
+    public function findOneBySomeField($value): ?Epreuve
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

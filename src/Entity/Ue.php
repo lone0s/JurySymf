@@ -64,7 +64,7 @@ class Ue
     private $periodesUes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Epreuves::class, mappedBy="ue")
+     * @ORM\OneToMany(targetEntity=Epreuve::class, mappedBy="ue")
      */
     private $epreuves;
 
@@ -176,14 +176,14 @@ class Ue
     }
 
     /**
-     * @return Collection<int, Epreuves>
+     * @return Collection<int, Epreuve>
      */
     public function getEpreuves(): Collection
     {
         return $this->epreuves;
     }
 
-    public function addEpreuve(Epreuves $epreuve): self
+    public function addEpreuve(Epreuve $epreuve): self
     {
         if (!$this->epreuves->contains($epreuve)) {
             $this->epreuves[] = $epreuve;
@@ -193,7 +193,7 @@ class Ue
         return $this;
     }
 
-    public function removeEpreuve(Epreuves $epreuve): self
+    public function removeEpreuve(Epreuve $epreuve): self
     {
         if ($this->epreuves->removeElement($epreuve)) {
             // set the owning side to null (unless already changed)

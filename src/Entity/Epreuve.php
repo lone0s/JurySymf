@@ -7,12 +7,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Epreuves
+ * Epreuve
  *
- * @ORM\Table(name="epreuves", indexes={@ORM\Index(name="fk_epreuves_natures_epreuve_idx", columns={"id_nature"}), @ORM\Index(name="fk_epreuves_ues_idx", columns={"id_ue"})})
- * @ORM\Entity(repositoryClass="App\Repository\EpreuvesRepository")
+ * @ORM\Table(
+ *     name="epreuves",
+ *     indexes={
+ *         @ORM\Index(name="fk_epreuves_natures_epreuve_idx", columns={"id_nature"}),
+ *         @ORM\Index(name="fk_epreuves_ues_idx", columns={"id_ue"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\EpreuveRepository")
  */
-class Epreuves
+class Epreuve
 {
     /**
      * @var int
@@ -61,16 +67,16 @@ class Epreuves
     /**
      * @var string|null
      *
-     * @ORM\Column(name="duree", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="duree", type="string", length=20, nullable=true, options={"default"=null})
      */
-    private $duree = 'NULL';
+    private $duree;
 
     /**
      * @var NatureEpreuve
      *
      * @ORM\ManyToOne(targetEntity="NatureEpreuve", inversedBy = "epreuves")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_nature", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_nature", referencedColumnName="id", nullable = true)
      * })
      */
     private $natureEpreuve;
@@ -80,7 +86,7 @@ class Epreuves
      *
      * @ORM\ManyToOne(targetEntity="Ue", inversedBy = "epreuves")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id",nullable = false)
+     *   @ORM\JoinColumn(name="id_ue", referencedColumnName="id", nullable = false)
      * })
      */
     private $ue;
@@ -88,12 +94,17 @@ class Epreuves
     /**
      * @ORM\OneToMany(targetEntity=InscriptionsEpreuves::class, mappedBy="epreuve")
      */
-    private $inscriptionEpreuve;
+    private $inscriptionsEpreuves;
 
+
+    // *******************************************************************
     public function __construct()
     {
-        $this->inscriptionEpreuve = new ArrayCollection();
+        $this->duree = null;
+        $this->natureEpreuve = null;
+        $this->inscriptionsEpreuves = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -199,27 +210,27 @@ class Epreuves
     /**
      * @return Collection<int, InscriptionsEpreuves>
      */
-    public function getInscriptionEpreuve(): Collection
+    public function getInscriptionsEpreuves(): Collection
     {
-        return $this->inscriptionEpreuve;
+        return $this->inscriptionsEpreuves;
     }
 
-    public function addIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    public function addInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
     {
-        if (!$this->inscriptionEpreuve->contains($idInscriptionEpreuve)) {
-            $this->inscriptionEpreuve[] = $idInscriptionEpreuve;
-            $idInscriptionEpreuve->setEpreuve($this);
+        if (!$this->inscriptionsEpreuves->contains($inscriptionEpreuve)) {
+            $this->inscriptionsEpreuves[] = $inscriptionEpreuve;
+            $inscriptionEpreuve->setEpreuve($this);
         }
 
         return $this;
     }
 
-    public function removeIdInscriptionEpreuve(InscriptionsEpreuves $idInscriptionEpreuve): self
+    public function removeInscriptionEpreuve(InscriptionsEpreuves $inscriptionEpreuve): self
     {
-        if ($this->inscriptionEpreuve->removeElement($idInscriptionEpreuve)) {
+        if ($this->inscriptionsEpreuves->removeElement($inscriptionEpreuve)) {
             // set the owning side to null (unless already changed)
-            if ($idInscriptionEpreuve->getEpreuve() === $this) {
-                $idInscriptionEpreuve->setEpreuve(null);
+            if ($inscriptionEpreuve->getEpreuve() === $this) {
+                $inscriptionEpreuve->setEpreuve(null);
             }
         }
 
