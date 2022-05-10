@@ -5,17 +5,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
 
 /**
  * Etudiants
- *
- * @ORM\Table(
+ * @Entity
+ * @Table(
  *     name="etudiants",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(name="numero_UNIQUE", columns={"numero"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
+ * @Entity(repositoryClass="App\Repository\EtudiantRepository")
  */
 class Etudiant
 {

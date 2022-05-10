@@ -1,0 +1,19 @@
+<h2>Les etudiants</h2>
+<table>
+    <tr>
+        <th>nom</th>
+        <th>prénom</th>
+        <th>INE</th>
+        <th>email</th>
+        <th>commentaire</th>
+    </tr>
+{% for etudiant in etudiants %}
+    <tr class="tr-table">
+        <td>{{ etudiant.nom }}</td>
+        <td>{{ etudiant.prenom }}</td>
+        <td>{{ etudiant.numero }}</td>
+        <td>{{ etudiant.email }}</td>
+        <td>{{ etudiant.commentaire }}</td>
+        <!--<td><a href="{{ path ('product_add_to_basket', { 'id' : article.id} ) }}">Ajouter</a></td> -->
+    </tr>
+{% endfor %}
