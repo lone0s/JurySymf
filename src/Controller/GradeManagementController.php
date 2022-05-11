@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Epreuve;
 use App\Entity\Etudiant;
 use App\Entity\InscriptionEpreuve;
+use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
 use App\Entity\PeriodeUe;
 use App\Entity\TypeNote;
@@ -42,5 +43,20 @@ class GradeManagementController extends AbstractController
         }
         $args = ['note_periode_etudiant' => $inscriptionPeriodeEtudiant];
         return $this -> render('lists/listing_note_periode_etudiant.html.twig', $args);
+    }
+    #[Route('/notes/parcours/{id}', name: 'app_note_parcours_etudiant')]
+    public function listStudentParcoursGrades(ManagerRegistry $doc, int $id) : Response {
+        $em = $doc -> getManager();
+        $inscriptionParcoursRepo = $em -> getRepository(InscriptionParcour::class);
+        $inscriptionParcours = $inscriptionParcoursRepo -> findAll();
+        $inscriptionParcoursEtudiant = array();
+        foreach ($inscriptionParcours as $parcours) {
+            if($id === $parcours -> getEtudiant() -> getId()) {
+                $inscriptionParcoursEtudiant[] = $parcours;
+            }
+        }
+        $args = ['note_parcours_etudiant' => $inscriptionParcoursEtudiant];
+        dump($args);
+        return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
     }
 }
