@@ -11,14 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StudentController extends AbstractController
 {
-    #[Route('/student', name: 'app_student')]
-    public function index(): Response
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/StudentController.php',
-        ]);
-    }
     //Listing étudiants
     #[Route('/list', name: 'app_list_students')]
     public function list_students(ManagerRegistry $doc) : Response {
