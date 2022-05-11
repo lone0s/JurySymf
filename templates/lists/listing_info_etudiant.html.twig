@@ -1,3 +1,5 @@
+{% extends 'base.html.twig' %}
+{% block list %}
 <h2>{{ etudiant.prenom }}{{ etudiant.nom }}</h2>
 <table>
     <tr>
@@ -15,3 +17,4 @@
         <td>{{ etudiant.commentaire }}</td>
     </tr>
 </table>
+{% endblock %}
