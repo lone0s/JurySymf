@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block list %}
+<table>
+<tr>
+    <th>id</th>
+    <th>id_epreuve</th>
+    <th>id_periode_ue</th>
+    <th>id_etudiant</th>
+    <th>id_type_note</th>
+    <th>note</th>
+</tr>
+{% for note_epreuve in notes_etudiant %}
+    <tr class="tr-table">
+        <td>{{ note_epreuve.id }}</td>
+        <td>{{ note_epreuve.epreuve.nom }}</td>
+        <td>{{ note_epreuve.periodeUe.id }}</td>
+        <td>{{ note_epreuve.etudiant.nom }}</td>
+        <td>{{ note_epreuve.typeNote.id | default("NULL") }}</td>
+        <td>{{ note_epreuve.note | default("NULL") }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

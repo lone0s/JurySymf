@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block list %}
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Note sur la periode inscrite</th>
+        <th>Nombre de points du jury</th>
+        <th>Saisie Manuelle</th>
+        <th>Type de Note</th>
+        <th>Code Apogée Periode</th>
+        <th>Inscription Partielle</th>
+    </tr>
+    {% for npe in note_periode_etudiant %}
+        <tr class="tr-table">
+            <td>{{ npe.etudiant.nom }}</td>
+            <td>{{ npe.etudiant.prenom }}</td>
+            <td>{{ npe.note | default("NULL") }}</td>
+            <td>{{ npe.pointsJury | default("NULL")}}</td>
+            {% if 0 in npe.saisie %}
+                <td>Vrai</td>
+            {% else %}
+                <td>Faux</td>
+            {% endif %}
+            <td>{{ npe.typeNote.type | default("NULL") }}</td>
+            <td>{{ npe.periode.codeApogee }}</td>
+            {% if  0 in npe.inscriptionPartielle%}
+            <td>Vrai </td>
+            {% else %}
+            <td>Faux</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
