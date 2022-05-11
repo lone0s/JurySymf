@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PeriodicitesController extends AbstractController
 {
-    #[Route('/periodicites', name: 'app_periodicites')]
+    #[Route('/new_periodicite', name: 'app_periodicites')]
     public function index(): Response
     {
         return $this->json([
@@ -16,4 +16,6 @@ class PeriodicitesController extends AbstractController
             'path' => 'src/Controller/PeriodicitesController.php',
         ]);
     }
+
+
 }
