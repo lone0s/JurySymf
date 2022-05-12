@@ -7,6 +7,7 @@ use App\Entity\Etudiant;
 use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
+use App\Entity\InscriptionUe;
 use App\Entity\PeriodeUe;
 use App\Entity\TypeNote;
 use Doctrine\Persistence\ManagerRegistry;
@@ -59,4 +60,5 @@ class GradeManagementController extends AbstractController
         dump($args);
         return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
     }
+
 }
