@@ -7,6 +7,7 @@ use App\Entity\Periodicite;
 use App\Form\ParcoursType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,7 @@ class ParcoursController extends AbstractController
         $em = $doc -> getManager();
         $parcours = new Parcour();
         $form = $this -> createForm(ParcoursType::class,$parcours);
+        $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
         if ($form -> isSubmitted() && $form -> isValid())
         {
             $parcours = $form -> getData();
@@ -44,6 +46,7 @@ class ParcoursController extends AbstractController
             $this -> createAccessDeniedException('You do not have access to this');
         }
         $form = $this -> createForm(ParcoursType::class,$parcours);
+        $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
         if ($form -> isSubmitted() && $form -> isValid()) {
             $parcours = $form -> getData();
             $em -> persist($parcours);
