@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Notes;
 
-use App\Entity\Epreuve;
-use App\Entity\Etudiant;
 use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
-use App\Entity\InscriptionUe;
-use App\Entity\PeriodeUe;
-use App\Entity\TypeNote;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function dump;
 
-class GradeManagementController extends AbstractController
+class GradesListingController extends AbstractController
 {
     #[Route('/notes/epreuve/{id}', name : 'app_note_epreuves_etudiant')]
     public function listStudentTestGrades(ManagerRegistry $doc, int $id) : Response {
@@ -60,5 +56,6 @@ class GradeManagementController extends AbstractController
         dump($args);
         return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
     }
+
 
 }
