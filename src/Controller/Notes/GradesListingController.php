@@ -2,6 +2,7 @@
 
 namespace App\Controller\Notes;
 
+use App\Controller\TypeNoteController;
 use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
@@ -54,6 +55,7 @@ class GradesListingController extends AbstractController
         }
         $args = ['note_parcours_etudiant' => $inscriptionParcoursEtudiant];
         dump($args);
+        dump(TypeNoteController::getTypesNotes($doc));
         return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
     }
 

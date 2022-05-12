@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block list %}
+    <table>
+        <th>Nom</th>
+        <th>Nom Court</th>
+        <th>Annee</th>
+        <th>Periodicite</th>
+        <th>Compensation</th>
+        <th>Code Apogée</th>
+        <th>Actif</th>
+        <th>Commentaire</th>
+        {% for parcour in parcours %}
+            <tr>
+                <td>{{ parcour.nom }}</td>
+                <td>{{ parcour.nomCourt }}</td>
+                <td>{{ parcour.annee }}</td>
+                <td>{{ parcour.periodicite.nom }}</td>
+                <td>{{ parcour.compensation }}</td>
+                <td>{{ parcour.codeApogee }}</td>
+                {% if 1 in parcour.actif%}
+                    <td>Faux</td>
+                {% else %}
+                    <td>Vrai</td>
+                {% endif %}
+                <td>{{ parcour.commentaire }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

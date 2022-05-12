@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="natures_epreuve")
  * @ORM\Entity(repositoryClass="App\Repository\NatureEpreuveRepository")
  */
+
+// EVENTUELLEMENT METTRE NATURE EN UNIQUE ??
 class NatureEpreuve
 {
     /**
@@ -90,4 +92,9 @@ class NatureEpreuve
         return $this;
     }
 
+    public function getIdFromName(string $name) {
+        if ($name === $this -> nature) {
+            return $this -> id;
+        }
+    }
 }

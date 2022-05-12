@@ -26,7 +26,7 @@ class PeriodicitesController extends AbstractController
             $em -> flush();
         }
         $args = array("formulaire" => $form->createView());
-        return $this -> render("forms/periodicitesForm.html.twig",$args);
+        return $this -> render("forms/FormView.html.twig",$args);
     }
 
 
