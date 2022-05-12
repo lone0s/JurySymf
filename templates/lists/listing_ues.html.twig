@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block list %}
+<table>
+    <th>Nom</th>
+    <th>Nom Court</th>
+    <th>Ects</th>
+    <th>Code Apogée</th>
+    <th>Commentaire</th>
+    {% for ue in ues %}
+        <tr>
+        <td>{{ ue.nom }}</td>
+        <td>{{ ue.nomCourt }}</td>
+        <td>{{ ue.ects }}</td>
+        <td>{{ ue.codeApogee }}</td>
+        <td>{{ ue.commentaire }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
