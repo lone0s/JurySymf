@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block list %}
+<h2>Epreuves</h2>
+<table>
+    <tr>
+        <th>Nature Epreuve</th>
+        <th>UE</th>
+        <th>Nom Epreuve</th>
+        <th>Coefficient</th>
+        <th>Rang</th>
+        <th>Session 1</th>
+        <th>Session 2</th>
+        <th>Durée</th>
+    </tr>
+    {% for epreuve in epreuves %}
+        <tr class="tr-table">
+            <td>{{ epreuve.natureEpreuve.nature | default("NULL") }}</td>
+            <td>{{ epreuve.ue.nom | default("NULL") }}</td>
+            <td>{{ epreuve.nom }}</td>
+            <td>{{ epreuve.coefficient }}</td>
+            <td>{{ epreuve.rang }}</td>
+            {% if 0 in epreuve.session1 %}
+                <td>Vrai</td>
+            {% else %}
+                <td>Faux</td>
+            {% endif %}
+            {% if 0 in epreuve.session2 %}
+                <td>Vrai</td>
+            {% else %}
+                <td>Faux</td>
+            {% endif %}
+            <td>{{ epreuve.duree }}</td>
+        </tr>
+    {% endfor %}
+{%endblock %}
