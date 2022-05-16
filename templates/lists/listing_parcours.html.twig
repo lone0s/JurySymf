@@ -15,7 +15,11 @@
                 <td>{{ parcour.nomCourt }}</td>
                 <td>{{ parcour.annee }}</td>
                 <td>{{ parcour.periodicite.nom }}</td>
-                <td>{{ parcour.compensation }}</td>
+                {% if 1 in parcour.compensation%}
+                    <td>Faux</td>
+                {% else %}
+                    <td>Vrai</td>
+                {% endif %}
                 <td>{{ parcour.codeApogee }}</td>
                 {% if 1 in parcour.actif%}
                     <td>Faux</td>

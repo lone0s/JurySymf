@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block list %}
+    <table>
+        <th>Nature</th>
+        {% for natureEpreuve in naturesEpreuves %}
+            <tr>
+                <td>{{ natureEpreuve.nature }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

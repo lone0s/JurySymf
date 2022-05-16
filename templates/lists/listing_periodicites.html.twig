@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block list %}
+    <table>
+        <th>Nom</th>
+        <th>Nom Court</th>
+        <th>Nombre</th>
+        {% for periodicite in periodicites %}
+            <tr>
+                <td>{{ periodicite.nom }}</td>
+                <td>{{ periodicite.nomCourt }}</td>
+                <td>{{ periodicite.nombre }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
