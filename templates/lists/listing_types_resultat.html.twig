@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block list %}
+    <table>
+        <th>Type</th>
+        <th>Commentaire</th>
+        {% for typeResultat in typesResultat %}
+            <tr>
+                <td>{{ typeResultat.type }}</td>
+                <td>{{ typeResultat.commentaire | default('NULL') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

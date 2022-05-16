@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block list %}
+    <table>
+        <th>Numero</th>
+        <th>Code Apogée</th>
+        <th>Parcours</th>
+        {% for periode in periodes %}
+            <tr>
+                <td>{{ periode.numero }}</td>
+                <td>{{ periode.codeApogee }}</td>
+                <td>{{ periode.parcour.nom }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

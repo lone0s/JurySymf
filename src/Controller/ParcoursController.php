@@ -21,6 +21,7 @@ class ParcoursController extends AbstractController
         $parcours = new Parcour();
         $form = $this -> createForm(ParcoursType::class,$parcours);
         $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
+        $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid())
         {
             $parcours = $form -> getData();
@@ -31,6 +32,7 @@ class ParcoursController extends AbstractController
         }
         if ($form -> isSubmitted()) {
             $this -> addFlash('error', 'invalid form data');
+            dump($parcours);
         }
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);
