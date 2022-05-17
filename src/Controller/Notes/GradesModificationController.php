@@ -7,7 +7,7 @@ use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
 use App\Form\EditTestGradeType;
-use App\Form\InscriptionEpreuveType;
+use App\Form\InscriptionEpreuveModificationType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -112,8 +112,9 @@ class GradesModificationController extends AbstractController
     {
         $em = $doc -> getManager();
         $inscriptionEpreuve = new InscriptionEpreuve();
-        $form = $this -> createForm(InscriptionEpreuveType::class,$inscriptionEpreuve);
+        $form = $this -> createForm(InscriptionEpreuveModificationType::class,$inscriptionEpreuve);
         $form -> add("send", SubmitType::class, ['label' => "Ajouter Note Examen"]);
+        $form -> handleRequest($request);
         if ($form -> isSubmitted()&& $form -> isValid()) {
             $form['etudiant'] -> setData($student_id);
             dump($form['etudiant']);
