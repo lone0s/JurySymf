@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/diplomes', name: 'diplomes')]
 class DiplomeController extends AbstractController
 {
-    //Listing étudiants
     #[Route('/list', name: '_list')]
     public function list_diplomes(ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
