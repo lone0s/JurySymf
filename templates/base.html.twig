@@ -6,12 +6,31 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        {% block forms %}
-        {% endblock %}
-        {% block list %}
-        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block bienvenue %}
+                {% include 'site/header.html.twig' %}
+            {% endblock %}
+            {% block menu %}
+                {% include 'site/menu.html.twig' %}
+            {% endblock %}
+        {% endblock %}
+
+
+        {% block forms %}
+        {% endblock %}
+
+
+        {% block list %}
+        {% endblock %}
+
+        {% block page %}
+        {% endblock %}
+
+
+        {% block footer %}
+            {% include 'site/footer.html.twig' %}
+        {% endblock %}
     </body>
 </html>

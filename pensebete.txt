@@ -1,0 +1,9 @@
+Pense-bete
+
+- Implementer regles de calcul
+- Implementer calcul automatiques des notes aux UEs/Periodes/Parcours 
+a partir des notes pré-entrées ou saisies manuellement 
+- Gestion droits d'accès 
+- Import/Export notes & listes etudiants format CSV
+- Un peu de frontend pour que ce soit visuellement agréable
+- provide a valid redirect inside AdminAuthenticator

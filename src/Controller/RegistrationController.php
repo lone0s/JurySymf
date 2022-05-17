@@ -31,7 +31,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user -> setRoles([0 => 'ROLE_ADMIN']);
+            $user -> setRoles([0 => 'ROLE_USER']);
+            $user -> setLastname($form['lastname'] -> getData());
+            $user -> setName($form['name'] -> getData());
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
