@@ -52,7 +52,6 @@ class EpreuveController extends AbstractController
         $em = $doc -> getManager();
         $epreuves = $em -> getRepository(Epreuve::class) -> findAll();
         $args = ['epreuves' => $epreuves];
-        dump($args);
         return  $this -> render("lists/listing_epreuves.html.twig", $args);
     }
 }

@@ -16,17 +16,13 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InscriptionEpreuveType extends AbstractType
+class InscriptionEpreuveModificationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('note')
             ->add('epreuve', TextType::class)
-            /*->addModelTransformer(new CallbackTransformer(
-                function newEpreuve()
-            ))*/
-            //->add('periodeUe', EntityType::class, ['class' => PeriodeUe::class, 'choice_label' => ])
             ->add('typeNote', EntityType::class, ['class' => TypeNote::class, 'choice_label' => 'type'])
         ;
     }
