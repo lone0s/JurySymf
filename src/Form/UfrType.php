@@ -2,22 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Parcour;
-use App\Entity\Periode;
+use App\Entity\Ufr;
+use App\Entity\Universite;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PeriodeType extends AbstractType
+class UfrType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numero')
-            ->add('codeApogee')
-            ->add('parcour', EntityType::class, [
-                'class' => Parcour::class,
+            ->add('denomination')
+            ->add('denominationCourte')
+            ->add('commentaire',TextType::class)
+            ->add('universite', EntityType::class, [
+                'class' => Universite::class,
                 'choice_label' => 'nom'
             ])
         ;
@@ -26,7 +28,7 @@ class PeriodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Periode::class,
+            'data_class' => Ufr::class,
         ]);
     }
 }
