@@ -44,8 +44,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('name', TextareaType::class)
-            ->add('lastname', TextareaType::class)
+            ->add('name')
+            ->add('lastname')
         ;
     }
 
