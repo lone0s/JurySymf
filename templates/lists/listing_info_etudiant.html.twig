@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block titre %}
+    <h1>Informations étudiant</h1>
+{% endblock %}
 {% block list %}
 <h2>{{ etudiant.prenom }}{{ etudiant.nom }}</h2>
 <table>

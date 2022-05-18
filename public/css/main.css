@@ -52,8 +52,6 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #dee2e6;
-    color: #212529;
 }
 
 .title{
@@ -151,14 +149,14 @@ button .commander {
 }
 
 .navbar {
-    background-color: #adb5bd ;
-    color: white;
+/*    background-color: #adb5bd ;
+    !*color: white;*!*/
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    align-items: center ;
     font-size: 20px;
     margin : 0;
     overflow: hidden;
+    justify-content: space-between;
     opacity: 0.6;
 }
 .nav-list {
@@ -167,12 +165,14 @@ button .commander {
 
 .nav-list .list-item {
     display: inline-block;
-    padding: 10px 5px;
-
+    text-align: left;
+    margin :0;
+    justify-content: right;
+    padding-right: 120px;
 }
 
 .navbar a {
-    color: white;
+   /* color: white;*/
     text-decoration: none;
 }
 
@@ -181,10 +181,21 @@ button .commander {
 }
 
 .icon {
-    height: 120px;/*
+    height: 80px;/*
     margin-top: 10px;
     margin-left:10px;*/
-    overflow: hidden;
-    opacity: 1;
+/*    overflow: hidden;
+    opacity: 1;*/
+    float : left;
+    display: inline-block;
+}
+
+.img-container{
+    position: relative;
+    left : 0;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: center;
 }
 
