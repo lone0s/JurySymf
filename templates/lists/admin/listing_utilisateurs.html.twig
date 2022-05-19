@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
-{% block title %}Utilisateurs{% endblock %}
+{% block titre %}<h2>Utilisateurs</h2>{% endblock %}
 {% block page %}
     <div class="tab">
-        <h2>Liste des utilisateurs</h2>
         <table>
             <tr>
                 <th>Login</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Role</th>
-                <th></th>
+                {#<th></th>#}
             </tr>
             {% for user in users %}
                 <tr>
@@ -18,13 +17,13 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.roles[0] }}</td>
                     {% if app.user.id != user.id%}
-                    <td>
+                        {% if 'ROLE_ADMIN' not in user.roles[0] %}
+                    <td class="optional_td">
                         <a href="{{ path('admin_add_admin',{'id_user' : user.id}) }}">
                            Rendre Admin
                         </a>
                     </td>
-                    {% else %}
-                        <td></td>
+                    {% endif %}
                     {% endif %}
                 </tr>
             {% endfor %}

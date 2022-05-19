@@ -6,7 +6,7 @@ use App\Entity\TypeNote;
 use App\Entity\TypeResultat;
 use App\Form\TypeNoteFormType;
 use App\Form\TypeResultatFormType;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,5 +71,17 @@ class TypeResultatController extends AbstractController
         }
         else
             return $this->redirectToRoute('typesResultat_list');
+    }
+
+    #[Route('/delete/{id_typeResultat}', name : '_delete')]
+    public function deleteTypeResultat(int $id_typeResultat, ManagerRegistry $doc) :Response {
+        $em = $doc -> getManager();
+        $typeResRepository = $em -> getRepository(TypeNote::class);
+        $typeRes = $typeResRepository -> find($id_typeResultat);
+        if ($typeRes) {
+            $em -> remove($typeRes);
+            $em -> flush();
+        }
+        return $this -> redirectToRoute('typesResultat_list');
     }
 }
