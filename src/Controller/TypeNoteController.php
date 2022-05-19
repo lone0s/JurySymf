@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TypeNote;
 use App\Form\TypeNoteFormType;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,6 @@ class TypeNoteController extends AbstractController
 {
     #[Route('/list', name: '_list')]
     public function getTypesNotes(ManagerRegistry $doc) : Response {
-        $args = array();
         $em = $doc -> getManager();
         $typesNote= $em -> getRepository(TypeNote::class) -> findAll();
         $args = ['typesNote' => $typesNote];
@@ -67,5 +66,17 @@ class TypeNoteController extends AbstractController
         }
         else
             return $this->redirectToRoute('types_note_list');
+    }
+
+    #[Route('/delete/{id_typeNote}', name : '_delete')]
+    public function deleteTypeNote(int $id_typeNote, ManagerRegistry $doc) :Response {
+        $em = $doc -> getManager();
+        $typeNoteRepository = $em -> getRepository(TypeNote::class);
+        $typeNote = $typeNoteRepository -> find($id_typeNote);
+        if ($typeNote) {
+            $em -> remove($typeNote);
+            $em -> flush();
+        }
+        return $this -> redirectToRoute('types_note_list');
     }
 }

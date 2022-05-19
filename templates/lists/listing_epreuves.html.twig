@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block titre %}
-    <h1>Les épreuves</h1>
+    <h2>Les épreuves</h2>
 {% endblock %}
 {% block list %}
 <table>
@@ -32,6 +32,9 @@
                 <td>Faux</td>
             {% endif %}
             <td>{{ epreuve.duree }}</td>
+            <td class="optional_td"><a href = '{{ path('app_modification', {'id_epreuve':epreuve.id}) }}'>Modifier</a></td>
         </tr>
     {% endfor %}
+</table>
+    <div class="create"><h3><a href="{{ path('app_create_new_epreuve') }}">Créer une nouvelle epreuve</a></h3></div>
 {%endblock %}

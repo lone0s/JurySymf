@@ -1,0 +1,18 @@
+{% block listingLinks %}
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ path('app_list_parcours') }}">Les Parcours</a>
+            </li>
+            <li>
+                <a href="{{ path('app_listing_epreuves') }}">Les Epreuves</a>
+            </li>
+            <li>
+                <a href="{{ path('periode_list') }}">Les Périodes</a>
+            </li>
+            <li>
+                <a href="{{ path('app_list_ues') }}">Les UEs</a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
