@@ -97,7 +97,7 @@ class StudentController extends AbstractController
             foreach ($etudiantDataRepos as $inscriptionEtudiant) {
                 $etudiantResults[] = $inscriptionEtudiant -> findBy(['etudiant' => $id_etudiant]);
             }
-            //Suppression de chacun des éléments liés a l'étudiant (il s'aggit d'un tableau de tableau)
+            //Suppression de chacun des éléments liés a l'étudiant (il s'agit d'un tableau de tableau)
             foreach ($etudiantResults as $results => $innerArray) {
                 foreach ($innerArray as $innerRes => $res) {
                     $em -> remove($res);
@@ -109,4 +109,10 @@ class StudentController extends AbstractController
         dump($etudiantResults);
         return $this -> redirectToRoute('etudiants_list');
     }
+/*
+    #[Route('/notes/{id_etudiant}' , name : '_notes_specific')]
+    public function studentGrades(int $id_etudiant, ManagerRegistry $doc) : Response
+    //Eventuellement pour récuperer les notes aux ues, au parcour, a la periode et aux épreuves d'un étudiant?
+    {
+    }*/
 }
