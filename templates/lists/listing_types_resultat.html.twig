@@ -10,8 +10,11 @@
             <tr>
                 <td>{{ typeResultat.type }}</td>
                 <td>{{ typeResultat.commentaire | default('NULL') }}</td>
+                <td class="optional_td"><a href = '{{ path('typesResultat_change', {'id_typeResultat':typeResultat.id}) }}'>✏️</a></td>
+                <td class="optional_td"><a href = '{{ path('typesResultat_delete', {'id_typeResultat':typeResultat.id}) }}'>❌</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('typesResultat_create') }}">➕</a></button></div>
 {% endblock %}
 

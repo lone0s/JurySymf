@@ -40,7 +40,7 @@ h1,h2{
     height: 2.5rem;
 }
 
-.create {
+.create_div {
     text-align: center;
 }
 ul {
@@ -79,6 +79,13 @@ input{
     display: -webkit-flex;
     text-align: left;
 }
+
+/*textarea {
+    text-align: left;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}*/
 .alert-danger{
     color: red;
 }
@@ -137,12 +144,19 @@ button{
     border-radius: 5px;
     padding: 10px;
     font-size: 15px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 30px auto;
 }
+ .creator {
+    background-color: green;
 
+     width: 50px;
+     height: auto;
+     justify-content: center;
+     text-align: center;
+}
+ .creator:hover {
+     background-color: lime;
+ }
 
 .mb-3, .register {
     text-align: center;
