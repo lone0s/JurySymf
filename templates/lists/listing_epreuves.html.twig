@@ -32,9 +32,10 @@
                 <td>Faux</td>
             {% endif %}
             <td>{{ epreuve.duree }}</td>
-            <td class="optional_td"><a href = '{{ path('app_modification', {'id_epreuve':epreuve.id}) }}'>Modifier</a></td>
+            <td class="optional_td"><a href = '{{ path('app_modification', {'id_epreuve':epreuve.id}) }}'>✏️</a></td>
+            <td class="optional_td"><a href = '{{ path('app_delete_epreuve', {'id_epreuve':epreuve.id}) }}'>❌</a></td>
         </tr>
     {% endfor %}
 </table>
-    <div class="create"><h3><a href="{{ path('app_create_new_epreuve') }}">Créer une nouvelle epreuve</a></h3></div>
+    <div class="create_div"><button class="creator"><a href="{{ path('app_create_new_epreuve') }}">➕</a></button></div>
 {%endblock %}

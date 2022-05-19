@@ -27,7 +27,7 @@ class GradesListingController extends AbstractController
             }
         }
         $args = ['notes_etudiant' => $inscriptionEpreuveEtudiant];
-        return $this -> render('lists/listing_notes_epreuves_etudiant.html.twig', $args);
+        return $this -> render('lists/Inscriptions/listing_notes_epreuves_etudiant.html.twig', $args);
     }
     #[Route('/notes/periode/{id}', name : 'app_note_periode_etudiant')]
     public function listStudentPeriodGrades(ManagerRegistry $doc, int $id) : Response {
@@ -41,7 +41,7 @@ class GradesListingController extends AbstractController
             }
         }
         $args = ['note_periode_etudiant' => $inscriptionPeriodeEtudiant];
-        return $this -> render('lists/listing_note_periode_etudiant.html.twig', $args);
+        return $this -> render('lists/Inscriptions/listing_note_periode_etudiant.html.twig', $args);
     }
     #[Route('/notes/parcours/{id}', name: 'app_note_parcours_etudiant')]
     public function listStudentParcoursGrades(ManagerRegistry $doc, int $id) : Response {
@@ -55,7 +55,7 @@ class GradesListingController extends AbstractController
             }
         }
         $args = ['note_parcours_etudiant' => $inscriptionParcoursEtudiant];
-        return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
+        return $this -> render('lists/Inscriptions/listing_note_parcours_etudiant.html.twig', $args);
     }
 
     #[Route('/notes/ues/{id}', name: 'app_note_ues_etudiant')]
@@ -70,7 +70,7 @@ class GradesListingController extends AbstractController
             }
         }
         $args = ['notes_ues_etudiant' => $inscriptionUesEtudiant];
-        return $this -> render('lists/listing_notes_ues_etudiant.html.twig', $args);
+        return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
     }
     //Deja dans ParcoursController
 /*    #[Route('/notes/parcours', name: '_parcours_list')]

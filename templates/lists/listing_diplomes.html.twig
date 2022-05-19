@@ -18,7 +18,11 @@
             <td>{{ diplome.anneeDebut }}</td>
             <td>{{ diplome.anneeFin }}</td>
             <td>{{ diplome.commentaire | default ('NULL')}}</td>
+            <td class="optional_td"><a href = '{{ path('diplomes_change', {'id_diplome':diplome.id}) }}'>✏️</a></td>
+            <td class="optional_td"><a href = '{{ path('diplomes_delete', {'id_diplome':diplome.id}) }}'>❌</a></td>
         </tr>
     {% endfor %}
+</table>
+    <div class="create_div"><button class="creator"><a href="{{ path('diplomes_add_diplome') }}">➕</a></button></div>
 {% endblock %}
 
