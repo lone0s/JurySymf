@@ -21,16 +21,21 @@ class InscriptionParcoursType extends AbstractType
             ->add('pointsJury')
             ->add('saisie')
             ->add('etudiant', EntityType::class, [
-                'class' => Etudiant::class, 'choice_label' => 'numero'
+                'class' => Etudiant::class,
+                'choice_label' => 'numero',
+                'disabled' => true
             ])
             ->add('typeNote', EntityType::class, [
-                'class' => TypeNote::class, 'choice_label' => 'type'
+                'class' => TypeNote::class,
+                'choice_label' => 'type'
             ])
             ->add('parcour', EntityType::class, [
-                'class' => Parcour::class, 'choice_label' => 'nom', 'disabled' => true
+                'class' => Parcour::class,
+                'choice_label' => 'nom'
             ])
             ->add('typeResultat', EntityType::class,[
-                'class' => TypeResultat::class, 'choice_label' => 'type'
+                'class' => TypeResultat::class,
+                'choice_label' => 'type'
             ])
         ;
     }

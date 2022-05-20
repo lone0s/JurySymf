@@ -72,39 +72,39 @@ class GradesListingController extends AbstractController
         $args = ['notes_ues_etudiant' => $inscriptionUesEtudiant];
         return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
     }
-    //Deja dans ParcoursController
-/*    #[Route('/notes/parcours', name: '_parcours_list')]
+
+    #[Route('/notes/parcours', name: '_parcours_list')]
     public function listStudentsParcoursGrades(ManagerRegistry $doc) :Response {
         $em = $doc -> getManager();
         $inscriptionParcours = $em -> getRepository(InscriptionParcour::class) -> findAll();
         $args = ['note_parcours_etudiant' => $inscriptionParcours];
-        return $this -> render('lists/listing_note_parcours_etudiant.html.twig', $args);
-    }*/
+        return $this -> render('lists/Inscriptions/listing_note_parcours_etudiant.html.twig', $args);
+    }
 
-    //Deja dans Periode Controller
-/*    #[Route('/notes/periodes', name: '_periodes_list')]
+
+    #[Route('/notes/periodes', name: '_periodes_list')]
     public function listStudentsPeriodesGrades(ManagerRegistry $doc) :Response {
         $em = $doc -> getManager();
         $inscriptionsPeriodes = $em -> getRepository(InscriptionPeriode::class) -> findAll();
         $args = ['note_periode_etudiant' => $inscriptionsPeriodes];
-        return $this -> render('lists/listing_note_periode_etudiant.html.twig', $args);
+        return $this -> render('lists/Inscriptions/listing_note_periode_etudiant.html.twig', $args);
     }
 
-    //Deja dans EpreuveController
+
     #[Route('/notes/epreuves', name: '_epreuves_list')]
     public function listStudentsEpreuvesGrades(ManagerRegistry $doc) :Response {
         $em = $doc -> getManager();
         $inscriptionEpreuves = $em -> getRepository(InscriptionEpreuve::class) -> findAll();
         $args = ['notes_etudiant' => $inscriptionEpreuves];
-        return $this -> render('lists/listing_notes_epreuves_etudiant.html.twig', $args);
-    }*/
+        return $this -> render('lists/Inscriptions/listing_notes_epreuves_etudiant.html.twig', $args);
+    }
 
-    //Existe deja dans UEController
-    //#[Route('/notes/ues', name: '_ues_list')]
-    //public function listStudentsUesGrades(ManagerRegistry $doc) :Response {
-    //    $em = $doc -> getManager();
-    //    $inscriptionsUes = $em -> getRepository(InscriptionEpreuve::class) -> findAll();
-    //    $args = ['notes_etudiant' => $inscriptionsUes];
-    //    return $this -> render('lists/listing_notes_ues_etudiant.html.twig', $args);
-    //}
+
+    #[Route('/notes/ues', name: '_ues_list')]
+    public function listStudentsUesGrades(ManagerRegistry $doc) :Response {
+        $em = $doc -> getManager();
+        $inscriptionsUes = $em -> getRepository(InscriptionEpreuve::class) -> findAll();
+        $args = ['notes_etudiant' => $inscriptionsUes];
+        return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
+    }
 }
