@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+<h2>Type de notes</h2>
+{% endblock %}
+{% block list %}
+    <table>
+        <th>Type</th>
+        <th>Commentaire</th>
+        {% for typeNote in typesNote %}
+            <tr>
+                <td>{{ typeNote.type }}</td>
+                <td>{{ typeNote.commentaire | default('NULL')}}</td>
+                <td class="optional_td"><a href = '{{ path('types_note_change', {'id_typeNote':typeNote.id}) }}'>✏️</a></td>
+                <td class="optional_td"><a href = '{{ path('types_note_delete', {'id_typeNote':typeNote.id}) }}'>❌</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('types_note_create') }}">➕</a></button></div>
+{% endblock %}
+

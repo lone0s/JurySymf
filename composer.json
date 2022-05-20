@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.12",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/apache-pack": "^1.0",
+        "symfony/asset": "^6.0",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/expression-language": "6.0.*",
@@ -29,7 +30,8 @@
         "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "symfony/debug-bundle": "6.0.*",

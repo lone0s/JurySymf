@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+<h2 class="title_links">Les Notes</h2>
+{% block notes %}
+    <nav class="nav-grades">
+        <ul>
+    {#Notes Epreuves #}
+            <li class="link-grades">
+                <a href="{{ path('_epreuves_list') }}">Epreuves</a>
+            </li>
+    {#Notes UEs#}
+            <li class="link-grades">
+                <a href="{{ path('_ues_list') }}">UEs</a>
+            </li>
+    {# Notes Periodes [Semestre/Année] #}
+            <li class="link-grades">
+                <a href="{{ path('_periodes_list') }}">Périodes</a>
+            </li>
+    {#Notes Parcours#}
+            <li class="link-grades">
+                <a href="{{ path('_parcours_list') }}">Parcours</a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

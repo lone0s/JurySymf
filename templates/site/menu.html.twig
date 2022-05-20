@@ -1,0 +1,18 @@
+{% block menu %}
+    <nav>
+        <ul>
+            {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') and is_granted('ROLE_USER') == false
+                and is_granted('ROLE_SUPER_ADMIN') == false%}
+            {% endif %}
+            {% if is_granted('ROLE_USER') and is_granted('ROLE_SUPER_ADMIN') == false %}
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') and is_granted('ROLE_SUPER_ADMIN') == false %}
+            {% endif %}
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {% block listingLinks %}
+                    {% include '/site/editing_links.html.twig' %}
+                {% endblock listingLinks %}
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

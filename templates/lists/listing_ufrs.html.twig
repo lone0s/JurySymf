@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Les UFRs</h2>
+{% endblock %}
+{% block list %}
+    <table>
+        <th>Nom</th>
+        <th>Nom Court</th>
+        <th>Commentaire</th>
+        <th>Université</th>
+        {% for ufr in ufrs %}
+            <tr>
+                <td>{{ ufr.denomination }}</td>
+                <td>{{ ufr.denominationCourte }}</td>
+                <td>{{ ufr.commentaire|default('NULL') }}</td>
+                <td>{{ ufr.universite.nom }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

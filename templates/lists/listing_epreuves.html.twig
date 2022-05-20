@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Les épreuves</h2>
+{% endblock %}
+{% block list %}
+<table>
+    <tr>
+        <th>Nature Epreuve</th>
+        <th>UE</th>
+        <th>Nom Epreuve</th>
+        <th>Coefficient</th>
+        <th>Rang</th>
+        <th>Session 1</th>
+        <th>Session 2</th>
+        <th>Durée</th>
+    </tr>
+    {% for epreuve in epreuves %}
+        <tr class="tr-table">
+            <td>{{ epreuve.natureEpreuve.nature | default("NULL") }}</td>
+            <td>{{ epreuve.ue.nom | default("NULL") }}</td>
+            <td>{{ epreuve.nom }}</td>
+            <td>{{ epreuve.coefficient }}</td>
+            <td>{{ epreuve.rang }}</td>
+            {% if 0 in epreuve.session1 %}
+                <td>Vrai</td>
+            {% else %}
+                <td>Faux</td>
+            {% endif %}
+            {% if 0 in epreuve.session2 %}
+                <td>Vrai</td>
+            {% else %}
+                <td>Faux</td>
+            {% endif %}
+            <td>{{ epreuve.duree }}</td>
+            <td class="optional_td"><a href = '{{ path('app_modification', {'id_epreuve':epreuve.id}) }}'>✏️</a></td>
+            <td class="optional_td"><a href = '{{ path('app_delete_epreuve', {'id_epreuve':epreuve.id}) }}'>❌</a></td>
+        </tr>
+    {% endfor %}
+</table>
+    <div class="create_div"><button class="creator"><a href="{{ path('app_create_new_epreuve') }}">➕</a></button></div>
+{%endblock %}

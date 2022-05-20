@@ -3,12 +3,15 @@
 namespace App\Controller\Notes;
 
 use App\Entity\Epreuve;
+use App\Entity\Etudiant;
 use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
 use App\Form\EditTestGradeType;
-use App\Form\InscriptionEpreuveType;
+use App\Form\InscriptionEpreuveModificationType;
+use App\Form\InscriptionParcoursType;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,33 +51,34 @@ class GradesModificationController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/grades/parcours/modification/{student_id}/{parcour_id}', name: 'app_parcours_grade_modification')]
-    public function changeStudentParcoursGrade(ManagerRegistry $doc, int $student_id, int $parcour_id, Request $request) : Response
+    #[Route('/grades/parcours/modification/{student_id}/', name: 'app_parcours_grade_modification')]
+    public function changeStudentParcoursGrade(ManagerRegistry $doc, int $student_id, Request $request) : Response
     {
+        // A REVOIR + RECONCEVOIR POUR ADAPTER FORMULAIRE DE MODIFICATION A ETUDIANT
+        /*
         $em = $doc -> getManager();
-        $form = $this -> createForm(EditTestGradeType::class);
+        $student = $em -> getRepository(Etudiant::class) -> find($student_id);
+        if (!$student)
+            throw new InvalidArgumentException();
+        $studentParcourGrades = $em -> getRepository(InscriptionParcour::class) -> findBy(['etudiant' => $student]);
+        $form = $this -> createForm(InscriptionParcoursType::class, $studentParcourGrades);
         $form -> add("send", SubmitType::class, ['label' => "Modifier Note Parcours"]);
         $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid()) {
-            $grade = $form['note'] -> getData();
-            $inscriptionsParcours = $em -> getRepository(InscriptionParcour::class) -> findAll();
-            foreach ($inscriptionsParcours as $parcour)
-            {
-                if ($parcour->getParcour()-> getId() === $parcour_id && $parcour->getEtudiant()-> getId() === $student_id)
-                {
-                    $parcour->setNote($grade);
-                    $em->persist($parcour);
-                    $em->flush();
-                    $this->addFlash('success', 'New grade successfully added');
+                if ($form['etudiant'] -> getId() != $student -> getId())
+                    throw new InvalidArgumentException();
+                else {
+                    $studentParcourGrades = $form -> getData();
+                    $em -> persist($studentParcourGrades);
+                    $em -> flush();
+                    return $this -> redirectToRoute('app_note_parcours_etudiant', ['id' => $student_id]);
                 }
             }
-            return $this -> redirectToRoute('app_note_parcours_etudiant', ['id' => $student_id]);
-        }
         if ($form -> isSubmitted()) {
             $this->addFlash('error', 'New grade value is incorrect');
         }
         $args = array("formulaire" => $form->createView());
-        return $this -> render("forms/FormView.html.twig",$args);
+        return $this -> render("forms/FormView.html.twig",$args);*/
     }
 
     #[Route('/grades/periode/modification/{student_id}/{periode_id}', name: 'app_periode_grade_modification')]
@@ -112,8 +116,9 @@ class GradesModificationController extends AbstractController
     {
         $em = $doc -> getManager();
         $inscriptionEpreuve = new InscriptionEpreuve();
-        $form = $this -> createForm(InscriptionEpreuveType::class,$inscriptionEpreuve);
+        $form = $this -> createForm(InscriptionEpreuveModificationType::class,$inscriptionEpreuve);
         $form -> add("send", SubmitType::class, ['label' => "Ajouter Note Examen"]);
+        $form -> handleRequest($request);
         if ($form -> isSubmitted()&& $form -> isValid()) {
             $form['etudiant'] -> setData($student_id);
             dump($form['etudiant']);

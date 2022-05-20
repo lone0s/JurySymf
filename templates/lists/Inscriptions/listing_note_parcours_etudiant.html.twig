@@ -25,6 +25,9 @@
                 <td>{{ npe.typeNote.type | default("NULL") }}</td>
                 <td>{{ npe.typeResultat.type | default("NULL") }}</td>
                 <td>{{ npe.parcour.nomCourt | default("NULL")}}</td>
+                <td class="optional_td"><a href = '{{ path('parcou', {'id_diplome':diplome.id}) }}'>✏️</a></td>
+                <td class="optional_td"><a href = '{{ path('diplomes_delete', {'id_diplome':diplome.id}) }}'>❌</a></td>
+            </tr>
             </tr>
         {% endfor %}
     </table>

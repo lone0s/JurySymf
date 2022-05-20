@@ -1,0 +1,28 @@
+{% block header %}
+    <nav class="navbar">
+        <div class="img-container">
+            <a href="{{ path('app_index') }}" class="navbar-logo">
+                <img class = "icon" src="{{ asset('img/UPtr.png') }}" alt="logo"/>
+            </a>
+        </div>
+        <ul class="nav-list">
+{#
+            <li class="list-item">
+                <a>X</a>
+            </li>
+#}
+            <li class="list-item">
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href= {{ path('app_register') }}>Register</a>
+                {% endif %}
+            </li>
+            <li class="list-item">
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href = {{path('app_login')}}>Login</a>
+                {% else %}
+                <a href = {{ path('app_logout')}}>Logout</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

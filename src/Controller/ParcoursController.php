@@ -14,42 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ParcoursController extends AbstractController
 {
-    //Trouver facon pour recup id de form
-    #[Route('/parcours/create/{id_periodicite}', name: 'app_create_parcours')]
-    public function createParcours(int $id_periodicite, Request $request, ManagerRegistry $doc): Response
-    {
-        $em = $doc -> getManager();
-        $parcours = new Parcour();
-        $periodicite = $em -> getRepository(Periodicite::class) -> find($id_periodicite);
-        if (!$periodicite) {
-            $this -> createAccessDeniedException('You do not have access to this');
-        }
-        $parcours -> setPeriodicite($periodicite);
-        $form = $this -> createForm(ParcoursType::class,$parcours);
-        $form -> add("send", SubmitType::class, ['label' => "Créer le Parcours"]);
-        if ($form -> isSubmitted() && $form -> isValid())
-        {
-            $parcours = $form -> getData();
-            $parcours -> setPeriodicite($periodicite);
-            $em -> persist($parcours);
-            $em -> flush();
-            $this -> addFlash('success', 'successfully created new Parcours');
-            return $this -> redirectToRoute('app_list_parcours');
-        }
-        if ($form -> isSubmitted()) {
-            $this -> addFlash('error', 'invalid form data');
-        }
-        $args = array("formulaire" => $form->createView());
-        return $this -> render("forms/FormView.html.twig",$args);
-    }
-
-    /*
     #[Route('/parcours/create', name: 'app_create_parcours')]
     public function createParcours(Request $request, ManagerRegistry $doc): Response
     {
         $em = $doc -> getManager();
         $parcours = new Parcour();
         $form = $this -> createForm(ParcoursType::class,$parcours);
+        $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
+        $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid())
         {
             $parcours = $form -> getData();
@@ -60,11 +32,12 @@ class ParcoursController extends AbstractController
         }
         if ($form -> isSubmitted()) {
             $this -> addFlash('error', 'invalid form data');
+            dump($parcours);
         }
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);
     }
-    */
+
 
     #[Route('/parcours/change/{id_parcours}', name: 'app_change_parcours')]
     public function changeParcours(int $id_parcours, Request $request, ManagerRegistry $doc) : Response
@@ -75,7 +48,7 @@ class ParcoursController extends AbstractController
             $this -> createAccessDeniedException('You do not have access to this');
         }
         $form = $this -> createForm(ParcoursType::class,$parcours);
-        $form -> add("send", SubmitType::class, ['label' => "Modifier le Parcours"]);
+        $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
         if ($form -> isSubmitted() && $form -> isValid()) {
             $parcours = $form -> getData();
             $em -> persist($parcours);

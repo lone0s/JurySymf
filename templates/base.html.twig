@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="Fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-        {% block forms %}
-        {% endblock %}
-        {% block list %}
+            {%  include 'site/main_stylesheet.html.twig' %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="page-container">
+            <div id = "content-wrap">
+                {% block header %}
+                    {% include 'site/navbar.html.twig' %}
+                {% endblock %}
+                {% block body %}
+                    {% block titre %}
+                    {% endblock %}
+                {% endblock %}
+
+                {% block menu %}
+                    {% include 'site/menu.html.twig' %}
+                {% endblock %}
+
+                {% block forms %}
+                {% endblock %}
+
+
+                {% block list %}
+                {% endblock %}
+
+                {% block page %}
+                {% endblock %}
+
+
+                {% block footer %}
+                    {% include 'site/footer.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
     </body>
 </html>

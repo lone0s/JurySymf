@@ -21,6 +21,14 @@ class AuthUser implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $id;
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $login;
@@ -33,14 +41,7 @@ class AuthUser implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $lastname;
+
     public function getId(): ?int
     {
         return $this->id;

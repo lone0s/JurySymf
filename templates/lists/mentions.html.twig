@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Les Mentions</h2>
+{% endblock %}
+
+{% block list %}
+    <table>
+        <tr>
+            <th>Diplome</th>
+            <th>UFR</th>
+            <th>Nom</th>
+            <th>Nom Court</th>
+            <th>Année Debut</th>
+            <th>Année Fin</th>
+            <th>Actif</th>
+            <th>Commentaire</th>
+        </tr>
+        {% for mention in mentions %}
+            <tr class="tr-table">
+                <td>{{ mention.diplome.libelle }}</td>
+                <td>{{ mention.ufr.denomination }}</td>
+                <td>{{ mention.nom | default("NULL") }}</td>
+                <td>{{ mention.nomCourt | default("NULL")}}</td>
+                <td>{{ mention.anneeDebut | default("NULL") }}</td>
+                <td>{{ mention.anneeFin | default("NULL") }}</td>
+                {% if 0 in mention.actif %}
+                    <td>Vrai</td>
+                {% else %}
+                    <td>Faux</td>
+                {% endif %}
+                <td>{{ mention.commentaire | default("NULL")}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

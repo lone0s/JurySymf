@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Nature des épreuves</h2>
+{% endblock %}
+{% block list %}
+    <table>
+        <th>Nature</th>
+        {% for natureEpreuve in naturesEpreuves %}
+            <tr>
+                <td>{{ natureEpreuve.nature }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

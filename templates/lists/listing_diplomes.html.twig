@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Les Diplomes</h2>
+{% endblock %}
+{% block list %}
+<table>
+    <tr>
+        <th>Libelle</th>
+        <th>Libelle court</th>
+        <th>Année de début</th>
+        <th>Année de fin</th>
+        <th>Commentaire</th>
+    </tr>
+    {% for diplome in diplomes %}
+        <tr class="tr-table">
+            <td>{{ diplome.libelle }}</td>
+            <td>{{ diplome.libelleCourt }}</td>
+            <td>{{ diplome.anneeDebut }}</td>
+            <td>{{ diplome.anneeFin }}</td>
+            <td>{{ diplome.commentaire | default ('NULL')}}</td>
+            <td class="optional_td"><a href = '{{ path('diplomes_change', {'id_diplome':diplome.id}) }}'>✏️</a></td>
+            <td class="optional_td"><a href = '{{ path('diplomes_delete', {'id_diplome':diplome.id}) }}'>❌</a></td>
+        </tr>
+    {% endfor %}
+</table>
+    <div class="create_div"><button class="creator"><a href="{{ path('diplomes_add_diplome') }}">➕</a></button></div>
+{% endblock %}
+

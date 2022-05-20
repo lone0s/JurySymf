@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block titre %}
+    <h2>Informations étudiant</h1>
+{% endblock %}
 {% block list %}
-<h2>{{ etudiant.prenom }}{{ etudiant.nom }}</h2>
 <table>
     <tr>
         <th>nom</th>
@@ -9,12 +11,17 @@
         <th>email</th>
         <th>commentaire</th>
     </tr>
+    {% for etudiant in etudiants %}
     <tr class="tr-table">
         <td>{{ etudiant.nom }}</td>
         <td>{{ etudiant.prenom }}</td>
         <td>{{ etudiant.numero }}</td>
-        <td>{{ etudiant.email }}</td>
-        <td>{{ etudiant.commentaire }}</td>
+        <td>{{ etudiant.email | default ("NULL") }}</td>
+        <td>{{ etudiant.commentaire | default("NULL") }}</td>
+        <td class="optional_td"><a href = '{{ path('etudiants_change', {'id_student':etudiant.id}) }}'>✏️</a></td>
+        <td class="optional_td"><a href = '{{ path('etudiants_delete', {'id_etudiant':etudiant.id}) }}'>❌</a></td>
     </tr>
+    {% endfor %}
 </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('etudiants_add_student') }}">➕</a></button></div>
 {% endblock %}
