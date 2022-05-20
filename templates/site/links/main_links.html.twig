@@ -1,0 +1,20 @@
+
+<h2 class="title_links">Menu</h2>
+{% block listinglinks %}
+    <nav class="nav-links">
+        <ul>
+    {# Notes #}
+            <li class="link-list">
+                <a href="{{ path('redirect_to_notes_view') }}">
+                    Notes
+                </a>
+            </li>
+    {# Gestion universitaire #}
+            <li class="link-list">
+                <a href="{{ path('redirect_to_gestion_view') }}">
+                    Gestion
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
