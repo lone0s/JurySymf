@@ -9,3 +9,8 @@ a partir des notes pré-entrées ou saisies manuellement
 - provide a valid redirect inside AdminAuthenticator <== Fait
 - Implementer fonctions de suppression de tous les éléments <== En cours
 - Implementer suppression d'étudiants impliquant suppression de tous leurs résultats <== Fait
+
+- Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
+----------------------------------------------------------------------------------------------
+
+Est ce que un etudiant peut etre inscrit à deux Parcours ???

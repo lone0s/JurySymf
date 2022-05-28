@@ -1,0 +1,5 @@
+<body>
+{% for note in notes %}
+<h2>{{ note | default('NULL')}}</h2>
+{% endfor %}
+</body>
