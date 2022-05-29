@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Parcour;
 use App\Entity\Periodicite;
-use App\Entity\TypeNote;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -24,8 +23,9 @@ class ParcoursType extends AbstractType
             ->add('codeApogee')
             ->add('actif')
             ->add('commentaire', TextType::class)
-            -> add('periodicite',EntityType::class,['class' => Periodicite::class, 'choice_label' => 'nom'])
-            /*->add('typeNote', EntityType::class, ['class' => TypeNote::class, 'choice_label' => 'type'])*/;
+            -> add('periodicite',EntityType::class,['class' => Periodicite::class, 'choice_label' => 'nom']);
+            //->add('typeNote', EntityType::class, ['class' => TypeNote::class, 'choice_label' => 'type'])
+            //->add('periodicite', EntityType::class, ['class' => Periodicite::class, 'label' => 'nom',['disabled' => true]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
