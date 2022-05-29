@@ -5,6 +5,7 @@
         <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}
             {%  include 'site/main_stylesheet.html.twig' %}
+            <link href = " {{ asset('css/all.css') }}" rel = stylesheet>
         {% endblock %}
     </head>
     <body>
@@ -16,22 +17,20 @@
                 {% block body %}
                     {% block titre %}
                     {% endblock %}
+                    {% block menu %}
+                        {% include 'site/menu.html.twig' %}
+                    {% endblock %}
+
+                    {% block forms %}
+                    {% endblock %}
+
+
+                    {% block list %}
+                    {% endblock %}
+
+                    {% block page %}
+                    {% endblock %}
                 {% endblock %}
-
-                {% block menu %}
-                    {% include 'site/menu.html.twig' %}
-                {% endblock %}
-
-                {% block forms %}
-                {% endblock %}
-
-
-                {% block list %}
-                {% endblock %}
-
-                {% block page %}
-                {% endblock %}
-
 
                 {% block footer %}
                     {% include 'site/footer.html.twig' %}

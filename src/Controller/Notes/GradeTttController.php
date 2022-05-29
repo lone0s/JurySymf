@@ -9,10 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GradeTttController extends AbstractController
 {
-    public function ueAverage(int $student_id, ManagerRegistry $doc) {
-/*        $em = $doc -> getManager();
-        $student = $em -> getRepository(Etudiant::class) -> find($student_id);
-        $res['etudiant'] = $student;
-        */
+    public function UpdateUeAverage(int $inscription_epreuve_id, ManagerRegistry $doc) {
     }
 }

@@ -59,7 +59,7 @@ class StudentController extends AbstractController
     }
 
     #[Route('/modifierInformations/{id_student}', name : '_change')]
-    public function changeStudent(int $id_student, Request $request, ManagerRegistry $doc) {
+    public function changeStudent(int $id_student, Request $request, ManagerRegistry $doc) : Response{
         $em = $doc -> getManager();
         $studentRepo = $em -> getRepository(Etudiant::class);
         $student = $studentRepo -> find($id_student);
