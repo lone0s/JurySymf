@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ufr;
 use App\Form\UfrType;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,9 +38,9 @@ class UfrController extends AbstractController
             $this->addFlash('success', 'Successfully created new UFR');
             return $this->redirectToRoute('ufrs_list');
         }
-        if ($form->isSubmitted())
+        if ($form->isSubmitted()) {
             $this->addFlash('error', 'Incorrect form data');
-
+        }
         $args = array("formulaire" => $form->createView());
         return $this->render("forms/FormView.html.twig", $args);
     }
@@ -67,7 +68,6 @@ class UfrController extends AbstractController
             $args = array("formulaire" => $form->createView());
             return $this -> render("forms/FormView.html.twig",$args);
         }
-        else
-            return $this->redirectToRoute('ufrs_list');
+        throw new InvalidArgumentException('Incorrect ufr id');
     }
 }
