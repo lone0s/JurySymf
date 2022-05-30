@@ -1,16 +1,21 @@
 Pense-bete
 
 - Implementer regles de calcul
-- Implementer calcul automatiques des notes aux UEs/Periodes/Parcours 
-a partir des notes pré-entrées ou saisies manuellement 
+    (Correspond a deux formulaires de gestion de coefficients pour en créer)
+
+- Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
+a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 - Gestion droits d'accès 
 - Import/Export notes & listes etudiants format CSV
 - Un peu de frontend pour que ce soit visuellement agréable <== Fait
 - provide a valid redirect inside AdminAuthenticator <== Fait
 - Implementer fonctions de suppression de tous les éléments <== En cours
 - Implementer suppression d'étudiants impliquant suppression de tous leurs résultats <== Fait
+- Revoir les fonctions de modification de notes pour les optimiser
+
 
 - Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
 ----------------------------------------------------------------------------------------------
 
-Est ce que un etudiant peut etre inscrit à deux Parcours ???
+Est ce que un etudiant peut etre inscrit à deux Parcours ??? <-- Logiquement non
+==> Implique restrictions

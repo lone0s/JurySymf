@@ -125,6 +125,9 @@ class GradeTttController extends AbstractController
     }
 
     //Fonction utile si on veut tout update après multiples modifications mais complexité catastrophique
+    //Update : quantité colossale de data a traiter => useless (symfony ne permet pas son execution)
+    //On va plutot intégrer les trois fonctions définies plus haut directement dans les fonctions d'ajout
+    // et de modification de notes
     #[Route('/notes/update', name : '_update')]
     public function updateGradesAverage(ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
