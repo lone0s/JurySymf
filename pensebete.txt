@@ -7,13 +7,13 @@
 - Gestion droits d'accès
 
 - Implémenter la vérification du contenu des formulaires
-
-- Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
 ----------------------------------------------------------------------------------------------
 - Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
 a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 
 - Import/Export notes & listes etudiants format CSV <== Ez
+
+- Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form <== Fait
 
 - Formulaires de création de Periodes/Ues/Epreuves <== Fait
 
@@ -32,4 +32,5 @@ a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 Est ce que un etudiant peut etre inscrit à deux Parcours ??? <-- Logiquement non
                                                              ==> Implique restrictions
 - A-t-on réellement besoin de supprimer des parcours/periodes/ues/periodicités ?
-- Form dynamiques sans AJAX ??? Demander prof
+- Form dynamiques sans AJAX ??? Demander prof <== Résolu par form explicite
+- Cacher accès nom & prénom étudiant pour anonymat??

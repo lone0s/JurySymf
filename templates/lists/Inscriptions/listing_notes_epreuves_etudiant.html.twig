@@ -17,7 +17,10 @@
         <td>{{ note_epreuve.etudiant.nom }}</td>
         <td>{{ note_epreuve.typeNote.id | default("NULL") }}</td>
         <td>{{ note_epreuve.note | default("NULL") }}</td>
+        <td class="optional_td"><a href = '{{ path('modifier_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>✏️</a></td>
+        <td class="optional_td"><a href = '{{ path('supprimer_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>❌</a></td>
     </tr>
 {% endfor %}
 </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('creer_notes_epreuve') }}">➕</a></button></div>
 {% endblock %}

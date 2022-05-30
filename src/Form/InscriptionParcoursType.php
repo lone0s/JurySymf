@@ -22,8 +22,7 @@ class InscriptionParcoursType extends AbstractType
             ->add('saisie')
             ->add('etudiant', EntityType::class, [
                 'class' => Etudiant::class,
-                'choice_label' => 'numero',
-                'disabled' => true
+                'choice_label' => 'numero'
             ])
             ->add('typeNote', EntityType::class, [
                 'class' => TypeNote::class,

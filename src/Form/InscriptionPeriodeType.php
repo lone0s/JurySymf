@@ -19,7 +19,7 @@ class InscriptionPeriodeType extends AbstractType
         $builder
             ->add('note')
             ->add('pointsJury')
-            ->add('saisie')
+            /*->add('saisie')*/
             ->add('inscriptionPartielle')
             ->add('etudiant', EntityType::class, [
                 'class' => Etudiant::class,
@@ -31,8 +31,10 @@ class InscriptionPeriodeType extends AbstractType
             ])
             ->add('periode',EntityType::class, [
                 'class' => Periode::class,
-                'choice_label' => 'codeApogee',
-                'disabled' => true
+                'choice_label' => function($periode) {
+                    return 'Parcours: ' . $periode -> getParcour() -> getNomCourt()
+                        . ' | Periode: ' . $periode -> getNumero() . ' - '. $periode ->getCodeApogee();
+                }
             ])
             ->add('typeResultat', EntityType::class,[
                 'class' => TypeResultat::class,

@@ -19,14 +19,22 @@ class InscriptionEpreuveCreatorType extends AbstractType
         $builder
             ->add('note')
             ->add('epreuve', EntityType::class,
-                ['class' => Epreuve::class,'choice_label' => 'nom','disabled' => true])
+                [
+                    'class' => Epreuve::class,
+                    'choice_label' => function($epreuve) {
+                        return
+                             $epreuve -> getUe() -> getNom() .
+                            ' - ' . $epreuve -> getNom();
+                    }
+                ])
             ->add('periodeUe', EntityType::class,
                 ['class' => PeriodeUe::class,
                     'choice_label' => function($periodeUe)
                     {
-                return 'Parcour '.$periodeUe -> getPeriode() -> getParcour() -> getNom()
-                    . ' | Periode ' . $periodeUe -> getPeriode() -> getNumero() . ' - ' .
-                    $periodeUe -> getPeriode() -> getCodeApogee() .
+                return
+                    'Parcour '.$periodeUe -> getPeriode() -> getParcour() -> getNom()
+                    . ' | ' . $periodeUe -> getPeriode() -> getNumero() .
+                    ' - ' . $periodeUe -> getPeriode() -> getCodeApogee() .
                     ' | UE: ' . $periodeUe -> getUe() -> getNom();
                     }
                 ])
