@@ -17,19 +17,22 @@
                 <td>{{ npe.etudiant.prenom }}</td>
                 <td>{{ npe.note | default("NULL") }}</td>
                 <td>{{ npe.pointsJury | default("NULL")}}</td>
-                {% if 0 in npe.saisie %}
+                {% if 0 == npe.saisie %}
                     <td>Vrai</td>
                 {% else %}
                     <td>Faux</td>
                 {% endif %}
                 <td>{{ npe.typeNote.type | default("NULL") }}</td>
                 <td>{{ npe.periode.codeApogee }}</td>
-                {% if  0 in npe.inscriptionPartielle%}
+                {% if  0 == npe.inscriptionPartielle%}
                     <td>Vrai </td>
                 {% else %}
                     <td>Faux</td>
                 {% endif %}
+                <td class="optional_td"><a href = '{{ path('modifier_periode_grade', {'inscriptionPeriodeId':npe.id}) }}'>✏️</a></td>
+                <td class="optional_td"><a href = '{{ path('supprimer_epreuve_grade', {'inscriptionPeriodeId':npe.id}) }}'>❌</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('creer_notes_periode') }}">➕</a></button></div>
 {% endblock %}

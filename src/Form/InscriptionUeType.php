@@ -4,9 +4,12 @@ namespace App\Form;
 
 use App\Entity\Etudiant;
 use App\Entity\InscriptionUe;
+use App\Entity\Parcour;
+use App\Entity\Periode;
 use App\Entity\PeriodeUe;
 use App\Entity\TypeNote;
 use App\Entity\TypeResultat;
+use App\Repository\PeriodeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,10 +31,16 @@ class InscriptionUeType extends AbstractType
                 'class' => TypeNote::class,
                 'choice_label' => 'type'
             ])
-            ->add('periodeUe', EntityType::class, [
-                'class' => PeriodeUe::class,
-                'choice_label' => 'id',
-            ])
+            ->add('periodeUe', EntityType::class,
+                ['class' => PeriodeUe::class,
+                    'choice_label' => function($periodeUe)
+                    {
+                        return 'Parcour '.$periodeUe -> getPeriode() -> getParcour() -> getNom()
+                            . ' | Periode ' . $periodeUe -> getPeriode() -> getNumero() . ' - ' .
+                            $periodeUe -> getPeriode() -> getCodeApogee() .
+                            ' | UE: ' . $periodeUe -> getUe() -> getNom();
+                    }
+                ])
             ->add('typeResultat', EntityType::class,[
                 'class' => TypeResultat::class,
                 'choice_label' => 'type'

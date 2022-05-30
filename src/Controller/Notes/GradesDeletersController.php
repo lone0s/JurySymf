@@ -85,7 +85,7 @@ class GradesDeletersController extends AbstractController
         $em -> flush();
         return $this -> redirectToRoute('_epreuves_list');
     }
-    #[Route('/ues/{inscriptionUeId}', name : '_epreuve_grade')]
+    #[Route('/ues/{inscriptionUeId}', name : '_ue_grade')]
     public function deleteUeGrade(int $inscriptionUeId, ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
         $inscriptionUe = $em -> getRepository(InscriptionUe::class) -> find($inscriptionUeId);
@@ -96,7 +96,7 @@ class GradesDeletersController extends AbstractController
         $em -> flush();
         return $this -> redirectToRoute('_ues_list');
     }
-    #[Route('/periode/{inscriptionPeriodeId}', name : '_epreuve_grade')]
+    #[Route('/periode/{inscriptionPeriodeId}', name : '_periode_grade')]
     public function deletePeriodeGrade(int $inscriptionPeriodeId, ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
         $inscriptionPeriode = $em -> getRepository(InscriptionPeriode::class) -> find($inscriptionPeriodeId);
@@ -107,7 +107,7 @@ class GradesDeletersController extends AbstractController
         $em -> flush();
         return $this -> redirectToRoute('_periodes_list');
     }
-    #[Route('/parcour/{inscriptionParcourId}', name : '_epreuve_grade')]
+    #[Route('/parcour/{inscriptionParcourId}', name : '_parcour_grade')]
     public function deleteParcourGrade(int $inscriptionParcourId, ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
         $inscriptionParcour = $em -> getRepository(InscriptionParcour::class) -> find($inscriptionParcourId);
