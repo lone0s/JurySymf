@@ -22,5 +22,10 @@ class FrontEndController extends AbstractController
     public function redirectToGUniv() : Response {
         return  $this -> render('site/links/universite/main_univ_links.html.twig');
     }
+/*
+    #[Route('/diplomes', name: '_to_diplomes')]
+    public function redirectToDiplomes : Response {
+        return $this -> render('')
+    }*/
 
 }

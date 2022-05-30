@@ -2,19 +2,19 @@
 {% block list %}
 <table>
 <tr>
-    <th>id</th>
-    <th>id_epreuve</th>
-    <th>id_periode_ue</th>
-    <th>id_etudiant</th>
-    <th>id_type_note</th>
-    <th>note</th>
+    <th>Epreuve</th>
+    <th>Période - Parcours</th>
+    <th>UE</th>
+    <th>Etudiant</th>
+    <th>Type Note</th>
+    <th>Note</th>
 </tr>
 {% for note_epreuve in notes_etudiant %}
     <tr class="tr-table">
-        <td>{{ note_epreuve.id }}</td>
         <td>{{ note_epreuve.epreuve.nom }}</td>
-        <td>{{ note_epreuve.periodeUe.id }}</td>
-        <td>{{ note_epreuve.etudiant.nom }}</td>
+        <td>{{ note_epreuve.periodeUe.periode.codeApogee }} - {{ note_epreuve.periodeUe.periode.parcour.nomCourt }}</td>
+        <td>{{ note_epreuve.periodeUe.ue.nomCourt }}</td>
+        <td>{{ note_epreuve.etudiant.numero }}</td>
         <td>{{ note_epreuve.typeNote.id | default("NULL") }}</td>
         <td>{{ note_epreuve.note | default("NULL") }}</td>
         <td class="optional_td"><a href = '{{ path('modifier_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>✏️</a></td>

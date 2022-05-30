@@ -30,7 +30,7 @@
                     <td>Faux</td>
                 {% endif %}
                 <td class="optional_td"><a href = '{{ path('modifier_periode_grade', {'inscriptionPeriodeId':npe.id}) }}'>✏️</a></td>
-                <td class="optional_td"><a href = '{{ path('supprimer_epreuve_grade', {'inscriptionPeriodeId':npe.id}) }}'>❌</a></td>
+                <td class="optional_td"><a href = '{{ path('supprimer_periode_grade', {'inscriptionPeriodeId':npe.id}) }}'>❌</a></td>
             </tr>
         {% endfor %}
     </table>

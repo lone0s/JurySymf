@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+<h2>Universités</h2>
+{% endblock %}
+{% block list %}
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Commentaire</th>
+        </tr>
+        {% for univ in univs %}
+            <tr>
+                <td>{{ univ.nom }}</td>
+                <td>{{ univ.commentaire }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
+
