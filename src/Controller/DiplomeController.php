@@ -66,7 +66,7 @@ class DiplomeController extends AbstractController
             return $this->redirectToRoute('diplomes_list');
     }
 
-    #[Route('/delete/{id_diplome}', name : '_delete')]
+    #[Route('/supprimer/{id_diplome}', name : '_delete')]
     public function deleteDiplome(int $id_diplome, ManagerRegistry $doc) :Response {
         $em = $doc -> getManager();
         $diplomeRepo = $em -> getRepository(Diplome::class);

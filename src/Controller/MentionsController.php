@@ -5,12 +5,13 @@ namespace App\Controller;
 use App\Entity\Mention;
 use App\Form\MentionsType;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-#[Route('/Mentions', name: 'Mentions')]
+#[Route('/mentions', name: 'mentions')]
 class MentionsController extends AbstractController
 {
     #[Route('/list', name: '_list')]
@@ -63,7 +64,19 @@ class MentionsController extends AbstractController
             $args = array("formulaire" => $form->createView());
             return $this -> render("forms/FormView.html.twig",$args);
         }
-        else
-            return $this -> redirectToRoute('Mentions_list');
+        return $this->redirectToRoute('Mentions_list');
+    }
+
+    #[Route('/supprimer/{id_mention}', name : '_delete')]
+    public function deleteMention(int $id_mention, ManagerRegistry $doc) : Response {
+        $em = $doc -> getManager();
+        $mention = $em -> getRepository(Mention::class) -> find($id_mention);
+        if (! $mention){
+            throw new InvalidArgumentException('Incorrect mention id');
+        }
+        $em -> remove($mention);
+        //Verifier que les informations sont mis a NULL quand la mention n'existe plus
+        $em -> flush();
+        return  $this->redirectToRoute('mentions_list');
     }
 }
