@@ -2,17 +2,21 @@
 ----------------------------------------------------------------------------------------------
 - Implementer regles de calcul
     (Correspond a deux formulaires de gestion de coefficients pour en créer
-    + transmission regles calcul + epreuves concernées pour réaliser calcul)
+    + transmission regles calcul + epreuves concernées pour réaliser calcul) <== Au plus tard Mercredi
 
-- Gestion droits d'accès
+- Search Form Types (Recherche selon X ou Y paramètre) <== Demain
 
-- Implémenter la vérification du contenu des formulaires
-----------------------------------------------------------------------------------------------
+- Uniformiser contenu des listings <== 90% Fait
+
+- Gestion droits d'accès <== Demain
+
+- Implémenter la vérification du contenu des formulaires Symfony Constraints & Validators <== Demain
+
 - Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
-a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
+a partir des notes pré-entrées ou saisies manuellement <== Fait a 90%
 
-- Import/Export notes & listes etudiants format CSV <== Ez
-
+- Import/Export notes & listes etudiants format CSV <== Ez Mercredi
+----------------------------------------------------------------------------------------------
 - Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form <== Fait
 
 - Formulaires de création de Periodes/Ues/Epreuves <== Fait

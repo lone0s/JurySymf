@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+    {% block title %}
+        <h2>Gestion Universitaire</h2>
+    {% endblock %}
+    <nav class="nav-links">
+        <ul>
+            {# Universités #}
+            <li class="link-list">
+                <a href="{{ path('universite_list') }}">
+                    Notes
+                </a>
+            </li>
+            {# UFR #}
+            <li class="link-list">
+                <a href="{{ path('ufrs_list') }}">
+                    Gestion
+                </a>
+            </li>
+            {# Parcours #}
+            <li class="link-list">
+                <a href="{{ path('app_list_parcours') }}">
+                    Parcours
+                </a>
+            </li>
+            {# Périodes #}
+            <li class="link-list">
+                <a href="{{ path('periode_list') }}">
+                    Périodes
+                </a>
+            </li>
+            {# UEs #}
+            <li class="link-list">
+                <a href="{{ path('ue_list') }}">
+                    UEs
+                </a>
+            </li>
+            {# Epreuves #}
+            <li class="link-list">
+                <a href="{{ path('app_listing_epreuves') }}">
+                    Epreuves
+                </a>
+            </li>
+            {# Types Notes #}
+            <li class="link-list">
+                <a href="{{ path('types_note_list') }}">
+                    Types Notes
+                </a>
+            </li>
+            {# Types Resultat #}
+            <li class="link-list">
+                <a href="{{ path('typesResultat_list') }}">
+                    Types Resultat
+                </a>
+            </li>
+            {# Mentions #}
+            <li class="link-list">
+                <a href="{{ path('mentions_list') }}">
+                    Mentions
+                </a>
+            </li>
+            {# Etudiants #}
+            <li class="link-list">
+                <a href="{{ path('etudiants_list') }}">
+                    Etudiants
+                </a>
+            </li>
+            {# Diplomes #}
+            <li class="link-list">
+                <a href="{{ path('diplomes_list') }}">
+                    Diplomes
+                </a>
+            </li>
+            {# Nature Epreuve #}
+            <li class="link-list">
+                <a href="{{ path('natures_epreuves_list') }}">
+                    Nature Epreuve
+                </a>
+            </li>
+            {# Periodicite #}
+            <li class="link-list">
+                <a href="{{ path('periodicite_list') }}">
+                    Periodicite
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
