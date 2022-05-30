@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception;
-
+#[Route('/ues', name: 'ue')]
 class UeController extends AbstractController
 {
-    #[Route('/ues/create', name:'app_create_ue')]
+    #[Route('/creer', name:'_creer')]
     public function createUe(ManagerRegistry $doc, Request $request) : Response
     {
         $em = $doc -> getManager();
@@ -36,7 +36,7 @@ class UeController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/ues/change/{ue_id}', name: 'app_change_ue_info')]
+    #[Route('/changer/{ue_id}', name: '_modifier')]
     public function changeUeData( ManagerRegistry $doc, Request $request, int $ue_id) : Response
     {
         $em = $doc->getManager();
@@ -64,7 +64,7 @@ class UeController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/ues/list', name : 'app_list_ues')]
+    #[Route('/list', name : '_list')]
     public function listUes(ManagerRegistry $doc) : Response
     {
         $em = $doc -> getManager();

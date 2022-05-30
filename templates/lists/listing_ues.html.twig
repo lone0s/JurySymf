@@ -16,7 +16,9 @@
         <td>{{ ue.ects }}</td>
         <td>{{ ue.codeApogee }}</td>
         <td>{{ ue.commentaire }}</td>
+            <td class="optional_td"><a href = '{{ path('ue_modifier', {'ue_id':ue.id}) }}'>✏️</a></td>
         </tr>
     {% endfor %}
 </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('ue_creer') }}">➕</a></button></div>
 {% endblock %}

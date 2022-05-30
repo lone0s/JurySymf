@@ -44,11 +44,11 @@ class PeriodeController extends AbstractController
         $args = ['periodes' => $periodes];
         return  $this -> render('lists/listing_periodes.html.twig', $args);
     }
-    #[Route('/change/{id_parcours}', name: '_change')]
-    public function changeParcours(ManagerRegistry $doc, Request $request, int $id_parcours) : Response {
+    #[Route('/change/{id_periode}', name: '_change')]
+    public function changeParcours(ManagerRegistry $doc, Request $request, int $id_periode) : Response {
         $em = $doc -> getManager();
         $parcoursRepo = $doc -> getRepository(Parcour::class);
-        $parcour = $parcoursRepo -> find($id_parcours);
+        $parcour = $parcoursRepo -> find($id_periode);
         if ($parcour) {
             $form = $this -> createForm(ParcoursType::class,$parcour);
             $form -> add("send", SubmitType::class, ['label' => "Modifier le parcours"]);

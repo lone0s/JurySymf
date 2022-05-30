@@ -12,8 +12,10 @@
                 <td>{{ periodicite.nom }}</td>
                 <td>{{ periodicite.nomCourt }}</td>
                 <td>{{ periodicite.nombre }}</td>
+                <td class="optional_td"><a href = '{{ path('periodicite_change', {'id_periodicite':periodicite.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('periodicite_create') }}">➕</a></button></div>
 {% endblock %}
 

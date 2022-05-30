@@ -49,6 +49,7 @@ class ParcoursController extends AbstractController
         }
         $form = $this -> createForm(ParcoursType::class,$parcours);
         $form -> add("send", SubmitType::class, ['label' => "Créer le parcours"]);
+        $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid()) {
             $parcours = $form -> getData();
             $em -> persist($parcours);

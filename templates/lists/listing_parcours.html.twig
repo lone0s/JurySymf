@@ -31,7 +31,9 @@
                     <td>Vrai</td>
                 {% endif %}
                 <td>{{ parcour.commentaire }}</td>
+                <td class="optional_td"><a href = '{{ path('app_change_parcours', {'id_parcours':parcour.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('app_create_parcours') }}">➕</a></button></div>
 {% endblock %}

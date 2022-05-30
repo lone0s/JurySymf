@@ -12,8 +12,10 @@
                 <td>{{ periode.numero }}</td>
                 <td>{{ periode.codeApogee }}</td>
                 <td>{{ periode.parcour.nom }}</td>
+                <td class="optional_td"><a href = '{{ path('periode_change', {'id_periode':periode.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('periode_create') }}">➕</a></button></div>
 {% endblock %}
 

@@ -8,8 +8,10 @@
         {% for natureEpreuve in naturesEpreuves %}
             <tr>
                 <td>{{ natureEpreuve.nature }}</td>
+                <td class="optional_td"><a href = '{{ path('natures_epreuves_change', {'id_natureEpreuve':natureEpreuve.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('natures_epreuves_create') }}">➕</a></button></div>
 {% endblock %}
 

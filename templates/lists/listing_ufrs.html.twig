@@ -14,8 +14,10 @@
                 <td>{{ ufr.denominationCourte }}</td>
                 <td>{{ ufr.commentaire|default('NULL') }}</td>
                 <td>{{ ufr.universite.nom }}</td>
+                <td class="optional_td"><a href = '{{ path('ufrs_change', {'id_ufr':ufr.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('ufrs_create') }}">➕</a></button></div>
 {% endblock %}
 

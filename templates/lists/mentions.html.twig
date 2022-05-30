@@ -23,14 +23,16 @@
                 <td>{{ mention.nomCourt | default("NULL")}}</td>
                 <td>{{ mention.anneeDebut | default("NULL") }}</td>
                 <td>{{ mention.anneeFin | default("NULL") }}</td>
-                {% if 0 in mention.actif %}
+                {% if 0 == mention.actif %}
                     <td>Vrai</td>
                 {% else %}
                     <td>Faux</td>
                 {% endif %}
                 <td>{{ mention.commentaire | default("NULL")}}</td>
+                <td class="optional_td"><a href = '{{ path('mentions_change', {'id_mention':mention.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}
     </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('mentions_create') }}">➕</a></button></div>
 {% endblock %}
 
