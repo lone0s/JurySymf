@@ -31,7 +31,7 @@ class AdminController extends AbstractController
         return $this->render('lists/admin/listing_utilisateurs.html.twig', $args);
     }
 
-    #[Route('/droits/elever/{id_user}', name: '_add_admin')]
+    #[Route('/droits/elever/{id_user}', name: '_elevate_user')]
     public function addAdminAction(ManagerRegistry $doc, $id_user): Response
     {
         $hasAccess = $this -> isGranted('ROLE_SUPER_ADMIN');
@@ -49,5 +49,24 @@ class AdminController extends AbstractController
             }
         }
         return $this->redirectToRoute('admin_user_listing');
+    }
+    #[Route('/supprimer/{id_user}', name : '_remove_user')]
+    public function removeUserAction(ManagerRegistry $doc, $id_user) : Response {
+        $hasAccess = $this -> isGranted('ROLE_SUPER_ADMIN');
+        $this -> denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        if ($hasAccess) {
+            $em = $doc -> getManager();
+            $userRepo = $em -> getRepository(AuthUser::class);
+            $user = $userRepo -> find($id_user);
+            if ($user) {
+                $em -> remove($user);
+                $em->flush();
+                $this->addFlash('info', 'Suppression utilisateur réussie!');
+            } else {
+                $this->addFlash('info', 'Utilisateur inconnu!');
+            }
+            return $this -> redirectToRoute('admin_user_listing');
+        }
+        return $this->redirectToRoute('app_index');
     }
 }

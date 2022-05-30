@@ -74,7 +74,6 @@ class GradesDeletersController extends AbstractController
         $em -> remove($inscriptionParcour);
     }
 
-
     #[Route('/epreuves/{inscriptionEpreuveId}', name : '_epreuve_grade')]
     public function deleteEpreuveGrade(int $inscriptionEpreuveId, ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
