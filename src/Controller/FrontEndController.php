@@ -15,7 +15,7 @@ class FrontEndController extends AbstractController
 
     #[Route('/gestion', name : '_to_gestion_view')]
     public function redirectToGestion() : Response {
-        return  $this -> render('site/links/main_links.html.twig');
+        return  $this -> render('site/links/gestion.html.twig');
     }
 
     #[Route('/univ' , name : '_to_gestion_universitaire')]

@@ -1,5 +1,8 @@
-<h2 class="title_links">Menu</h2>
-{% block listinglinks %}
+{% extends 'base.html.twig' %}
+{% block menu %}
+    {% block title %}
+        <h2>Gestion Universitaire</h2>
+    {% endblock %}
     <nav class="nav-links">
         <ul>
             {# Universités #}
@@ -16,25 +19,25 @@
             </li>
             {# Parcours #}
             <li class="link-list">
-                <a href="{{ path('_parcours_list') }}">
+                <a href="{{ path('app_list_parcours') }}">
                     Parcours
                 </a>
             </li>
             {# Périodes #}
             <li class="link-list">
-                <a href="{{ path('_periodes_list') }}">
+                <a href="{{ path('periode_list') }}">
                     Périodes
                 </a>
             </li>
             {# UEs #}
             <li class="link-list">
-                <a href="{{ path('_ues_list') }}">
+                <a href="{{ path('ue_list') }}">
                     UEs
                 </a>
             </li>
             {# Epreuves #}
             <li class="link-list">
-                <a href="{{ path('_epreuves_list') }}">
+                <a href="{{ path('app_listing_epreuves') }}">
                     Epreuves
                 </a>
             </li>

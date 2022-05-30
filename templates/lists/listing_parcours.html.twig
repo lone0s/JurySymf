@@ -30,7 +30,7 @@
                 {% else %}
                     <td>Vrai</td>
                 {% endif %}
-                <td>{{ parcour.commentaire }}</td>
+                <td>{{ parcour.commentaire | default ('NULL')}}</td>
                 <td class="optional_td"><a href = '{{ path('app_change_parcours', {'id_parcours':parcour.id}) }}'>✏️</a></td>
             </tr>
         {% endfor %}

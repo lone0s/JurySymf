@@ -31,7 +31,7 @@
             {% else %}
                 <td>Faux</td>
             {% endif %}
-            <td>{{ epreuve.duree }}</td>
+            <td>{{ epreuve.duree | default ('NULL') }}</td>
             <td class="optional_td"><a href = '{{ path('app_modification', {'id_epreuve':epreuve.id}) }}'>✏️</a></td>
             <td class="optional_td"><a href = '{{ path('app_delete_epreuve', {'id_epreuve':epreuve.id}) }}'>❌</a></td>
         </tr>

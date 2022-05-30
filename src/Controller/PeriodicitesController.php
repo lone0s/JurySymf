@@ -38,7 +38,7 @@ class PeriodicitesController extends AbstractController
     #[Route('/list', name : '_list')]
     public function listPeriodicites(ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
-        $periodicites = $em -> getRepository(Periodicite::class);
+        $periodicites = $em -> getRepository(Periodicite::class) -> findAll();
         $args = ['periodicites' => $periodicites];
         return $this -> render('lists/listing_periodicites.html.twig', $args);
     }
