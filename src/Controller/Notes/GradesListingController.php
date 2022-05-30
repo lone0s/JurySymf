@@ -103,8 +103,8 @@ class GradesListingController extends AbstractController
     #[Route('/notes/ues', name: '_ues_list')]
     public function listStudentsUesGrades(ManagerRegistry $doc) :Response {
         $em = $doc -> getManager();
-        $inscriptionsUes = $em -> getRepository(InscriptionEpreuve::class) -> findAll();
-        $args = ['notes_etudiant' => $inscriptionsUes];
+        $inscriptionsUes = $em -> getRepository(InscriptionUe::class) -> findAll();
+        $args = ['notes_ues_etudiant' => $inscriptionsUes];
         return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
     }
 }

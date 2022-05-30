@@ -7,11 +7,15 @@ use App\Entity\Etudiant;
 use App\Entity\InscriptionEpreuve;
 use App\Entity\InscriptionParcour;
 use App\Entity\InscriptionPeriode;
+use App\Entity\InscriptionUe;
 use App\Form\EditTestGradeType;
 use App\Form\InscriptionEpreuveModificationType;
 use App\Form\InscriptionParcoursType;
+use App\Form\InscriptionPeriodeModificationType;
+use App\Form\InscriptionUeModificationType;
 use Doctrine\Persistence\ManagerRegistry;
 use http\Exception\InvalidArgumentException;
+use HttpInvalidParamException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GradesModificationController extends AbstractController
 {
-    #[Route('/grades/test/modification/{student_id}/{epreuve_id}', name: 'app_epreuve_grade_modification')]
+/*    #[Route('/grades/test/modification/{student_id}/{epreuve_id}', name: 'app_epreuve_grade_modification')]
     public function changeStudentTestGrade(ManagerRegistry $doc, int $student_id, int $epreuve_id, Request $request) : Response
     {
         $em = $doc -> getManager();
@@ -53,7 +57,7 @@ class GradesModificationController extends AbstractController
 
     #[Route('/grades/parcours/modification/{student_id}/', name: 'app_parcours_grade_modification')]
     public function changeStudentParcoursGrade(ManagerRegistry $doc, int $student_id, Request $request) : Response
-    {
+    {*/
         // A REVOIR + RECONCEVOIR POUR ADAPTER FORMULAIRE DE MODIFICATION A ETUDIANT
         /*
         $em = $doc -> getManager();
@@ -79,9 +83,9 @@ class GradesModificationController extends AbstractController
         }
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);*/
-    }
+/*    }*/
 
-    #[Route('/grades/periode/modification/{student_id}/{periode_id}', name: 'app_periode_grade_modification')]
+/*    #[Route('/grades/periode/modification/{student_id}/{periode_id}', name: 'app_periode_grade_modification')]
     public function changeStudentPeriodeGrade(ManagerRegistry $doc, int $student_id, int $periode_id, Request $request) : Response
     {
         $em = $doc -> getManager();
@@ -108,10 +112,10 @@ class GradesModificationController extends AbstractController
         }
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);
-    }
+    }*/
 
     // !!! Formulaire a base d'éléments prééxistents sinon pb !
-    #[Route('/grades/add/testGrade/{student_id}', name: 'app_add_student_test_grade')]
+/*    #[Route('/grades/add/testGrade/{student_id}', name: 'app_add_student_test_grade')]
     public function addStudentExamGrade(ManagerRegistry $doc, int $student_id, Request $request) : Response
     {
         $em = $doc -> getManager();
@@ -133,7 +137,108 @@ class GradesModificationController extends AbstractController
         }
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);
+    }*/
+
+    #[Route('/notes/epreuves/modifier/{inscriptionEpreuveId}', name : '_epreuve_grade')]
+    public function changeEpreuveGrade(ManagerRegistry $doc, Request $request, int $inscriptionEpreuveId) : Response {
+        $em = $doc -> getManager();
+        $inscriptionEpreuve = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionEpreuveId);
+        if (! $inscriptionEpreuve)
+        {
+            throw new InvalidArgumentException('Incorrect InscriptionEpreuve id');
+        }
+        $form = $this -> createForm(InscriptionEpreuveModificationType::class, $inscriptionEpreuve);
+        $form -> add("send", SubmitType::class, ['label' => "Modifier note à l'epreuve"]);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $inscriptionEpreuve = $form -> getData();
+            $em -> persist($inscriptionEpreuve);
+            $em -> flush();
+            return  $this -> redirectToRoute('_epreuves_list');
+        }
+        if ($form -> isSubmitted()) {
+            $this->addFlash('error', 'New grade information is incorrect');
+        }
+        $args = array("formulaire" => $form->createView());
+        return $this -> render("forms/FormView.html.twig",$args);
     }
 
+    #[Route('/notes/ues/modifier/{inscriptionUeId}', name : '_ue_grade')]
+    public function changeUeGrade(ManagerRegistry $doc, Request $request, int $inscriptionUeId) : Response {
+        $em = $doc -> getManager();
+        $inscriptionUe = $em -> getRepository(InscriptionUe::class) -> find($inscriptionUeId);
+        if (! $inscriptionUe)
+        {
+            throw new InvalidArgumentException('Incorrect InscriptionUe id');
+        }
+        $form = $this -> createForm(InscriptionUeModificationType::class, $inscriptionUe);
+        $form -> add("send", SubmitType::class, ['label' => "Modifier note à l'UE"]);
+        $form -> handleRequest($request);
+        $oldGrade = $inscriptionUe -> getNote();
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $inscriptionUe = $form -> getData();
+            dump($oldGrade);
+            dump($form['note'] -> getData());
+            if ($oldGrade !== ($form['note'] -> getData()))
+                {
+                    $inscriptionUe -> setSaisie(1);
+                }
+            $em -> persist($inscriptionUe);
+            $em -> flush();
+            return  $this -> redirectToRoute('_ues_list');
+        }
+        if ($form -> isSubmitted()) {
+            $this->addFlash('error', 'New grade information is incorrect');
+        }
+        $args = array("formulaire" => $form->createView());
+        return $this -> render("forms/FormView.html.twig",$args);
+    }
 
+    #[Route('/notes/periodes/modifier/{inscriptionPeriodeId}', name : '_periode_grade')]
+    public function changePeriodeGrade(ManagerRegistry $doc, Request $request, int $inscriptionPeriodeId) : Response {
+        $em = $doc -> getManager();
+        $inscriptionPeriode = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionPeriodeId);
+        if (! $inscriptionPeriode)
+        {
+            throw new InvalidArgumentException('Incorrect InscriptionPeriode id');
+        }
+        $form = $this -> createForm(InscriptionPeriodeModificationType::class, $inscriptionPeriode);
+        $form -> add("send", SubmitType::class, ['label' => "Modifier note sur la période"]);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $inscriptionPeriode = $form -> getData();
+            $em -> persist($inscriptionPeriode);
+            $em -> flush();
+            return  $this -> redirectToRoute('_periodes_list');
+        }
+        if ($form -> isSubmitted()) {
+            $this->addFlash('error', 'New grade information is incorrect');
+        }
+        $args = array("formulaire" => $form->createView());
+        return $this -> render("forms/FormView.html.twig",$args);
+    }
+
+    #[Route('/notes/parcours/modifier/{inscriptionParcourId}', name : '_parcours_grade')]
+    public function changeParcoursGrade(ManagerRegistry $doc, Request $request, int $inscriptionParcourId) : Response {
+        $em = $doc -> getManager();
+        $inscriptionParcour = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionParcourId);
+        if (! $inscriptionParcour)
+        {
+            throw new InvalidArgumentException('Incorrect InscriptionParcours id');
+        }
+        $form = $this -> createForm(InscriptionPeriodeModificationType::class, $inscriptionParcour);
+        $form -> add("send", SubmitType::class, ['label' => "Modifier note sur la période"]);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $inscriptionParcour = $form -> getData();
+            $em -> persist($inscriptionParcour);
+            $em -> flush();
+            return  $this -> redirectToRoute('_parcours_list');
+        }
+        if ($form -> isSubmitted()) {
+            $this->addFlash('error', 'New grade information is incorrect');
+        }
+        $args = array("formulaire" => $form->createView());
+        return $this -> render("forms/FormView.html.twig",$args);
+    }
 }

@@ -44,7 +44,7 @@ class DiplomeController extends AbstractController
     }
 
     #[Route('/modifierInformations/{id_diplome}', name : '_change')]
-    public function changeDiplome(int $id_diplome, Request $request, ManagerRegistry $doc) {
+    public function changeDiplome(int $id_diplome, Request $request, ManagerRegistry $doc) : Response {
         $em = $doc -> getManager();
         $diplomeRepository = $em -> getRepository(Diplome::class);
         $diplome = $diplomeRepository -> find($id_diplome);

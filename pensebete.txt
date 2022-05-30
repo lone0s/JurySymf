@@ -12,7 +12,7 @@ a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 - Implementer fonctions de suppression de tous les éléments <== En cours
 - Implementer suppression d'étudiants impliquant suppression de tous leurs résultats <== Fait
 - Revoir les fonctions de modification de notes pour les optimiser
-
+- Implémenter la vérification du contenu des formulaires
 
 - Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
 ----------------------------------------------------------------------------------------------

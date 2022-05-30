@@ -30,7 +30,6 @@ class GradeTttController extends AbstractController
         $epreuves = $em->getRepository(Epreuve::class)->findBy([
             'ue' => $ue_id
         ]);
-        dump($epreuves);
         //On recup les notes de l'étudiant aux épreuves en question
         $inscriptionEpreuveRepo = $em->getRepository(InscriptionEpreuve::class);
         $res = array();
@@ -43,30 +42,26 @@ class GradeTttController extends AbstractController
                 $res[] = $ie->getNote();
             }
         }
-        dump($this->average($res));
         // Gestion Remontee note + render view
         // Eventuellement utiliser form pour recup information etudiant + ue
         // Sinon automatiser pour toutes les ues ou pour chaque ajout note epreuve liée a UE
     }
 
-    /*#[Route('/test/periode/{student_id}/{periode_id}', name : '_periode')]*/
+    #[Route('/test/periode/{student_id}/{periode_id}', name : '_periode')]
     public function periodeAverage(int $student_id, int $periode_id, ManagerRegistry $doc){
         $em = $doc -> getManager();
         $ueRepo = $em -> getRepository(InscriptionUe::class);
-        $periodes = $em -> getRepository(PeriodeUe::class) -> findBy([
+        $periodesUes = $em -> getRepository(PeriodeUe::class) -> findBy([
             'periode' => $periode_id
         ]);
-        dump($periodes);
         $res = array();
-        foreach ($periodes as $periode) {
-            dump($periode);
+        foreach ($periodesUes as $periodeUe) {
             $inscriptionUe = $ueRepo -> findBy([
                 'etudiant' => $student_id,
-                'periodeUe' => $periode -> getId()
+                'periodeUe' => $periodeUe -> getId()
             ]);
             foreach ($inscriptionUe as $iU) {
                 $res[] = $iU -> getNote();
-                dump($iU -> getNote());
             }
         }
 /*        $avg[] = $this->average($res);
@@ -94,10 +89,9 @@ class GradeTttController extends AbstractController
             ]);
             foreach ($inscriptionPeriode as $iP) {
                 $res[] = $iP -> getNote();
-                dump($iP -> getNote());
             }
         }
-        dump($this->gradeType($this->average($res)));
+//        dump($this->gradeType($this->average($res)));
     }
 
     private function gradeType(int $grade) {
