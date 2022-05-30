@@ -31,28 +31,16 @@ class InscriptionUeType extends AbstractType
                 'class' => TypeNote::class,
                 'choice_label' => 'type'
             ])
-           ->add('periodeUe', EntityType::class, [
-                'class' => PeriodeUe::class,
-                'choice_label' => 'id',
-            ])
-            // A voir plus tard pour modification dynamiques des valeurs dans
-                // En attendant on passera par un formulaire de periode ue 
-/*            -> add('Parcours', EntityType::class, [
-                'class' => Parcour::class,
-                'choice_label' => 'nom'
-            ])
-            -> add('Periode', EntityType::class, [
-                'class' => Periode::class,
-                'query_builder' => function(PeriodeRepository $periodeRepository) {
-                return $periodeRepository -> createQueryBuilder('data')
-                    -> where('data.parcour' = $this)
-                }
-                ,'choice_label' => 'numero'
-            ])
-            -> add('Ue', EntityType::class, [
-                'class' => Periode::class,
-                'choice_label'
-            ])*/
+            ->add('periodeUe', EntityType::class,
+                ['class' => PeriodeUe::class,
+                    'choice_label' => function($periodeUe)
+                    {
+                        return 'Parcour '.$periodeUe -> getPeriode() -> getParcour() -> getNom()
+                            . ' | Periode ' . $periodeUe -> getPeriode() -> getNumero() . ' - ' .
+                            $periodeUe -> getPeriode() -> getCodeApogee() .
+                            ' | UE: ' . $periodeUe -> getUe() -> getNom();
+                    }
+                ])
             ->add('typeResultat', EntityType::class,[
                 'class' => TypeResultat::class,
                 'choice_label' => 'type'

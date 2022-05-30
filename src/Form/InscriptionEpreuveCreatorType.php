@@ -17,12 +17,19 @@ class InscriptionEpreuveCreatorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //'class' => Diplome::class, 'choice_label' => 'libelle'
             ->add('note')
             ->add('epreuve', EntityType::class,
                 ['class' => Epreuve::class,'choice_label' => 'nom','disabled' => true])
             ->add('periodeUe', EntityType::class,
-                ['class' => PeriodeUe::class,'choice_label' => 'id', 'disabled' => true])
+                ['class' => PeriodeUe::class,
+                    'choice_label' => function($periodeUe)
+                    {
+                return 'Parcour '.$periodeUe -> getPeriode() -> getParcour() -> getNom()
+                    . ' | Periode ' . $periodeUe -> getPeriode() -> getNumero() . ' - ' .
+                    $periodeUe -> getPeriode() -> getCodeApogee() .
+                    ' | UE: ' . $periodeUe -> getUe() -> getNom();
+                    }
+                ])
             ->add('etudiant', EntityType::class,
                 ['class' => Etudiant::class, 'choice_label' => 'numero'])
             ->add('typeNote', EntityType::class,

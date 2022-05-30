@@ -113,13 +113,13 @@ class GradesCreatorController extends AbstractController
         return $this->render("forms/FormView.html.twig", $args);
     }
 
-    #[Route('/ues/{id_periode}/{id_ue}', name: '_ues')]
-    public function creerNoteUe(ManagerRegistry $doc, Request $request, int $id_periode, int $id_ue) : Response
+    #[Route('/ues', name: '_ues')]
+    public function creerNoteUe(ManagerRegistry $doc, Request $request/*, int $id_periode, int $id_ue*/) : Response
         // Fonctionne mais !!! Pas de verification de note !!!
     {
         $em = $doc->getManager();
         $inscriptionUe = new InscriptionUe();
-        $periode = $em -> getRepository(Periode::class) -> find($id_periode);
+/*        $periode = $em -> getRepository(Periode::class) -> find($id_periode);
         $ue = $em -> getRepository(Ue::class) -> find($id_ue);
         $periodeUe = $em -> getRepository(PeriodeUe::class) -> findOneBy([
             'periode' => $periode,
@@ -127,7 +127,7 @@ class GradesCreatorController extends AbstractController
         ]);
         if ($periodeUe) {
             $inscriptionUe->setPeriodeUe($periodeUe);
-        }
+        }*/
         $form = $this->createForm(InscriptionUeType::class, $inscriptionUe);
         $form->add("send", SubmitType::class, ['label' => "Ajouter la note d'UE"]);
         $form->handleRequest($request);
@@ -139,8 +139,9 @@ class GradesCreatorController extends AbstractController
             $this->addFlash('success', 'Successfully created new note UE');
             return $this->redirectToRoute('app_list_ues', ['id' => $inscriptionUe->getEtudiant()->getId()]);
         }
-        if ($form->isSubmitted())
+        if ($form->isSubmitted()) {
             $this->addFlash('error', 'Incorrect form data');
+        }
         $args = array("formulaire" => $form->createView());
         return $this->render("forms/FormView.html.twig", $args);
     }

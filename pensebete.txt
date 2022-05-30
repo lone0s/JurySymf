@@ -1,15 +1,21 @@
-Pense-bete
-
+                                           Pense-bete
+----------------------------------------------------------------------------------------------
 - Implementer regles de calcul
     (Correspond a deux formulaires de gestion de coefficients pour en créer
     + transmission regles calcul + epreuves concernées pour réaliser calcul)
 
+- Gestion droits d'accès
+
+- Implémenter la vérification du contenu des formulaires
+
+- Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
+----------------------------------------------------------------------------------------------
 - Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
 a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 
-- Gestion droits d'accès
-
 - Import/Export notes & listes etudiants format CSV <== Ez
+
+- Formulaires de création de Periodes/Ues/Epreuves <== Fait
 
 - Un peu de frontend pour que ce soit visuellement agréable <== Fait
 
@@ -20,15 +26,10 @@ a partir des notes pré-entrées ou saisies manuellement <== Fait a 98%
 - Implementer suppression d'étudiants impliquant suppression de tous leurs résultats <== Fait
 
 - Revoir les fonctions de modification de notes pour les optimiser <== Fait
-
-- Implémenter la vérification du contenu des formulaires
-
-- Formulaires de création de Periodes/Ues/Epreuves <== Fait
-
-- Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form
 ----------------------------------------------------------------------------------------------
-
+                                         Questions
+----------------------------------------------------------------------------------------------
 Est ce que un etudiant peut etre inscrit à deux Parcours ??? <-- Logiquement non
                                                              ==> Implique restrictions
-
 - A-t-on réellement besoin de supprimer des parcours/periodes/ues/periodicités ?
+- Form dynamiques sans AJAX ??? Demander prof
