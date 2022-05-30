@@ -7,7 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-#[Route('/universite')]
+#[Route('/universite', name: 'universite')]
 class UniversiteController extends AbstractController
 {
     #[Route('', name: '_list')]
