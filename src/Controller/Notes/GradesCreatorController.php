@@ -125,8 +125,9 @@ class GradesCreatorController extends AbstractController
             'periode' => $periode,
             'ue' => $ue
         ]);
-        if ($periodeUe)
-            $inscriptionUe -> setPeriodeUe($periodeUe);
+        if ($periodeUe) {
+            $inscriptionUe->setPeriodeUe($periodeUe);
+        }
         $form = $this->createForm(InscriptionUeType::class, $inscriptionUe);
         $form->add("send", SubmitType::class, ['label' => "Ajouter la note d'UE"]);
         $form->handleRequest($request);
