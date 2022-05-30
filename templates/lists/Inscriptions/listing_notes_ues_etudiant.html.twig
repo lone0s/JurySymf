@@ -10,22 +10,29 @@
             <th>Type de Note</th>
             <th>Type de Resultat</th>
             <th>Note Eliminatoire</th>
+            <th>Parcours</th>
+            <th>UE</th>
         </tr>
-        {% for nee in notes_ues_etudiant %}
+        {% for nue in notes_ues_etudiant %}
             <tr class="tr-table">
-                <td>{{ nee.etudiant.nom }}</td>
-                <td>{{ nee.etudiant.prenom }}</td>
-                <td>{{ nee.note | default("NULL") }}</td>
-                <td>{{ nee.pointsJury | default("NULL")}}</td>
-                {% if 0 in nee.saisie %}
-                    <td>Vrai</td>
-                {% else %}
+                <td>{{ nue.etudiant.nom }}</td>
+                <td>{{ nue.etudiant.prenom }}</td>
+                <td>{{ nue.note | default("NULL") }}</td>
+                <td>{{ nue.pointsJury | default("NULL")}}</td>
+                {% if nue.saisie == 0 %}
                     <td>Faux</td>
+                {% else %}
+                    <td>Vrai</td>
                 {% endif %}
-                <td>{{ nee.typeNote.type | default("NULL") }}</td>
-                <td>{{ nee.typeResultat.type | default("NULL") }}</td>
-                <td>{{ nee.periodeUe.noteEliminatoire | default("NULL")}}</td>
+                <td>{{ nue.typeNote.type | default("NULL") }}</td>
+                <td>{{ nue.typeResultat.type | default("NULL") }}</td>
+                <td>{{ nue.periodeUe.noteEliminatoire | default("NULL")}}</td>
+                <td>{{ nue.periodeUe.periode.parcour.nom }}</td>
+                <td>{{ nue.periodeUe.ue.nom }}</td>
+                <td class="optional_td"><a href = '{{ path('_ue_grade', {'inscriptionUeId':nue.id}) }}'>✏️</a></td>
+{#                <td class="optional_td"><a href = '{{ path('diplomes_delete', {'id_diplome':diplome.id}) }}'>❌</a></td>#}
             </tr>
         {% endfor %}
     </table>
+{#<div class="create_div"><button class="creator"><a href="{{ path('ue') }}">➕</a></button></div>#}
 {% endblock %}

@@ -24,8 +24,6 @@ class ParcoursType extends AbstractType
             ->add('actif')
             ->add('commentaire', TextType::class)
             -> add('periodicite',EntityType::class,['class' => Periodicite::class, 'choice_label' => 'nom']);
-            //->add('typeNote', EntityType::class, ['class' => TypeNote::class, 'choice_label' => 'type'])
-            //->add('periodicite', EntityType::class, ['class' => Periodicite::class, 'label' => 'nom',['disabled' => true]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

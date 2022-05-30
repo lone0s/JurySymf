@@ -2,22 +2,17 @@
 
 namespace App\Form;
 
-use App\Controller\TypeNoteController;
-use App\Entity\Epreuve;
 use App\Entity\Etudiant;
-use App\Entity\InscriptionEpreuve;
-use App\Entity\PeriodeUe;
+use App\Entity\InscriptionPeriode;
+use App\Entity\Periode;
 use App\Entity\TypeNote;
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\TypeResultat;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InscriptionEpreuveModificationType extends AbstractType
+class InscriptionPeriodeModificationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -28,18 +23,20 @@ class InscriptionEpreuveModificationType extends AbstractType
                 'choice_label' => 'numero',
                 'disabled' => true
             ])
-            ->add('epreuve', EntityType::class, [
-                'class' => Epreuve::class,
-                'choice_label' => 'nom',
-                'disabled' => true
-            ])
-            ->add('periodeUe', EntityType::class, [
-                'class' => PeriodeUe::class,
+            ->add('periode', EntityType::class, [
+                'class' => Periode::class,
                 'choice_label' => 'id',
                 'disabled' => true
             ])
-            ->add('typeNote', EntityType::class, [
+            ->add('inscriptionPartielle')
+            ->add('pointsJury')
+            ->add('saisie')
+            ->add('typeNote',EntityType::class,[
                 'class' => TypeNote::class,
+                'choice_label' => 'type'
+            ])
+            ->add('typeResultat', EntityType::class,[
+                'class' => TypeResultat::class,
                 'choice_label' => 'type'
             ])
         ;
@@ -48,7 +45,7 @@ class InscriptionEpreuveModificationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => InscriptionEpreuve::class,
+            'data_class' => InscriptionPeriode::class,
         ]);
     }
 }

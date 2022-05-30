@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Periodicite;
 use App\Form\PeriodicitesType;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,8 +63,7 @@ class PeriodicitesController extends AbstractController
                 $this -> addFlash('error','Incorrect form data');
             }
         }
-        else {
-            return $this -> redirectToRoute('periodicite_list');
-        }
+        throw new InvalidArgumentException('Incorrect periodicite id');
     }
+
 }

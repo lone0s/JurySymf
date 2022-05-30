@@ -66,4 +66,6 @@ class NatureEpreuveController extends AbstractController
         else
             return $this -> redirectToRoute('natures_epreuves_list');
     }
+
+    //Pas besoin de delete ???
 }

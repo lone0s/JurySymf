@@ -38,6 +38,6 @@ class AuthController extends AbstractController
 
     #[Route(path:'/index', name : 'app_index')]
     public function index() : Response {
-        return $this -> render('base.html.twig');
+        return $this -> render('site/menu.html.twig');
     }
 }

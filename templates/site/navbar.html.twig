@@ -6,11 +6,6 @@
             </a>
         </div>
         <ul class="nav-list">
-{#
-            <li class="list-item">
-                <a>X</a>
-            </li>
-#}
             <li class="list-item">
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href= {{ path('app_register') }}>Register</a>

@@ -7,6 +7,7 @@ use App\Entity\Periode;
 use App\Form\ParcoursType;
 use App\Form\PeriodeType;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,9 +66,6 @@ class PeriodeController extends AbstractController
             $args = array("formulaire" => $form->createView());
             return $this -> render("forms/FormView.html.twig",$args);
         }
-        // Demander prof comment gérer exception autre que comme ça
-        else
-            $this -> addFlash('error', 'Incorrect periode ID');
-            return $this -> redirectToRoute('periode_list');
+        throw new InvalidArgumentException('Incorrect parcours id');
     }
 }

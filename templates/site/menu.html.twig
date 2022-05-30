@@ -1,7 +1,8 @@
+{% extends 'base.html.twig' %}
 {% block menu %}
     <nav>
         <ul>
-            {% if is_granted('ROLE_ADMIN') and is_granted('ROLE_SUPER_ADMIN') == false %}
+            {% if is_granted('ROLE_ADMIN') == false and is_granted('ROLE_SUPER_ADMIN')  %}
                 {% block listingLinks %}
                     {% include '/site/links/main_links.html.twig' %}
                 {% endblock %}
