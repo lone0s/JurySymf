@@ -15,7 +15,7 @@
         <td>{{ note_epreuve.periodeUe.periode.codeApogee }} - {{ note_epreuve.periodeUe.periode.parcour.nomCourt }}</td>
         <td>{{ note_epreuve.periodeUe.ue.nomCourt }}</td>
         <td>{{ note_epreuve.etudiant.numero }}</td>
-        <td>{{ note_epreuve.typeNote.id | default("NULL") }}</td>
+        <td>{{ note_epreuve.typeNote.type | default("NULL") }}</td>
         <td>{{ note_epreuve.note | default("NULL") }}</td>
         <td class="optional_td"><a href = '{{ path('modifier_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>✏️</a></td>
         <td class="optional_td"><a href = '{{ path('supprimer_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>❌</a></td>
