@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/modifier/notes', name: 'modifier')]
 class GradesModificationController extends AbstractController
 {
 /*    #[Route('/grades/test/modification/{student_id}/{epreuve_id}', name: 'app_epreuve_grade_modification')]
@@ -139,7 +140,7 @@ class GradesModificationController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }*/
 
-    #[Route('/notes/epreuves/modifier/{inscriptionEpreuveId}', name : '_epreuve_grade')]
+    #[Route('/epreuves/{inscriptionEpreuveId}', name : '_epreuve_grade')]
     public function changeEpreuveGrade(ManagerRegistry $doc, Request $request, int $inscriptionEpreuveId) : Response {
         $em = $doc -> getManager();
         $inscriptionEpreuve = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionEpreuveId);
@@ -163,7 +164,7 @@ class GradesModificationController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/notes/ues/modifier/{inscriptionUeId}', name : '_ue_grade')]
+    #[Route('/ues/{inscriptionUeId}', name : '_ue_grade')]
     public function changeUeGrade(ManagerRegistry $doc, Request $request, int $inscriptionUeId) : Response {
         $em = $doc -> getManager();
         $inscriptionUe = $em -> getRepository(InscriptionUe::class) -> find($inscriptionUeId);
@@ -194,7 +195,7 @@ class GradesModificationController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/notes/periodes/modifier/{inscriptionPeriodeId}', name : '_periode_grade')]
+    #[Route('/periodes/{inscriptionPeriodeId}', name : '_periode_grade')]
     public function changePeriodeGrade(ManagerRegistry $doc, Request $request, int $inscriptionPeriodeId) : Response {
         $em = $doc -> getManager();
         $inscriptionPeriode = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionPeriodeId);
@@ -218,7 +219,7 @@ class GradesModificationController extends AbstractController
         return $this -> render("forms/FormView.html.twig",$args);
     }
 
-    #[Route('/notes/parcours/modifier/{inscriptionParcourId}', name : '_parcours_grade')]
+    #[Route('/parcours/{inscriptionParcourId}', name : '_parcours_grade')]
     public function changeParcoursGrade(ManagerRegistry $doc, Request $request, int $inscriptionParcourId) : Response {
         $em = $doc -> getManager();
         $inscriptionParcour = $em -> getRepository(InscriptionEpreuve::class) -> find($inscriptionParcourId);
@@ -241,4 +242,6 @@ class GradesModificationController extends AbstractController
         $args = array("formulaire" => $form->createView());
         return $this -> render("forms/FormView.html.twig",$args);
     }
+
+
 }
