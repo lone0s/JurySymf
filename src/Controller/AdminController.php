@@ -41,9 +41,11 @@ class AdminController extends AbstractController
             $userRepo = $em->getRepository(AuthUser::class);
             $user = $userRepo->find($id_user);
             if ($user) {
-                $user->setRoles(array('ROLE_ADMIN'));
-                $em->flush();
-                $this->addFlash('info', 'Ajout admin réussi !');
+                if($user->getRoles()[0] !== 'ROLE_SUPER_ADMIN') {
+                    $user->setRoles(array('ROLE_ADMIN'));
+                    $em->flush();
+                    $this->addFlash('info', 'Ajout admin réussi !');
+                }
             } else {
                 $this->addFlash('info', 'Utilisateur inconnu !');
             }
@@ -59,6 +61,7 @@ class AdminController extends AbstractController
             $userRepo = $em -> getRepository(AuthUser::class);
             $user = $userRepo -> find($id_user);
             if ($user) {
+                $user -> eraseCredentials();
                 $em -> remove($user);
                 $em->flush();
                 $this->addFlash('info', 'Suppression utilisateur réussie!');

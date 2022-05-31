@@ -18,6 +18,7 @@
         <td>{{ etudiant.numero }}</td>
         <td>{{ etudiant.email | default ("NULL") }}</td>
         <td>{{ etudiant.commentaire | default("NULL") }}</td>
+        <td class="optional_td"><a href="{{ path('redirect_to_student_grades', {'studentId' : etudiant.id }) }}">Consulter les notes</a></td>
         <td class="optional_td"><a href = '{{ path('etudiants_change', {'id_student':etudiant.id}) }}'>✏️</a></td>
         <td class="optional_td"><a href = '{{ path('etudiants_delete', {'id_etudiant':etudiant.id}) }}'>❌</a></td>
     </tr>

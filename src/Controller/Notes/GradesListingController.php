@@ -15,31 +15,23 @@ use function dump;
 
 class GradesListingController extends AbstractController
 {
-    #[Route('/notes/epreuve/{id}', name : 'app_note_epreuves_etudiant')]
+    #[Route('/notes/epreuves/{id}', name : 'app_note_epreuves_etudiant')]
     public function listStudentTestGrades(ManagerRegistry $doc, int $id) : Response {
         $em = $doc -> getManager();
         $inscriptionEpreuveRepo = $em -> getRepository(InscriptionEpreuve::class);
-        $inscriptionEpreuve = $inscriptionEpreuveRepo -> findAll();
-        $inscriptionEpreuveEtudiant = array();
-        foreach ($inscriptionEpreuve as $epreuve) {
-            if ($id === $epreuve -> getEtudiant() -> getId()) {
-                $inscriptionEpreuveEtudiant[] = $epreuve;
-            }
-        }
+        $inscriptionEpreuveEtudiant = $inscriptionEpreuveRepo -> findBy([
+            'etudiant' => $id
+        ]);
         $args = ['notes_etudiant' => $inscriptionEpreuveEtudiant];
         return $this -> render('lists/Inscriptions/listing_notes_epreuves_etudiant.html.twig', $args);
     }
-    #[Route('/notes/periode/{id}', name : 'app_note_periode_etudiant')]
+    #[Route('/notes/periodes/{id}', name : 'app_note_periode_etudiant')]
     public function listStudentPeriodGrades(ManagerRegistry $doc, int $id) : Response {
         $em = $doc -> getManager();
         $inscriptionPeriodesRepo = $em -> getRepository(InscriptionPeriode::class);
-        $inscriptionPeriode = $inscriptionPeriodesRepo -> findAll();
-        $inscriptionPeriodeEtudiant = array();
-        foreach ($inscriptionPeriode as $periode) {
-            if($id === $periode -> getEtudiant() -> getId()) {
-                $inscriptionPeriodeEtudiant[] = $periode;
-            }
-        }
+        $inscriptionPeriodeEtudiant = $inscriptionPeriodesRepo -> findBy([
+            'etudiant' => $id
+        ]);
         $args = ['note_periode_etudiant' => $inscriptionPeriodeEtudiant];
         return $this -> render('lists/Inscriptions/listing_note_periode_etudiant.html.twig', $args);
     }
@@ -47,13 +39,9 @@ class GradesListingController extends AbstractController
     public function listStudentParcoursGrades(ManagerRegistry $doc, int $id) : Response {
         $em = $doc -> getManager();
         $inscriptionParcoursRepo = $em -> getRepository(InscriptionParcour::class);
-        $inscriptionParcours = $inscriptionParcoursRepo -> findAll();
-        $inscriptionParcoursEtudiant = array();
-        foreach ($inscriptionParcours as $parcours) {
-            if($id === $parcours -> getEtudiant() -> getId()) {
-                $inscriptionParcoursEtudiant[] = $parcours;
-            }
-        }
+        $inscriptionParcoursEtudiant = $inscriptionParcoursRepo -> findBy([
+            'etudiant' => $id
+        ]);
         $args = ['note_parcours_etudiant' => $inscriptionParcoursEtudiant];
         return $this -> render('lists/Inscriptions/listing_note_parcours_etudiant.html.twig', $args);
     }
@@ -62,13 +50,9 @@ class GradesListingController extends AbstractController
     public function listStudentUeGrades(ManagerRegistry $doc, int $id) : Response {
         $em = $doc -> getManager();
         $inscriptionUesRepo = $em -> getRepository(InscriptionUe::class);
-        $inscriptionsUes = $inscriptionUesRepo -> findAll();
-        $inscriptionUesEtudiant = array();
-        foreach ($inscriptionsUes as $ue) {
-            if($id === $ue -> getEtudiant() -> getId()) {
-                $inscriptionUesEtudiant[] = $ue;
-            }
-        }
+        $inscriptionUesEtudiant = $inscriptionUesRepo -> findBy([
+            'etudiant' => $id
+        ]);
         $args = ['notes_ues_etudiant' => $inscriptionUesEtudiant];
         return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
     }
@@ -107,4 +91,6 @@ class GradesListingController extends AbstractController
         $args = ['notes_ues_etudiant' => $inscriptionsUes];
         return $this -> render('lists/Inscriptions/listing_notes_ues_etudiant.html.twig', $args);
     }
+
+
 }

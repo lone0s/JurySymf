@@ -19,7 +19,7 @@
         <td>{{ etudiant.numero }}</td>
         <td>{{ etudiant.email }}</td>
         <td>{{ etudiant.commentaire }}</td>
-        <td><a href="#">Consulter les notes</a></td>
+        <td><a href="{{ path('redirectapp_frontend_redirecttostudentgrades', {'studentId' : etudiant.id }) }}">Consulter les notes</a></td>
     </tr>
 {% endfor %}
 {%endblock %}

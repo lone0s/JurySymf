@@ -7,6 +7,11 @@
         </div>
         <ul class="nav-list">
             <li class="list-item">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.roles[0] == 'ROLE_SUPER_ADMIN' %}
+                    <a href="{{ path('admin_user_listing')}}">Gestion</a>
+                {% endif  %}
+            </li>
+            <li class="list-item">
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href= {{ path('app_register') }}>Register</a>
                 {% endif %}
