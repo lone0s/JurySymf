@@ -51,7 +51,7 @@ class StudentController extends AbstractController
             $em -> persist($student);
             $em -> flush();
             $this -> addFlash('succes', 'Successfully added new student to database');
-            return $this -> redirectToRoute('etudiants_list');
+            return $this -> redirectToRoute('etudiant_list');
         }
         if ($form -> isSubmitted()) {
             $this -> addFlash('error', 'Incorrect form data');
@@ -74,13 +74,13 @@ class StudentController extends AbstractController
                 $em -> persist($student);
                 $em -> flush();
                 $this -> addFlash('success', 'Successfully changed student data');
-                return $this ->redirectToRoute('etudiants_list');
+                return $this ->redirectToRoute('etudiant_list');
             }
             $args = array("formulaire" => $form->createView());
             return $this -> render("forms/FormView.html.twig",$args);
         }
         else
-            return $this->redirectToRoute('etudiants_list');
+            return $this->redirectToRoute('etudiant_list');
     }
 
     #[Route('/supprimer/{id_etudiant}', name : '_delete')]
@@ -109,7 +109,7 @@ class StudentController extends AbstractController
             $em -> flush();
         }
         dump($etudiantResults);
-        return $this -> redirectToRoute('etudiants_list');
+        return $this -> redirectToRoute('etudiant_list');
     }
 
     #[Route('/notes/full/{studentId}', name : '_ensemble_notes')]
