@@ -101,7 +101,7 @@ class GradesDeletersController extends AbstractController
         $em = $doc -> getManager();
         $inscriptionPeriode = $em -> getRepository(InscriptionPeriode::class) -> find($inscriptionPeriodeId);
         if (!$inscriptionPeriode) {
-            throw new InvalidArgumentException('Incorrect Inscription Epreuve Id');
+            throw new InvalidArgumentException('Incorrect Inscription Periode Id');
         }
         $this->supprimerNotePeriode($inscriptionPeriode,$doc);
         $em -> flush();
@@ -112,7 +112,7 @@ class GradesDeletersController extends AbstractController
         $em = $doc -> getManager();
         $inscriptionParcour = $em -> getRepository(InscriptionParcour::class) -> find($inscriptionParcourId);
         if (!$inscriptionParcour) {
-            throw new InvalidArgumentException('Incorrect Inscription Epreuve Id');
+            throw new InvalidArgumentException('Incorrect Inscription Parcour Id');
         }
         $this->supprimerNoteParcour($inscriptionParcour,$doc);
         $em -> flush();

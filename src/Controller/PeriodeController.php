@@ -7,12 +7,12 @@ use App\Entity\Periode;
 use App\Form\ParcoursType;
 use App\Form\PeriodeType;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Exception\InvalidArgumentException;
 #[Route('/periode', name: 'periode')]
 class PeriodeController extends AbstractController
 {
@@ -47,15 +47,16 @@ class PeriodeController extends AbstractController
     #[Route('/change/{id_periode}', name: '_change')]
     public function changeParcours(ManagerRegistry $doc, Request $request, int $id_periode) : Response {
         $em = $doc -> getManager();
-        $parcoursRepo = $doc -> getRepository(Parcour::class);
-        $parcour = $parcoursRepo -> find($id_periode);
-        if ($parcour) {
-            $form = $this -> createForm(ParcoursType::class,$parcour);
-            $form -> add("send", SubmitType::class, ['label' => "Modifier le parcours"]);
+        $periodeRepo = $doc -> getRepository(Periode::class);
+        $periode = $periodeRepo -> find($id_periode);
+        dump($periode);
+        if ($periode) {
+            $form = $this -> createForm(PeriodeType::class,$periode);
+            $form -> add("send", SubmitType::class, ['label' => "Modifier la période universitaire"]);
             $form -> handleRequest($request);
             if($form -> isSubmitted() && $form -> isValid()) {
-                $parcour = $form -> getData();
-                $em -> persist($parcour);
+                $periode = $form -> getData();
+                $em -> persist($periode);
                 $em -> flush();
                 $this -> addFlash('success', 'Successfully modified Periode');
                 return  $this -> redirectToRoute('periode_list');
@@ -66,6 +67,6 @@ class PeriodeController extends AbstractController
             $args = array("formulaire" => $form->createView());
             return $this -> render("forms/FormView.html.twig",$args);
         }
-        throw new InvalidArgumentException('Incorrect parcours id');
+        throw new InvalidArgumentException('Incorrect periode id');
     }
 }

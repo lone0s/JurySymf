@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+<h2>Notes étudiant {{ etudiant.numero }}</h2>
+{% endblock %}
+{% block list %}
+    {% if IEs is not empty %}
+{% include 'lists/Inscriptions/content/notes_epreuves_template.html.twig' with {notes_etudiant : IEs} %}
+    {% endif %}
+    {% if IUs is not empty %}
+{% include 'lists/Inscriptions/content/notes_ues_template.html.twig' with {notes_ues_etudiant : IUs} %}
+    {% endif %}
+    {% if IPes is not empty %}
+{% include 'lists/Inscriptions/content/notes_periode_template.html.twig' with { note_periode_etudiant : IPes }%}
+    {% endif %}
+    {% if IPas is not empty %}
+    {% include'lists/Inscriptions/content/note_parcours_template.html.twig' with {note_parcours_etudiant : IPas} %}
+    {% endif %}
+{% endblock %}
