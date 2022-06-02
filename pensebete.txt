@@ -1,23 +1,20 @@
                                            Pense-bete
 ----------------------------------------------------------------------------------------------
-- Implementer regles de calcul
-    (Correspond a deux formulaires de gestion de coefficients pour en créer
-    + transmission regles calcul + epreuves concernées pour réaliser calcul) <== Au plus tard Mercredi
-
-- Search Form Types (Recherche selon X ou Y paramètre) <== Demain
-
-- Uniformiser contenu des listings <== 90% Fait
+- Search Form Types (Recherche selon X ou Y paramètre) <== Demain !!! Secondaire
 
 - Gestion droits d'accès <== Demain
 
 - Implémenter la vérification du contenu des formulaires Symfony Constraints & Validators <== Demain
 
-- Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
-a partir des notes pré-entrées ou saisies manuellement <== Fait a 90%
-
 - Import/Export notes & listes etudiants format CSV <== Ez Mercredi
+
+- Gestion Session + Regles de caalcul
+
+- Ajouter redirection saisie notes aux différentes echelles a création et inversement !!!
 ----------------------------------------------------------------------------------------------
 - Implementer fonction pour gestion Mention Note automatique au lieu de dépendre de form <== Fait
+
+- Uniformiser contenu des listings <== 90% Fait
 
 - Formulaires de création de Periodes/Ues/Epreuves <== Fait
 
@@ -30,6 +27,15 @@ a partir des notes pré-entrées ou saisies manuellement <== Fait a 90%
 - Implementer suppression d'étudiants impliquant suppression de tous leurs résultats <== Fait
 
 - Revoir les fonctions de modification de notes pour les optimiser <== Fait
+
+- Implementer calcul automatiques des notes aux UEs/Periodes/Parcours
+a partir des notes pré-entrées ou saisies manuellement <== Fait
+----------------------------------------------------------------------------------------------
+                                         Problemes
+----------------------------------------------------------------------------------------------
+- Quand on crée une UE et une Période, pas d'update Période UE
+
+- Regler titre page (voir list epreuves html twi)
 ----------------------------------------------------------------------------------------------
                                          Questions
 ----------------------------------------------------------------------------------------------

@@ -107,7 +107,7 @@ class GradesCreatorController extends AbstractController
             $em->persist($inscriptionUe);
             $em->flush();
             $this->addFlash('success', 'Successfully created new note UE');
-            return $this->redirectToRoute('app_list_ues', ['id' => $inscriptionUe->getEtudiant()->getId()]);
+            return $this->redirectToRoute('_ues_list'/*, ['id' => $inscriptionUe->getEtudiant()->getId()]*/);
         }
         if ($form->isSubmitted()) {
             $this->addFlash('error', 'Incorrect form data');

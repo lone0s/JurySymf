@@ -109,10 +109,6 @@ class StudentController extends AbstractController
         dump($etudiantResults);
         return $this -> redirectToRoute('etudiants_list');
     }
-/*
-    #[Route('/notes/{id_etudiant}' , name : '_notes_specific')]
-    public function studentGrades(int $id_etudiant, ManagerRegistry $doc) : Response
-    //Eventuellement pour récuperer les notes aux ues, au parcour, a la periode et aux épreuves d'un étudiant?
-    {
-    }*/
+
+    
 }

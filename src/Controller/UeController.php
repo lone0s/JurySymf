@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\PeriodeUe;
 use App\Entity\Ue;
 use App\Form\UeType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,7 +28,7 @@ class UeController extends AbstractController
             $em -> persist($ue);
             $em -> flush();
             $this -> addFlash('success', 'successfully created new Ue');
-            return $this->redirectToRoute('app_list_ues');
+            return $this->redirectToRoute('periode_ue_create',['ueId' => $ue -> getId()]);
         }
         if ($form -> isSubmitted()) {
             $this -> addFlash('error', 'Incorrect data entered in form');
@@ -52,7 +53,7 @@ class UeController extends AbstractController
             $em->persist($ue);
             $em->flush();
             $this->addFlash('success', 'successfully modifie new Ue');
-            return $this->redirectToRoute('app_list_ues');
+            return $this->redirectToRoute('ue_list');
         }
         if ($form->isSubmitted()) {
             $this -> addFlash('error', 'Incorrect data entered in form');
