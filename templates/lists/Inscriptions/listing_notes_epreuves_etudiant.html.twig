@@ -1,26 +1,4 @@
 {% extends 'base.html.twig' %}
 {% block list %}
-<table>
-<tr>
-    <th>Epreuve</th>
-    <th>Période - Parcours</th>
-    <th>UE</th>
-    <th>Etudiant</th>
-    <th>Type Note</th>
-    <th>Note</th>
-</tr>
-{% for note_epreuve in notes_etudiant %}
-    <tr class="tr-table">
-        <td>{{ note_epreuve.epreuve.nom }}</td>
-        <td>{{ note_epreuve.periodeUe.periode.codeApogee }} - {{ note_epreuve.periodeUe.periode.parcour.nomCourt }}</td>
-        <td>{{ note_epreuve.periodeUe.ue.nomCourt }}</td>
-        <td>{{ note_epreuve.etudiant.numero }}</td>
-        <td>{{ note_epreuve.typeNote.type | default("NULL") }}</td>
-        <td>{{ note_epreuve.note | default("NULL") }}</td>
-        <td class="optional_td"><a href = '{{ path('modifier_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>✏️</a></td>
-        <td class="optional_td"><a href = '{{ path('supprimer_epreuve_grade', {'inscriptionEpreuveId':note_epreuve.id}) }}'>❌</a></td>
-    </tr>
-{% endfor %}
-</table>
-    <div class="create_div"><button class="creator"><a href="{{ path('creer_notes_epreuve') }}">➕</a></button></div>
+{% include 'lists/Inscriptions/content/notes_epreuves_template.html.twig' with {notes_etudiant : notes_etudiant } %}
 {% endblock %}

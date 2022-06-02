@@ -1,34 +1,4 @@
 {% extends 'base.html.twig' %}
 {% block list %}
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Note sur la periode inscrite</th>
-            <th>Nombre de points du jury</th>
-            <th>Saisie Manuelle</th>
-            <th>Type de Note</th>
-            <th>Type de Resultat</th>
-            <th>Nom Court Parcours</th>
-        </tr>
-        {% for npe in note_parcours_etudiant %}
-            <tr class="tr-table">
-                <td>{{ npe.etudiant.nom }}</td>
-                <td>{{ npe.etudiant.prenom }}</td>
-                <td>{{ npe.note | default("NULL") }}</td>
-                <td>{{ npe.pointsJury | default("NULL")}}</td>
-                {% if 0 in npe.saisie %}
-                    <td>Vrai</td>
-                {% else %}
-                    <td>Faux</td>
-                {% endif %}
-                <td>{{ npe.typeNote.type | default("NULL") }}</td>
-                <td>{{ npe.typeResultat.type | default("NULL") }}</td>
-                <td>{{ npe.parcour.nomCourt | default("NULL")}}</td>
-                <td class="optional_td"><a href = '{{ path('modifier_parcours_grade', {'inscriptionParcourId':npe.id}) }}'>✏️</a></td>
-                <td class="optional_td"><a href = '{{ path('supprimer_parcour_grade', {'inscriptionParcourId':npe.id}) }}'>❌</a></td>
-            </tr>
-        {% endfor %}
-    </table>
-    <div class="create_div"><button class="creator"><a href="{{ path('creer_notes_parcours') }}">➕</a></button></div>
+{% include 'lists/Inscriptions/content/note_parcours_template.html.twig' with {note_parcours_etudiant : note_parcours_etudiant}  %}
 {% endblock %}

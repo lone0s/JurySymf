@@ -1,0 +1,35 @@
+ <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Note sur la periode inscrite</th>
+            <th>Nombre de points du jury</th>
+            <th>Saisie Manuelle</th>
+            <th>Type de Note</th>
+            <th>Type de Resultat</th>
+            <th>Note Eliminatoire</th>
+            <th>Parcours</th>
+            <th>UE</th>
+        </tr>
+        {% for nue in notes_ues_etudiant %}
+            <tr class="tr-table">
+                <td>{{ nue.etudiant.nom }}</td>
+                <td>{{ nue.etudiant.prenom }}</td>
+                <td>{{ nue.note | default("NULL") }}</td>
+                <td>{{ nue.pointsJury | default("NULL")}}</td>
+                {% if nue.saisie == 0 %}
+                    <td>Faux</td>
+                {% else %}
+                    <td>Vrai</td>
+                {% endif %}
+                <td>{{ nue.typeNote.type | default("NULL") }}</td>
+                <td>{{ nue.typeResultat.type | default("NULL") }}</td>
+                <td>{{ nue.periodeUe.noteEliminatoire | default("NULL")}}</td>
+                <td>{{ nue.periodeUe.periode.parcour.nom }}</td>
+                <td>{{ nue.periodeUe.ue.nom }}</td>
+                <td class="optional_td"><a href = '{{ path('modifier_ue_grade', {'inscriptionUeId':nue.id}) }}'>✏️</a></td>
+                <td class="optional_td"><a href = '{{ path('supprimer_ue_grade', {'inscriptionUeId':nue.id}) }}'>❌</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="create_div"><button class="creator"><a href="{{ path('creer_notes_ues') }}">➕</a></button></div>

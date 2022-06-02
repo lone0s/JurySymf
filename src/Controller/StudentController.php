@@ -15,7 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-#[Route("/etudiants", name: 'etudiants')]
+use Symfony\Component\Validator\Exception\InvalidArgumentException;
+
+#[Route("/etudiant", name: 'etudiant')]
 class StudentController extends AbstractController
 {
     //Listing étudiants
@@ -110,5 +112,34 @@ class StudentController extends AbstractController
         return $this -> redirectToRoute('etudiants_list');
     }
 
-    
+    #[Route('/notes/full/{studentId}', name : '_ensemble_notes')]
+    public function studentFullGrades(int $studentId, ManagerRegistry $doc) : Response {
+        $em = $doc -> getManager();
+        //Recuperer les notes aux différentes echelles
+        $student = $em -> getRepository(Etudiant::class) -> find($studentId);
+        if (! $student) {
+            throw new InvalidArgumentException('Incorrect student Id Data');
+        }
+        $studentEpreuvesInscriptions = $em -> getRepository(InscriptionEpreuve::class) -> findBy([
+            'etudiant' => $studentId
+        ]);
+        $studentUEsInscriptions = $em -> getRepository(InscriptionUe::class) -> findBy([
+            'etudiant' => $studentId
+        ]);
+        $studentPeriodesInscriptions = $em -> getRepository(InscriptionPeriode::class) -> findBy([
+            'etudiant' => $studentId
+        ]);
+        $studentParcourInscriptions = $em -> getRepository(InscriptionParcour::class) -> findBy([
+            'etudiant' => $studentId
+        ]);
+        $args = [
+            'etudiant' => $student,
+            'IEs' => $studentEpreuvesInscriptions,
+            'IUs' => $studentUEsInscriptions,
+            'IPes' => $studentPeriodesInscriptions,
+            'IPas' => $studentParcourInscriptions
+        ];
+
+        return $this -> render('lists/notes/ensemble_notes_etudiant.html.twig', $args);
+    }
 }
