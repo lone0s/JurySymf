@@ -236,4 +236,11 @@ class Epreuve
 
         return $this;
     }
+
+    public function checkSession(): int {
+        if ($this -> session1 === true) {
+            return 1;
+        }
+        return 2;
+    }
 }

@@ -14,16 +14,74 @@ use App\Entity\PeriodeUe;
 use App\Entity\TypeNote;
 use App\Entity\TypeResultat;
 use App\Entity\Ue;
+use Symfony\Component\Validator\Exception\InvalidArgumentException;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+#[Route('/calculer/notes', name : 'calcul')]
 class GradeTttController extends AbstractController
 {
+    #[Route('/test', name: '_test')]
+    public function testRoute() : Response {
+        dump(1);
+    }
 
-    public function ueAverage(int $student_id, int $ue_id, ManagerRegistry $doc)
+    #[Route('/ue/{idEtudiant}/{idInscriptionUe}', name : 'test_calcul_form')]
+    public function getUeGrade(int $idInscriptionUe, int $idEtudiant,ManagerRegistry $doc) : Response
+    {
+        //On recup les epreuves liées a l'Ue
+        $em = $doc->getManager();
+        $inscriptionUeRepo = $em->getRepository(InscriptionUe::class);
+        $inscriptionUe = $inscriptionUeRepo->find($idInscriptionUe);
+        if (! $inscriptionUe)
+        {
+            throw new InvalidArgumentException('Wrong inscription ue id');
+        }
+        $periodeUe = $inscriptionUe->getPeriodeUe();
+        if (! $periodeUe) {
+            throw new InvalidArgumentException('Wrong periode ue id');
+        }
+        $ue = $periodeUe->getUe();
+        if (! $ue) {
+            throw new InvalidArgumentException('Wrong ue id');
+        }
+        $epreuves = $this->getEpreuvesOfUe($ue->getId(), $doc);
+        $coeffs = [];
+        foreach ($epreuves as $epreuve) {
+            $coeffs[$epreuve->getId()] = $epreuve->getCoefficient();
+        }
+        $valuesArray = [];
+        $coeffsArray = [];
+        foreach ($coeffs as $key => $value) {
+            $epreuve = $em->getRepository(InscriptionEpreuve::class)->findOneBy([
+                'etudiant' => $idEtudiant,
+                'periodeUe' => $periodeUe->getId(),
+                'epreuve' => $key
+            ]);
+            if (! $epreuve) {
+                throw new InvalidArgumentException('Wrong epreuve id');
+            }
+            dump($epreuve -> getEpreuve() -> checkSession());
+            $coeffsArray[] = $value;
+            $valuesArray[] = $epreuve->getNote();
+        }
+        dump($valuesArray);
+        dump($coeffsArray);
+        dump($this->calculateAverage($coeffsArray, $valuesArray));
+        return $this -> render('aaaaaa.html.twig');
+    }
+    private function getEpreuvesOfUe(int $idUe, ManagerRegistry $doc) : array {
+        $em = $doc -> getManager();
+        $epreuves = $em -> getRepository(Epreuve::class) -> findBy([
+            'ue' => $idUe
+        ]);
+        if ($epreuves) {
+            return $epreuves;
+        }
+        throw new InvalidArgumentException('incorrect ue id');
+    }
+    private function ueAverage(int $student_id, int $ue_id, ManagerRegistry $doc)
     {
         $em = $doc->getManager();
         $ueId = $em->getRepository(Ue::class)->find($ue_id);
@@ -48,6 +106,7 @@ class GradeTttController extends AbstractController
         // Sinon automatiser pour toutes les ues ou pour chaque ajout note epreuve liée a UE
     }
 
+
     #[Route('/test/periode/{student_id}/{periode_id}', name : '_periode')]
     public function periodeAverage(int $student_id, int $periode_id, ManagerRegistry $doc){
         $em = $doc -> getManager();
@@ -65,9 +124,9 @@ class GradeTttController extends AbstractController
                 $res[] = $iU -> getNote();
             }
         }
-/*        $avg[] = $this->average($res);
-        $args = ['notes' => $avg];
-        return  $this -> render('lists/notes/test.html.twig', $args);*/
+        /*        $avg[] = $this->average($res);
+                $args = ['notes' => $avg];
+                return  $this -> render('lists/notes/test.html.twig', $args);*/
         //Marche
     }
 
@@ -123,59 +182,50 @@ class GradeTttController extends AbstractController
     //Update : quantité colossale de data a traiter => useless (symfony ne permet pas son execution)
     //On va plutot intégrer les trois fonctions définies plus haut directement dans les fonctions d'ajout
     // et de modification de notes
-/*    #[Route('/notes/update', name : '_update')]
-    public function updateGradesAverage(ManagerRegistry $doc) : Response {
-        $em = $doc -> getManager();
-        $students = $em -> getRepository(Etudiant::class) -> findAll();
-        foreach ($students as $student) {
-            $studentId = $student -> getId();
-            $studentInsPar = $em -> getRepository(InscriptionParcour::class) -> findBy([
-                'etudiant' => $studentId
-            ]);
-            $studentInsPer = $em -> getRepository(InscriptionPeriode::class) -> findBy([
-                'etudiant' => $studentId
-            ]);
-            $studentInsUe = $em -> getRepository(InscriptionEpreuve::class) -> findBy([
-                'etudiant' => $studentId
-            ]);
-            foreach ($studentInsPar as $sIPa) {
-                $this->parcoursAverage(
-                    $studentId,
-                    $sIPa -> getParcour() ->getId(),
-                    $doc
-                ) ;
+    /*    #[Route('/notes/update', name : '_update')]
+        public function updateGradesAverage(ManagerRegistry $doc) : Response {
+            $em = $doc -> getManager();
+            $students = $em -> getRepository(Etudiant::class) -> findAll();
+            foreach ($students as $student) {
+                $studentId = $student -> getId();
+                $studentInsPar = $em -> getRepository(InscriptionParcour::class) -> findBy([
+                    'etudiant' => $studentId
+                ]);
+                $studentInsPer = $em -> getRepository(InscriptionPeriode::class) -> findBy([
+                    'etudiant' => $studentId
+                ]);
+                $studentInsUe = $em -> getRepository(InscriptionEpreuve::class) -> findBy([
+                    'etudiant' => $studentId
+                ]);
+                foreach ($studentInsPar as $sIPa) {
+                    $this->parcoursAverage(
+                        $studentId,
+                        $sIPa -> getParcour() ->getId(),
+                        $doc
+                    ) ;
+                }
+                foreach ($studentInsPer as $sIPe) {
+                    $this -> periodeAverage(
+                        $studentId,
+                        $sIPe -> getId(),
+                        $doc
+                    );
+                }
+                foreach ($studentInsUe as $sUe) {
+                    $ueId = $sUe -> getPeriodeUe() -> getUe() -> getId();
+                    $this -> ueAverage(
+                        $studentId,
+                        $ueId,
+                        $doc
+                    );
+                }
             }
-            foreach ($studentInsPer as $sIPe) {
-                $this -> periodeAverage(
-                    $studentId,
-                    $sIPe -> getId(),
-                    $doc
-                );
-            }
-            foreach ($studentInsUe as $sUe) {
-                $ueId = $sUe -> getPeriodeUe() -> getUe() -> getId();
-                $this -> ueAverage(
-                    $studentId,
-                    $ueId,
-                    $doc
-                );
-            }
-        }
-        return $this -> redirectToRoute('app_index');
-    }*/
+            return $this -> redirectToRoute('app_index');
+        }*/
 
-    private function getEpreuvesOfUe(int $idUe, ManagerRegistry $doc) {
-        $em = $doc -> getManager();
-        $epreuves = $em -> getRepository(Epreuve::class) -> findBy([
-            'ue' => $idUe
-        ]);
-        if ($epreuves) {
-            return $epreuves;
-        }
-        throw new InvalidArgumentException('incorrect ue id');
-    }
 
-    private function getUesOfPeriode(int $idPeriode, ManagerRegistry $doc) {
+
+    private function getUesOfPeriode(int $idPeriode, ManagerRegistry $doc) : array {
         $em = $doc -> getManager();
         $periodeUes = $em -> getRepository(PeriodeUe::class) -> findBy([
             'periode' => $idPeriode
@@ -202,35 +252,7 @@ class GradeTttController extends AbstractController
     }
 
 
-    #[Route('/test/calcul/{idEtudiant}/{idInscriptionUe}', name : 'test_calcul_form')]
-    public function getUeGrade(int $idInscriptionUe, int $idEtudiant,ManagerRegistry $doc) : Response
-    {
-        //On recup les epreuves liées a l'Ue
-        $em = $doc->getManager();
-        $inscriptionUeRepo = $em->getRepository(InscriptionUe::class);
-        $inscriptionUe = $inscriptionUeRepo->find($idInscriptionUe);
-        $periodeUe = $inscriptionUe->getPeriodeUe();
-        $ue = $periodeUe->getUe();
-        $epreuves = $this->getEpreuvesOfUe($ue->getId(), $doc);
-        $coeffs = [];
-        foreach ($epreuves as $epreuve) {
-            $coeffs[$epreuve->getId()] = $epreuve->getCoefficient();
-        }
-        $valuesArray = [];
-        $coeffsArray = [];
-        foreach ($coeffs as $key => $value) {
-            $epreuve = $em->getRepository(InscriptionEpreuve::class)->findOneBy([
-                'etudiant' => $idEtudiant,
-                'periodeUe' => $periodeUe->getId(),
-                'epreuve' => $key
-            ]);
-            $coeffsArray[] = $value;
-            $valuesArray[] = $epreuve->getNote();
-        }
-        dump($valuesArray);
-        dump($coeffsArray);
-        dump($this->calculateAverage($coeffsArray, $valuesArray));
-    }
+
 
     #[Route('/test/calculP/{idEtudiant}/{idInscriptionPeriode}', name : 'test_calcul_form')]
     public function getPeriodeGrade(int $idInscriptionPeriode, int $idEtudiant, ManagerRegistry $doc) : Response
@@ -269,6 +291,12 @@ class GradeTttController extends AbstractController
         //Okk ca marche
     }
 
+    /*    private function splitEpreuvesBySession(int $session, array $epreuves) : array {
+            //$session doit être égal a 1 ou 2
+            foreach ($epreuves as $key => $epreuve) {
+                if $epreuve -> getEpreuve() -> getSession1
+            }
+        }*/
 
     private function calculateAverage(array $coeffs, array $grades) : float {
         // !!! Ne prend pas en compte les points jury
@@ -283,4 +311,5 @@ class GradeTttController extends AbstractController
         }
         return ($sum/$coeffsSum);
     }
+
 }
